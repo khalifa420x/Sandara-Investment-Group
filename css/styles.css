@@ -772,23 +772,72 @@ section { position: relative; }
 
 .rentals-quote {
   text-align: center;
-  padding: 60px 40px;
-  background: var(--surface);
+  max-width: 960px;
+  margin: 28px auto 0;
+  padding: 56px 52px;
+  background: #f4f0e8;
+  border: 1px solid rgba(198,169,107,0.18);
+  border-radius: 28px;
+  box-shadow:
+    0 12px 28px rgba(37, 28, 19, 0.06),
+    0 24px 52px rgba(37, 28, 19, 0.04);
 }
 .rentals-quote p {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(18px, 2.2vw, 28px);
+  font-size: clamp(28px, 3vw, 40px);
   color: var(--text);
-  line-height: 1.55;
-  max-width: 600px;
+  line-height: 1.48;
+  letter-spacing: -0.02em;
+  max-width: 760px;
   margin: 0 auto;
+}
+.rentals-quote-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  margin-top: 34px;
+  padding: 14px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(171,144,86,0.28);
+  background: #c6a96b;
+  color: #111111;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(198,169,107,0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+.rentals-quote-cta:hover {
+  transform: translateY(-2px);
+  background: #b99c5f;
+  border-color: rgba(171,144,86,0.34);
+  box-shadow: 0 14px 28px rgba(198,169,107,0.26);
 }
 
 @media (max-width: 960px) {
   .rentals-header { grid-template-columns: 1fr; gap: 32px; }
   .villa-cards { grid-template-columns: 1fr; }
+  .rentals-quote {
+    margin-top: 24px;
+    padding: 28px 24px;
+    border-radius: 24px;
+  }
+  .rentals-quote p {
+    font-size: clamp(22px, 7vw, 30px);
+    line-height: 1.5;
+  }
+  .rentals-quote-cta {
+    width: 100%;
+    max-width: 320px;
+    margin-top: 28px;
+    padding: 15px 22px;
+  }
 }
 @media (min-width: 640px) and (max-width: 960px) {
   .villa-cards { grid-template-columns: repeat(2, 1fr); }
