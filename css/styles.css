@@ -662,27 +662,43 @@ section { position: relative; }
 .rentals-header {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 72px;
   align-items: end;
-  margin-bottom: 72px;
+  margin-bottom: 56px;
+}
+.rentals-header .eyebrow {
+  margin-bottom: 0;
+}
+#rentals .display-lg {
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+.rentals-header-right {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
 }
 .rentals-header-right p {
   color: var(--text-sec);
   font-size: 0.88rem;
   line-height: 1.8;
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  max-width: 520px;
 }
 .active-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--font-sans);
   font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
+  font-weight: 500;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--gold);
-  border-radius: 8px;
+  border-radius: 999px;
+  padding: 9px 14px;
+  border: 1px solid rgba(198,169,107,0.18);
+  background: linear-gradient(180deg, rgba(198,169,107,0.08), rgba(198,169,107,0.03));
 }
 .active-dot {
   width: 6px; height: 6px;
@@ -699,61 +715,100 @@ section { position: relative; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: start;
-  gap: 24px;
+  gap: 28px;
   margin-bottom: 80px;
 }
 .villa-card {
-  background: var(--bg);
-  border-radius: 12px;
+  background:
+    radial-gradient(circle at top left, rgba(198,169,107,0.09), transparent 34%),
+    linear-gradient(180deg, #171717 0%, #141414 100%);
+  border: 1px solid rgba(198,169,107,0.15);
+  border-radius: 20px;
   overflow: hidden;
-  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.03),
+    0 18px 42px rgba(0,0,0,0.22);
+  transition:
+    transform 0.35s cubic-bezier(0.22,1,0.36,1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
   cursor: pointer;
 }
-.villa-card:hover { transform: translateY(-6px); }
+.villa-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(198,169,107,0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 22px 48px rgba(0,0,0,0.28);
+}
 .villa-card-img {
   overflow: hidden;
   aspect-ratio: 3/2;
   position: relative;
-  border-radius: 12px 12px 0 0;
+  border-radius: 20px 20px 0 0;
 }
 .villa-card-img img {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 12px 12px 0 0;
+  border-radius: 20px 20px 0 0;
   transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
-  filter: contrast(1.04) saturate(0.85);
+  filter: contrast(1.02) saturate(0.82) brightness(0.9);
 }
 .villa-card:hover .villa-card-img img { transform: scale(1.04); }
-.villa-card-body { padding: 24px 0 0; }
+.villa-card-body {
+  padding: 24px;
+  display: grid;
+  gap: 12px;
+}
+.villa-card-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
 .villa-location {
   font-family: var(--font-sans);
   font-size: 0.68rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 8px;
+  color: rgba(255,255,255,0.66);
+  margin-bottom: 0;
 }
 .villa-name {
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: 1.3rem;
-  color: var(--text);
-  margin-bottom: 8px;
+  color: #f2f2f2;
+  margin-bottom: 0;
   line-height: 1.2;
 }
 .villa-specs {
   font-size: 0.78rem;
-  color: var(--text-sec);
-  margin-bottom: 16px;
-  line-height: 1.5;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 0;
+  line-height: 1.7;
+}
+.villa-card-footer {
+  display: grid;
+  gap: 18px;
+  margin-top: 4px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 .villa-price {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  color: var(--text);
-  margin-bottom: 20px;
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c6a96b;
+  margin-bottom: 0;
   border-radius: 8px;
+}
+#rentals .villa-price .lang-en-inline,
+#rentals .villa-price .lang-fr-inline {
+  display: inline-block;
 }
 .villa-cta {
   font-family: var(--font-sans);
@@ -776,7 +831,7 @@ section { position: relative; }
   justify-content: center;
   min-height: 48px;
   padding: 14px 22px;
-  border-radius: 16px;
+  border-radius: 15px;
   border: 1px solid rgba(171,144,86,0.24);
   background: #c6a96b;
   color: #111111;
@@ -803,24 +858,54 @@ section { position: relative; }
 #rentals .rentals-secondary-cta {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  min-height: 48px;
+  padding: 13px 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
   font-family: var(--font-sans);
   font-size: 0.72rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(42,42,42,0.9);
-  padding-bottom: 3px;
-  border-bottom: 1px solid rgba(42,42,42,0.24);
+  color: rgba(255,255,255,0.78);
+  text-decoration: none;
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+#rentals .rentals-secondary-cta:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.03);
+  color: #f2f2f2;
+}
+#rentals .rentals-card-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 12px;
 }
 
 @media (max-width: 960px) {
+  #rentals {
+    padding: 104px 0;
+  }
   #rentals .rentals-primary-cta {
     width: 100%;
     min-height: 50px;
   }
   #rentals .rentals-secondary-cta {
+    width: 100%;
+    min-height: 50px;
     font-size: 0.68rem;
+  }
+  #rentals .rentals-card-actions {
+    grid-template-columns: 1fr;
+  }
+  #rentals .villa-cards {
+    gap: 20px;
+  }
+  #rentals .villa-card-body {
+    padding: 22px 20px 20px;
   }
 }
 
@@ -829,19 +914,19 @@ section { position: relative; }
   max-width: 960px;
   margin: 28px auto 0;
   padding: 56px 52px;
-  background: #f4f0e8;
+  background: linear-gradient(180deg, rgba(23,23,23,0.98) 0%, rgba(20,20,20,0.98) 100%);
   border: 1px solid rgba(198,169,107,0.18);
   border-radius: 28px;
   box-shadow:
-    0 12px 28px rgba(37, 28, 19, 0.06),
-    0 24px 52px rgba(37, 28, 19, 0.04);
+    inset 0 1px 0 rgba(255,255,255,0.03),
+    0 18px 42px rgba(0,0,0,0.2);
 }
 .rentals-quote p {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 300;
   font-size: clamp(28px, 3vw, 40px);
-  color: var(--text);
+  color: #f2f2f2;
   line-height: 1.48;
   letter-spacing: -0.02em;
   max-width: 760px;
@@ -1710,4 +1795,571 @@ img { display: block; }
 }
 #mobile-menu.open {
   display: flex !important;
+}
+
+/* ═══════════════════════════════════════════
+   SUB-PAGE NAV  (rentals.html + villa.html)
+═══════════════════════════════════════════ */
+.r-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px clamp(24px, 5vw, 64px);
+  background: rgba(11, 11, 11, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(198, 169, 107, 0.10);
+  z-index: 200;
+}
+.r-nav-logo {
+  font-family: var(--font-serif);
+  font-size: clamp(14px, 2vw, 18px);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 400;
+}
+.r-nav-logo span { color: var(--gold); }
+.r-nav-right { display: flex; align-items: center; gap: 24px; }
+.r-nav-back {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(245,245,245,0.35);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+.r-nav-back:hover { color: var(--gold); }
+.cur-switch { display: flex; align-items: center; gap: 6px; }
+.cur-btn {
+  background: none; border: none;
+  font-family: var(--font-sans);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(245,245,245,0.35);
+  cursor: pointer; padding: 2px 0;
+  transition: color 0.25s;
+}
+.cur-btn.active { color: var(--gold); }
+.cur-btn:hover  { color: rgba(198,169,107,0.7); }
+.cur-sep { color: rgba(255,255,255,0.15); font-size: 9px; user-select: none; }
+@media (max-width: 768px) {
+  .cur-switch { display: none !important; }
+  .r-nav-back { display: none; }
+}
+
+/* ═══════════════════════════════════════════
+   RENTALS — HERO
+═══════════════════════════════════════════ */
+.rent-hero {
+  position: relative;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.rent-hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url("https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1600&q=80");
+  background-size: cover;
+  background-position: center 40%;
+}
+.rent-hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(11,11,11,0.85) 100%);
+}
+.rent-hero-inner {
+  position: relative; z-index: 2;
+  padding: 72px clamp(32px,7vw,96px) 0;
+}
+.rent-hero-label {
+  font-family: var(--font-sans);
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.30em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.rent-hero-label::before {
+  content: ""; width: 20px; height: 1px;
+  background: var(--gold); flex-shrink: 0;
+}
+.rent-hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(34px,5vw,54px); font-weight: 300;
+  line-height: 1.15; color: var(--white);
+  margin-bottom: 16px; max-width: 600px;
+}
+.rent-hero-title em { font-style: italic; color: rgba(245,245,245,0.72); }
+.rent-hero-sub {
+  font-family: var(--font-sans);
+  font-size: 13px; font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  max-width: 480px; line-height: 1.75;
+}
+.rent-hero-currency {
+  position: absolute; bottom: 28px;
+  left: clamp(32px,7vw,96px); z-index: 2;
+  display: flex; align-items: center; gap: 18px;
+}
+.rent-cur-btn {
+  background: none; border: none;
+  border-bottom: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  cursor: pointer; padding: 2px 0 4px;
+  transition: color 0.25s, border-color 0.25s;
+}
+.rent-cur-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.rent-cur-btn:hover:not(.active) { color: rgba(255,255,255,0.75); }
+.rent-cur-sep {
+  color: rgba(255,255,255,0.18); font-size: 9px;
+  pointer-events: none; user-select: none;
+}
+
+/* ═══════════════════════════════════════════
+   RENTALS — FILTER BAR
+═══════════════════════════════════════════ */
+.rent-filter-bar {
+  position: sticky; top: 70px; z-index: 90;
+  background: #F5F0E8;
+  border-bottom: 1px solid rgba(198,169,107,0.15);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(32px,7vw,96px);
+}
+.rent-filter-tabs { display: flex; align-items: center; }
+.rent-filter-tab {
+  background: none; border: none;
+  border-bottom: 2px solid transparent;
+  padding: 16px 22px;
+  font-family: var(--font-sans);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #6B6560; cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+  white-space: nowrap;
+}
+.rent-filter-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.rent-filter-tab:hover:not(.active) { color: #1A1A1A; }
+.rent-filter-count {
+  font-family: var(--font-sans); font-size: 10px;
+  letter-spacing: 0.10em;
+  color: rgba(107,101,96,0.55); white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════
+   RENTALS — GRID
+═══════════════════════════════════════════ */
+.rent-grid-section {
+  background: #F5F0E8;
+  padding: 64px clamp(32px,7vw,96px) 80px;
+  min-height: 300px;
+}
+.rent-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 24px; align-items: start;
+}
+@media (max-width: 1024px) { .rent-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 600px)  { .rent-grid { grid-template-columns: 1fr; } }
+
+/* Villa card — rv prefix */
+.rv-card {
+  background: #111111;
+  border: 1px solid rgba(198,169,107,0.18);
+  border-radius: 8px; overflow: hidden;
+  cursor: pointer; display: block; text-decoration: none;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
+              border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.rv-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(198,169,107,0.50);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.15);
+}
+.rv-card-img {
+  position: relative; overflow: hidden;
+  aspect-ratio: 16/10;
+}
+.rv-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+}
+.rv-card:hover .rv-card-img img { transform: scale(1.05); }
+.rv-card-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 2;
+  font-family: var(--font-sans);
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 5px 10px; border-radius: 6px;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.rv-badge-green {
+  background: rgba(198,169,107,0.12);
+  border: 1px solid rgba(198,169,107,0.45);
+  color: var(--gold);
+}
+.rv-badge-orange {
+  background: rgba(251,146,60,0.10);
+  border: 1px solid rgba(251,146,60,0.35);
+  color: #fb923c;
+}
+.rv-card-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);
+  opacity: 0; transition: opacity 0.4s ease;
+  display: flex; align-items: flex-end; padding: 18px;
+}
+.rv-card:hover .rv-card-overlay { opacity: 1; }
+.rv-card-overlay-text {
+  font-family: var(--font-sans);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold);
+  transform: translateY(6px); transition: transform 0.35s ease;
+}
+.rv-card:hover .rv-card-overlay-text { transform: translateY(0); }
+.rv-card-body { padding: 22px; }
+.rv-card-location {
+  font-family: var(--font-sans);
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+}
+.rv-card-name {
+  font-family: var(--font-serif);
+  font-size: 22px; font-weight: 300;
+  color: #F5F5F5; line-height: 1.2; margin-bottom: 10px;
+}
+.rv-card-specs {
+  font-family: var(--font-sans);
+  font-size: 11px; font-weight: 300;
+  color: rgba(245,245,245,0.38);
+  letter-spacing: 0.04em; margin-bottom: 18px; line-height: 1.5;
+}
+.rv-card-price-label {
+  font-family: var(--font-sans);
+  font-size: 9px; font-weight: 300;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(245,245,245,0.35); margin-bottom: 4px;
+}
+.rv-card-price {
+  font-family: var(--font-serif);
+  font-size: 26px; font-weight: 300;
+  color: var(--gold); line-height: 1; margin-bottom: 20px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.rv-card-price.updating { opacity: 0; transform: scale(0.95); }
+.rv-card-btn {
+  display: block; width: 100%; text-align: center;
+  padding: 13px; background: transparent;
+  color: var(--gold); border: 1px solid rgba(198,169,107,0.40);
+  border-radius: 8px; font-family: var(--font-sans);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.rv-card-btn:hover { background: rgba(198,169,107,0.08); border-color: var(--gold); }
+
+/* ═══════════════════════════════════════════
+   RENTALS — DARK CTA
+═══════════════════════════════════════════ */
+.rent-dark-cta {
+  background: #0B0B0B;
+  padding: 100px clamp(32px,7vw,96px);
+  text-align: center;
+}
+.rent-dark-cta-inner { max-width: 600px; margin: 0 auto; }
+.rent-dark-cta-line {
+  width: 40px; height: 1px; background: var(--gold);
+  margin: 0 auto 40px; opacity: 0.65;
+}
+.rent-dark-cta-label {
+  font-family: var(--font-sans);
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.30em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+}
+.rent-dark-cta-title {
+  font-family: var(--font-serif);
+  font-size: clamp(26px,4vw,42px); font-weight: 300;
+  color: var(--white); line-height: 1.2; margin-bottom: 16px;
+}
+.rent-dark-cta-text {
+  font-family: var(--font-sans);
+  font-size: 14px; font-weight: 300;
+  color: rgba(245,245,245,0.45);
+  line-height: 1.75; margin-bottom: 48px;
+}
+.rent-dark-stats {
+  display: flex; justify-content: center;
+  align-items: flex-start; gap: 56px;
+  margin-bottom: 48px; flex-wrap: wrap;
+}
+.rent-dark-stat-num {
+  font-family: var(--font-serif);
+  font-size: 40px; font-weight: 300;
+  color: var(--gold); line-height: 1; margin-bottom: 8px;
+}
+.rent-dark-stat-label {
+  font-family: var(--font-sans);
+  font-size: 9px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(245,245,245,0.35);
+}
+.rent-dark-cta-btn {
+  display: inline-block; padding: 16px 40px;
+  background: transparent; color: var(--gold);
+  border: 1px solid var(--gold); border-radius: 8px;
+  font-family: var(--font-sans); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.3s ease;
+}
+.rent-dark-cta-btn:hover { background: rgba(198,169,107,0.10); }
+
+/* ═══════════════════════════════════════════
+   VILLA DETAIL PAGE
+═══════════════════════════════════════════ */
+.vd-loading {
+  position: fixed; inset: 0; background: #0B0B0B;
+  z-index: 9000; display: flex;
+  align-items: center; justify-content: center;
+  transition: opacity 0.5s;
+}
+.vd-loading.hidden { opacity: 0; pointer-events: none; }
+.vd-loading-text {
+  font-family: var(--font-serif);
+  font-size: 22px; font-weight: 300;
+  letter-spacing: 0.55em; text-transform: uppercase;
+  color: var(--gold);
+  animation: vdPulse 1.5s ease-in-out infinite;
+}
+@keyframes vdPulse { 0%,100%{opacity:0.2;} 50%{opacity:1;} }
+
+.vd-hero {
+  position: relative; height: 100vh;
+  min-height: 600px;
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+.vd-hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center 40%;
+}
+.vd-hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.65) 65%, #0B0B0B 100%);
+}
+.vd-hero-content {
+  position: relative; z-index: 2;
+  padding: 0 clamp(32px,7vw,96px) 64px; width: 100%;
+}
+.vd-hero-location {
+  font-family: var(--font-sans);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.vd-hero-location::before {
+  content: ""; width: 16px; height: 1px;
+  background: var(--gold); flex-shrink: 0;
+}
+.vd-hero-name {
+  font-family: var(--font-serif);
+  font-size: clamp(38px,7vw,72px); font-weight: 300;
+  color: var(--white); line-height: 1.05;
+  margin-bottom: 14px; letter-spacing: -0.01em;
+}
+.vd-hero-specs {
+  font-family: var(--font-sans);
+  font-size: 13px; font-weight: 300;
+  color: rgba(245,245,245,0.55);
+  letter-spacing: 0.06em; margin-bottom: 18px;
+}
+.vd-hero-price-wrap { display: flex; align-items: baseline; gap: 10px; }
+.vd-hero-price-label {
+  font-family: var(--font-sans); font-size: 10px; font-weight: 300;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(245,245,245,0.40);
+}
+.vd-hero-price {
+  font-family: var(--font-serif); font-size: 28px; font-weight: 300;
+  color: var(--gold); line-height: 1;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.vd-hero-price.updating { opacity: 0; transform: scale(0.95); }
+
+.vd-sticky-bar {
+  position: sticky; top: 0; z-index: 150;
+  background: rgba(11,11,11,0.96);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(198,169,107,0.10);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 14px clamp(32px,7vw,96px);
+  transform: translateY(-100%);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  pointer-events: none;
+}
+.vd-sticky-bar.visible { transform: translateY(0); pointer-events: auto; }
+.vd-sticky-name {
+  font-family: var(--font-serif); font-size: 20px; font-weight: 300;
+  color: var(--white); letter-spacing: -0.01em;
+}
+.vd-sticky-right { display: flex; align-items: center; gap: 24px; }
+.vd-sticky-price {
+  font-family: var(--font-serif); font-size: 20px; font-weight: 300;
+  color: var(--gold);
+}
+.vd-sticky-btn {
+  font-family: var(--font-sans); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: #111111; background: var(--gold);
+  border: none; border-radius: 6px; padding: 10px 20px;
+  text-decoration: none; cursor: pointer;
+  transition: opacity 0.25s;
+}
+.vd-sticky-btn:hover { opacity: 0.82; }
+
+.vd-thumbs {
+  background: #0B0B0B;
+  display: flex; gap: 6px;
+  padding: 10px clamp(32px,7vw,96px);
+  overflow-x: auto; scrollbar-width: none;
+}
+.vd-thumbs::-webkit-scrollbar { display: none; }
+.vd-thumb {
+  flex-shrink: 0; width: 110px; height: 70px;
+  overflow: hidden; border-radius: 4px;
+  border: 2px solid transparent; cursor: pointer;
+  transition: border-color 0.25s;
+}
+.vd-thumb.active { border-color: var(--gold); }
+.vd-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.4s ease;
+}
+.vd-thumb:hover img { transform: scale(1.06); }
+
+.vd-body { background: #F5F0E8; }
+.vd-detail {
+  display: grid; grid-template-columns: 1fr 400px;
+  gap: 60px; padding: 72px clamp(32px,7vw,96px) 80px;
+  max-width: 1400px; margin: 0 auto;
+}
+@media (max-width: 960px) { .vd-detail { grid-template-columns: 1fr; } }
+
+.vd-section-label {
+  font-family: var(--font-sans); font-size: 9px; font-weight: 500;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.vd-section-label::before {
+  content: ""; width: 14px; height: 1px;
+  background: var(--gold); flex-shrink: 0;
+}
+.vd-description {
+  font-family: var(--font-sans); font-size: 15px; font-weight: 300;
+  color: #4A4540; line-height: 1.85; margin-bottom: 48px;
+}
+.vd-specs-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: rgba(198,169,107,0.15);
+  border: 1px solid rgba(198,169,107,0.15);
+  border-radius: 8px; overflow: hidden; margin-bottom: 48px;
+}
+.vd-spec { background: #FAFAF7; padding: 20px 18px; text-align: center; }
+.vd-spec-val {
+  font-family: var(--font-serif); font-size: 26px; font-weight: 300;
+  color: #1A1A1A; line-height: 1; margin-bottom: 6px;
+}
+.vd-spec-key {
+  font-family: var(--font-sans); font-size: 9px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #8A8278;
+}
+@media (max-width: 600px) { .vd-specs-grid { grid-template-columns: repeat(2,1fr); } }
+.vd-amenities { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px; }
+.vd-amenity {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-sans); font-size: 12px; font-weight: 300;
+  color: #4A4540; line-height: 1.5;
+}
+.vd-amenity::before {
+  content: ""; width: 4px; height: 4px;
+  background: var(--gold); border-radius: 50%; flex-shrink: 0;
+}
+
+.vd-book-card {
+  background: #111111;
+  border: 1px solid rgba(198,169,107,0.18);
+  border-radius: 8px; padding: 32px;
+  position: sticky; top: 88px; height: fit-content;
+}
+.vd-book-price-label {
+  font-family: var(--font-sans); font-size: 9px; font-weight: 400;
+  letter-spacing: 0.20em; text-transform: uppercase;
+  color: rgba(198,169,107,0.6); margin-bottom: 6px;
+}
+.vd-book-price {
+  font-family: var(--font-serif); font-size: 42px; font-weight: 300;
+  color: var(--gold); line-height: 1; margin-bottom: 6px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.vd-book-price.updating { opacity: 0; transform: scale(0.95); }
+.vd-book-price-night {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 300;
+  color: rgba(245,245,245,0.35); margin-bottom: 24px;
+}
+.vd-book-divider {
+  width: 100%; height: 1px;
+  background: rgba(198,169,107,0.12); margin-bottom: 20px;
+}
+.vd-book-row {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 14px;
+}
+.vd-book-row-label {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 300;
+  color: rgba(245,245,245,0.40); letter-spacing: 0.06em;
+}
+.vd-book-row-val {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 400;
+  color: rgba(245,245,245,0.75); letter-spacing: 0.04em;
+}
+.vd-book-cta {
+  display: block; width: 100%; text-align: center;
+  padding: 16px; margin-top: 24px;
+  background: var(--gold); color: #111111;
+  border: none; border-radius: 8px;
+  font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  transition: opacity 0.25s, transform 0.25s;
+}
+.vd-book-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+.vd-book-note {
+  font-family: var(--font-sans); font-size: 10px; font-weight: 300;
+  color: rgba(245,245,245,0.25); text-align: center;
+  margin-top: 12px; line-height: 1.6;
+}
+
+.vd-related { background: #F5F0E8; padding: 0 clamp(32px,7vw,96px) 80px; }
+.vd-related-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px,3vw,32px); font-weight: 300;
+  color: #1A1A1A; margin-bottom: 32px;
+  padding-top: 60px;
+  border-top: 1px solid rgba(198,169,107,0.15);
 }
