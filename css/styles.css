@@ -2075,7 +2075,7 @@ img { display: block; }
 ═══════════════════════════════════════════ */
 .rent-dark-cta {
   background:
-    linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.60)),
+    linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.58)),
     url('https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1600&q=80');
   background-size: cover;
   background-position: center center;
@@ -2084,11 +2084,12 @@ img { display: block; }
   text-align: center;
   position: relative;
 }
-.rent-dark-cta > * {
+.rent-dark-cta-inner {
+  max-width: 600px;
+  margin: 0 auto;
   position: relative;
   z-index: 1;
 }
-.rent-dark-cta-inner { max-width: 600px; margin: 0 auto; }
 .rent-dark-cta-line {
   width: 40px; height: 1px; background: var(--gold);
   margin: 0 auto 40px; opacity: 0.65;
