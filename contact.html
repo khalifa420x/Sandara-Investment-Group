@@ -370,6 +370,8 @@
 
 <body>
 
+<div id="cursor"></div>
+
 <!-- NAV -->
 <header class="c-nav">
   <a href="index.html" class="c-nav-logo">
@@ -726,6 +728,24 @@ document.querySelectorAll('.f-input').forEach(input => {
     this.style.borderBottomColor = '';
   });
 });
+</script>
+
+<script>
+(function() {
+  var cursor = document.getElementById('cursor');
+  if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.addEventListener('mousemove', function(e) {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, [role="button"]').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { cursor.classList.add('expand'); });
+      el.addEventListener('mouseleave', function() { cursor.classList.remove('expand'); });
+    });
+  } else if (cursor) {
+    cursor.style.display = 'none';
+  }
+})();
 </script>
 </body>
 </html>
