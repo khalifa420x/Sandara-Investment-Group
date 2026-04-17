@@ -206,7 +206,6 @@ document.addEventListener('keydown', e => {
 window.openMobileMenu = openMobileMenu;
 window.closeMobileMenu = closeMobileMenu;
 
-// === LANGUAGE SETTER (mobile menu) ===
 // === CLICK OUTSIDE TO CLOSE MOBILE MENU ===
 document.addEventListener('click', function(e) {
   const m = document.getElementById('mobile-menu');
@@ -218,26 +217,37 @@ document.addEventListener('click', function(e) {
   }
 });
 
-window.setLang = function(lang) {
-  if (lang === 'fr') {
-    document.body.classList.add('fr');
-    const frEl = document.getElementById('langFR');
-    const enEl = document.getElementById('langEN');
-    if (frEl) { frEl.classList.add('active-lang'); frEl.style.color = 'var(--gold)'; }
-    if (enEl) { enEl.classList.remove('active-lang'); enEl.style.color = ''; }
-    const frMob = document.getElementById('langFR-mob');
-    const enMob = document.getElementById('langEN-mob');
-    if (frMob) frMob.style.opacity = '1';
-    if (enMob) enMob.style.opacity = '0.45';
-  } else {
-    document.body.classList.remove('fr');
-    const frEl = document.getElementById('langFR');
-    const enEl = document.getElementById('langEN');
-    if (frEl) { frEl.classList.remove('active-lang'); frEl.style.color = ''; }
-    if (enEl) { enEl.classList.add('active-lang'); enEl.style.color = 'var(--gold)'; }
-    const frMob = document.getElementById('langFR-mob');
-    const enMob = document.getElementById('langEN-mob');
-    if (frMob) frMob.style.opacity = '0.45';
-    if (enMob) enMob.style.opacity = '1';
-  }
-};
+function setLang(lang) {
+  localStorage.setItem('sundara-lang', lang);
+
+  // Handle .en-text / .fr-text classes
+  document.querySelectorAll('.en-text').forEach(el => {
+    el.style.display = lang === 'en' ? '' : 'none';
+  });
+  document.querySelectorAll('.fr-text').forEach(el => {
+    el.style.display = lang === 'fr' ? '' : 'none';
+  });
+
+  // Handle data-en / data-fr attributes
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.style.display = lang === 'en' ? '' : 'none';
+  });
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    el.style.display = lang === 'fr' ? '' : 'none';
+  });
+
+  // Update button active states
+  document.querySelectorAll('.lang-btn, .lang-toggle-btn').forEach(btn => {
+    btn.style.color = btn.dataset.lang === lang
+      ? '#C6A96B'
+      : 'rgba(245,245,245,0.4)';
+  });
+
+  document.documentElement.lang = lang;
+}
+
+// Apply saved lang on homepage load too
+const savedLang = localStorage.getItem('sundara-lang') || 'en';
+setLang(savedLang);
+
+window.setLang = setLang;

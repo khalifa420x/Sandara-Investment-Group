@@ -620,45 +620,76 @@
 
 <script src="js/animations.js"></script>
 <script>
-// ── LANGUAGE (inherit from homepage) ──────────────────────
-const lang = localStorage.getItem('sundara-lang') || 'en';
-applyContactLang(lang);
+// ── LANGUAGE SYSTEM ───────────────────────────────────────
+const LANG_KEY = 'sundara-lang';
+let currentLang = localStorage.getItem(LANG_KEY) || 'en';
 
-function applyContactLang(l) {
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem(LANG_KEY, lang);
+
+  // Show/hide all translated elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.style.display = lang === 'en' ? '' : 'none';
+  });
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    el.style.display = lang === 'fr' ? '' : 'none';
+  });
+
+  // Also handle .en-text and .fr-text classes
   document.querySelectorAll('.en-text').forEach(el => {
-    el.style.display = l === 'en' ? '' : 'none';
+    el.style.display = lang === 'en' ? '' : 'none';
   });
   document.querySelectorAll('.fr-text').forEach(el => {
-    el.style.display = l === 'fr' ? '' : 'none';
+    el.style.display = lang === 'fr' ? '' : 'none';
   });
-  document.documentElement.lang = l;
+
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+
+  // Update placeholders
+  const placeholders = {
+    firstname: { en: 'Jean', fr: 'Jean' },
+    lastname:  { en: 'Dupont', fr: 'Dupont' },
+    email:     { en: 'jean@example.com', fr: 'jean@exemple.com' },
+    message:   { en: '...', fr: '...' }
+  };
+  Object.entries(placeholders).forEach(([name, vals]) => {
+    const el = document.querySelector(`[name="${name}"]`);
+    if (el) el.placeholder = vals[lang] || vals.en;
+  });
 }
 
-// ── URL PARAMS: context banner ─────────────────────────────
+// Apply on page load immediately
+applyLang(currentLang);
+
+// ── URL PARAMS: context banner ────────────────────────────
 const params = new URLSearchParams(window.location.search);
 const type = params.get('type');
 const banner = document.getElementById('typeBanner');
 
 const bannerMessages = {
   rental: {
-    en: '🏠 You are enquiring about a rental villa — please indicate your dates or duration in the message.',
-    fr: '🏠 Vous nous contactez pour une location — précisez vos dates ou durée souhaitée dans le message.'
+    en: 'You are enquiring about a rental villa — please indicate your preferred dates or duration in the message.',
+    fr: 'Vous nous contactez pour une location — précisez vos dates ou durée souhaitée dans le message.'
   },
   investment: {
-    en: '📊 You are requesting details on an investment property — we will send you the full audit file.',
-    fr: '📊 Vous demandez les détails d\'un bien d\'investissement — nous vous enverrons le dossier complet.'
+    en: 'You are requesting details on an investment property — we will send you the complete audit file.',
+    fr: 'Vous demandez les détails d\'un bien d\'investissement — nous vous enverrons le dossier complet.'
   },
   private: {
-    en: '🔒 You are requesting private access — this is reserved for qualified investors.',
-    fr: '🔒 Vous demandez un accès privé — réservé aux investisseurs qualifiés.'
+    en: 'You are requesting private access — reserved for qualified investors only.',
+    fr: 'Vous demandez un accès privé — réservé aux investisseurs qualifiés uniquement.'
   }
 };
 
-if (type && bannerMessages[type]) {
-  banner.textContent = bannerMessages[type][lang] || bannerMessages[type].en;
+if (type && bannerMessages[type] && banner) {
+  const msg = bannerMessages[type][currentLang]
+           || bannerMessages[type].en;
+  banner.textContent = msg;
   banner.classList.add('show');
 
-  // Pre-select objective based on type
+  // Pre-select objective
   if (type === 'rental') {
     const o4 = document.getElementById('o4');
     if (o4) o4.checked = true;
@@ -669,28 +700,29 @@ if (type && bannerMessages[type]) {
   }
 }
 
-// ── FORM SUBMIT → WHATSAPP ─────────────────────────────────
+// ── FORM SUBMIT → WHATSAPP ────────────────────────────────
 document.getElementById('contactForm')
   .addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Validate required fields
     const firstname = this.firstname.value.trim();
     const lastname  = this.lastname.value.trim();
     const email     = this.email.value.trim();
     const country   = this.country.value;
-    const budget    = (this.querySelector('input[name="budget"]:checked') || {}).value;
-    const objective = (this.querySelector('input[name="objective"]:checked') || {}).value;
+    const budget    = (this.querySelector(
+      'input[name="budget"]:checked') || {}).value;
+    const objective = (this.querySelector(
+      'input[name="objective"]:checked') || {}).value;
     const message   = this.message.value.trim();
 
-    // Basic validation
+    // Validation
     let hasError = false;
     [this.firstname, this.lastname, this.email].forEach(f => {
       if (!f.value.trim()) {
-        f.classList.add('error');
+        f.style.borderBottomColor = '#C6A96B';
         hasError = true;
       } else {
-        f.classList.remove('error');
+        f.style.borderBottomColor = '';
       }
     });
     if (!country || country === '') hasError = true;
@@ -698,16 +730,17 @@ document.getElementById('contactForm')
     if (!objective) hasError = true;
 
     if (hasError) {
-      // Shake animation on submit button
       const btn = this.querySelector('.f-btn');
-      btn.style.transform = 'translateX(-4px)';
-      setTimeout(() => btn.style.transform = '', 200);
+      if (btn) {
+        btn.style.transform = 'translateX(-6px)';
+        setTimeout(() => btn.style.transform = '', 300);
+      }
       return;
     }
 
-    // Build WhatsApp message
+    // Build clean WhatsApp message — NO emojis, NO source line
     const waNumber = '6281215597625';
-    const msgLines = [
+    const lines = [
       '*SUNDARA INVESTMENT GROUP*',
       '----------------------------',
       '*Nom:* ' + firstname + ' ' + lastname,
@@ -715,23 +748,25 @@ document.getElementById('contactForm')
       '*Pays:* ' + country,
       '*Budget:* ' + budget,
       '*Objectif:* ' + objective,
-      message ? '*Message:* ' + message : '',
-    ].filter(Boolean).join('\n');
+    ];
+    if (message) lines.push('*Message:* ' + message);
 
-    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msgLines)}`;
+    const waText = lines.join('\n');
+    const waUrl = 'https://wa.me/' + waNumber
+                + '?text=' + encodeURIComponent(waText);
 
-    // Show success state
+    // Show success
     document.getElementById('contactForm').style.display = 'none';
     document.getElementById('formSuccess').classList.add('show');
 
-    // Open WhatsApp after short delay
-    setTimeout(() => { window.open(waUrl, '_blank'); }, 600);
+    // Open WhatsApp
+    setTimeout(() => window.open(waUrl, '_blank'), 500);
   });
 
-// Clear error on input
+// Clear error state on input
 document.querySelectorAll('.f-input').forEach(input => {
   input.addEventListener('input', function() {
-    this.classList.remove('error');
+    this.style.borderBottomColor = '';
   });
 });
 </script>
