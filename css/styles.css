@@ -1308,28 +1308,30 @@ img { display: block; }
     -webkit-backdrop-filter: blur(20px);
   }
 
-  nav, header, #nav, .nav-inner {
+  nav, header {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
     flex-wrap: nowrap !important;
-    width: 100% !important;
-    overflow: hidden !important;
-    padding: 16px 20px !important;
+    padding: 14px 16px !important;
     gap: 0 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
   }
 
-  .nav-inner {
-    padding: 0 !important;
-  }
-
-  .nav-logo, .logo, .brand, header a:first-child {
-    flex: 1 1 auto !important;
+  nav > a:first-child,
+  nav .nav-logo, header .nav-logo {
+    flex: 1 !important;
     min-width: 0 !important;
-    white-space: nowrap !important;
     overflow: hidden !important;
+    white-space: nowrap !important;
     text-overflow: ellipsis !important;
-    font-size: clamp(12px, 3.5vw, 16px) !important;
+    max-width: calc(100vw - 60px) !important;
+  }
+
+  .hamburger-btn, nav button:last-child {
+    flex-shrink: 0 !important;
+    width: 44px !important;
+    margin-left: 8px !important;
   }
 
   .nav-logo-sub, .logo-sub, .brand-subtitle,

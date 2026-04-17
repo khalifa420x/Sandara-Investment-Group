@@ -173,21 +173,16 @@ document.querySelectorAll('img').forEach(img => {
 
 // === MOBILE MENU ===
 function openMobileMenu() {
-  const menu = document.getElementById('mobile-menu');
-  if (!menu) return;
-  menu.style.display = 'flex';
+  const m = document.getElementById('mobile-menu');
+  if (!m) return;
+  m.style.display = 'flex';
   document.body.style.overflow = 'hidden';
-  document.body.style.position = 'fixed';
-  document.body.style.width = '100%';
 }
-
 function closeMobileMenu() {
-  const menu = document.getElementById('mobile-menu');
-  if (!menu) return;
-  menu.style.display = 'none';
+  const m = document.getElementById('mobile-menu');
+  if (!m) return;
+  m.style.display = 'none';
   document.body.style.overflow = '';
-  document.body.style.position = '';
-  document.body.style.width = '';
 }
 
 // Close on swipe right (mobile gesture)
