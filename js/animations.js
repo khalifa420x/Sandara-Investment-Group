@@ -170,3 +170,52 @@ document.querySelectorAll('[data-target]').forEach(el => {
 document.querySelectorAll('img').forEach(img => {
   img.setAttribute('loading', 'lazy');
 });
+
+// === MOBILE MENU ===
+function openMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  if (menu) {
+    menu.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  if (menu) {
+    menu.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMobileMenu();
+});
+
+window.openMobileMenu = openMobileMenu;
+window.closeMobileMenu = closeMobileMenu;
+
+// === LANGUAGE SETTER (mobile menu) ===
+window.setLang = function(lang) {
+  if (lang === 'fr') {
+    document.body.classList.add('fr');
+    const frEl = document.getElementById('langFR');
+    const enEl = document.getElementById('langEN');
+    if (frEl) { frEl.classList.add('active-lang'); frEl.style.color = 'var(--gold)'; }
+    if (enEl) { enEl.classList.remove('active-lang'); enEl.style.color = ''; }
+    const frMob = document.getElementById('langFR-mob');
+    const enMob = document.getElementById('langEN-mob');
+    if (frMob) frMob.style.opacity = '1';
+    if (enMob) enMob.style.opacity = '0.45';
+  } else {
+    document.body.classList.remove('fr');
+    const frEl = document.getElementById('langFR');
+    const enEl = document.getElementById('langEN');
+    if (frEl) { frEl.classList.remove('active-lang'); frEl.style.color = ''; }
+    if (enEl) { enEl.classList.add('active-lang'); enEl.style.color = 'var(--gold)'; }
+    const frMob = document.getElementById('langFR-mob');
+    const enMob = document.getElementById('langEN-mob');
+    if (frMob) frMob.style.opacity = '0.45';
+    if (enMob) enMob.style.opacity = '1';
+  }
+};

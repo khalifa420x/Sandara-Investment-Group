@@ -17,15 +17,121 @@
 <div id="cursor"></div>
 
 <!-- ─── MOBILE MENU ─── -->
-<nav class="nav-mobile" id="navMobile" role="navigation" aria-label="Mobile menu">
-  <a href="#portfolio"   onclick="closeMobile()"><span class="lang-en-inline">Portfolio</span><span class="lang-fr-inline">Portfolio</span></a>
-  <a href="#why-bali"    onclick="closeMobile()"><span class="lang-en-inline">Opportunities</span><span class="lang-fr-inline">Opportunités</span></a>
-  <a href="#process"     onclick="closeMobile()"><span class="lang-en-inline">Process</span><span class="lang-fr-inline">Processus</span></a>
-  <a href="#positioning" onclick="closeMobile()"><span class="lang-en-inline">Philosophy</span><span class="lang-fr-inline">Philosophie</span></a>
-  <a href="#cta-section" onclick="closeMobile()" style="color: var(--gold); font-size: 1rem; letter-spacing: 0.2em; font-family: var(--font-sans); font-weight: 400; text-transform: uppercase;">
-    <span class="lang-en-inline">Enquire</span><span class="lang-fr-inline">Nous contacter</span>
-  </a>
-</nav>
+<div id="mobile-menu" style="
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13,13,13,0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 40px;
+  gap: 0;
+">
+  <!-- Close button -->
+  <button onclick="closeMobileMenu()" style="
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #F5F5F5;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 8px;
+    line-height: 1;
+  " aria-label="Close menu">×</button>
+
+  <!-- Nav links -->
+  <nav style="display:flex;flex-direction:column;gap:8px;width:100%;margin-bottom:48px">
+    <a href="#rentals" onclick="closeMobileMenu()" style="
+      font-family:'Cormorant Garamond',serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: #F5F5F5;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.3s;
+    ">Portfolio</a>
+
+    <a href="#why-bali" onclick="closeMobileMenu()" style="
+      font-family:'Cormorant Garamond',serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: #F5F5F5;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.3s;
+    ">Opportunities</a>
+
+    <a href="#process" onclick="closeMobileMenu()" style="
+      font-family:'Cormorant Garamond',serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: #F5F5F5;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    ">Process</a>
+
+    <a href="#positioning" onclick="closeMobileMenu()" style="
+      font-family:'Cormorant Garamond',serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: #F5F5F5;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    ">Philosophy</a>
+  </nav>
+
+  <!-- FR/EN toggle inside mobile menu -->
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px">
+    <button onclick="setLang('en');closeMobileMenu()"
+      id="mobile-lang-en"
+      style="
+        background:none;border:none;
+        font-family:'Outfit',sans-serif;
+        font-size:12px;font-weight:500;
+        letter-spacing:0.2em;
+        text-transform:uppercase;
+        color:#C6A96B;cursor:pointer;
+        padding:8px 0;
+    ">EN</button>
+    <span style="color:rgba(255,255,255,0.2);font-size:11px">/</span>
+    <button onclick="setLang('fr');closeMobileMenu()"
+      id="mobile-lang-fr"
+      style="
+        background:none;border:none;
+        font-family:'Outfit',sans-serif;
+        font-size:12px;font-weight:500;
+        letter-spacing:0.2em;
+        text-transform:uppercase;
+        color:rgba(255,255,255,0.4);cursor:pointer;
+        padding:8px 0;
+    ">FR</button>
+  </div>
+
+  <!-- Enquire CTA -->
+  <a href="#cta-section" onclick="closeMobileMenu()" style="
+    font-family:'Outfit',sans-serif;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:#131313;
+    background:#C6A96B;
+    padding:16px 32px;
+    text-decoration:none;
+    display:inline-block;
+    border-radius:6px;
+  ">Enquire →</a>
+</div>
 
 <!-- ═══════════════════════════════════════
    1. NAV
@@ -59,7 +165,7 @@
           <span class="lang-en-inline">Enquire</span>
           <span class="lang-fr-inline">Contact</span>
         </a>
-        <button class="nav-hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Open menu" aria-expanded="false">
+        <button class="nav-hamburger" id="hamburger" onclick="openMobileMenu()" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
