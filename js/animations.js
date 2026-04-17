@@ -217,3 +217,24 @@ document.addEventListener('click', function(e) {
     }
   }
 });
+
+// === LANGUAGE SETTER (mobile menu) ===
+function setLang(lang) {
+  if (lang === 'fr') {
+    document.body.classList.add('fr');
+  } else {
+    document.body.classList.remove('fr');
+  }
+
+  const langENEl = document.getElementById('langEN');
+  const langFREl = document.getElementById('langFR');
+  if (lang === 'fr') {
+    if (langFREl) { langFREl.classList.add('active-lang'); langFREl.style.color = 'var(--gold)'; }
+    if (langENEl) { langENEl.classList.remove('active-lang'); langENEl.style.color = ''; }
+  } else {
+    if (langENEl) { langENEl.classList.add('active-lang'); langENEl.style.color = 'var(--gold)'; }
+    if (langFREl) { langFREl.classList.remove('active-lang'); langFREl.style.color = ''; }
+  }
+}
+
+window.setLang = setLang;
