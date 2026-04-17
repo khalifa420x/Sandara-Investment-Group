@@ -207,6 +207,17 @@ window.openMobileMenu = openMobileMenu;
 window.closeMobileMenu = closeMobileMenu;
 
 // === LANGUAGE SETTER (mobile menu) ===
+// === CLICK OUTSIDE TO CLOSE MOBILE MENU ===
+document.addEventListener('click', function(e) {
+  const m = document.getElementById('mobile-menu');
+  const btn = document.querySelector('.hamburger-btn, [onclick="openMobileMenu()"]');
+  if (m && m.style.display === 'flex') {
+    if (!m.contains(e.target) && (!btn || !btn.contains(e.target))) {
+      closeMobileMenu();
+    }
+  }
+});
+
 window.setLang = function(lang) {
   if (lang === 'fr') {
     document.body.classList.add('fr');

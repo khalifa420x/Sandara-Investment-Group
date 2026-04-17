@@ -1325,7 +1325,8 @@ img { display: block; }
     overflow: hidden !important;
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
-    max-width: calc(100vw - 60px) !important;
+    max-width: calc(100vw - 80px) !important;
+    font-size: clamp(11px, 3vw, 15px) !important;
   }
 
   .hamburger-btn, nav button:last-child {
