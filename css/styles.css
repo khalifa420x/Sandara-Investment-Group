@@ -1865,7 +1865,7 @@ img { display: block; }
 }
 .rent-hero-bg {
   position: absolute; inset: 0; z-index: 0;
-  background-image: url("https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1600&q=80");
+  background-image: url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1600&q=80");
   background-size: cover;
   background-position: center 40%;
 }
