@@ -58,28 +58,6 @@
     document.body.style.overflow = '';
   };
 
-  /* ── Language toggle ── */
-  let currentLang = 'en';
-  const langENEl = document.getElementById('langEN');
-  const langFREl = document.getElementById('langFR');
-
-  window.toggleLang = function () {
-    currentLang = currentLang === 'en' ? 'fr' : 'en';
-    if (currentLang === 'fr') {
-      document.body.classList.add('fr');
-      langFREl.classList.add('active-lang');
-      langFREl.style.color = 'var(--gold)';
-      langENEl.classList.remove('active-lang');
-      langENEl.style.color = '';
-    } else {
-      document.body.classList.remove('fr');
-      langENEl.classList.add('active-lang');
-      langENEl.style.color = 'var(--gold)';
-      langFREl.classList.remove('active-lang');
-      langFREl.style.color = '';
-    }
-  };
-
   /* ── Scroll reveal (IntersectionObserver) ── */
   const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
   if ('IntersectionObserver' in window) {
@@ -218,18 +196,3 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// === LANGUAGE SETTER (mobile menu) ===
-function setLang(lang) {
-  localStorage.setItem('sundara-lang', lang);
-  if (lang === 'fr') {
-    document.body.classList.add('fr');
-  } else {
-    document.body.classList.remove('fr');
-  }
-  const langENEl = document.getElementById('langEN');
-  const langFREl = document.getElementById('langFR');
-  if (langFREl) { langFREl.style.color = lang === 'fr' ? 'var(--gold)' : ''; }
-  if (langENEl) { langENEl.style.color = lang === 'en' ? 'var(--gold)' : ''; }
-}
-
-window.setLang = setLang;
