@@ -103,6 +103,22 @@ body {
   transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Directional variants */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
 .reveal-d1 { transition-delay: 0.1s; }
 .reveal-d2 { transition-delay: 0.2s; }
 .reveal-d3 { transition-delay: 0.3s; }
@@ -480,7 +496,20 @@ section { position: relative; }
   align-items: center;
 }
 .why-bali-text { padding-right: 40px; }
-.why-bali-text .eyebrow { margin-bottom: 24px; }
+.why-bali-text .eyebrow {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.why-bali-text .eyebrow::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 60px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
 .why-bali-text .display-md { color: var(--text); margin-bottom: 28px; }
 .why-bali-text p { color: var(--text-sec); max-width: 460px; }
 
@@ -497,40 +526,45 @@ section { position: relative; }
   transition: transform 0.8s cubic-bezier(0.22,1,0.36,1);
   filter: contrast(1.06) saturate(0.88);
 }
-.why-bali-img:hover img { transform: scale(1.04); }
+.why-bali-img:hover img { transform: scale(1.03); }
 
 .why-stats {
-  margin-top: 80px;
+  margin-top: 100px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
+  padding-bottom: 20px;
 }
 .stat-item {
-  padding: 40px 48px;
-  border-left: 1px solid rgba(198,169,107,0.18);
+  padding: 40px 48px 40px 0;
   border-radius: 8px;
+  border-top: 1px solid rgba(198,169,107,0.3);
 }
-.stat-item:first-child { border-left: none; padding-left: 0; }
+.stat-item + .stat-item {
+  padding-left: 48px;
+  border-left: 1px solid rgba(198,169,107,0.12);
+}
 .stat-number {
   font-family: var(--font-serif);
   font-weight: 300;
-  font-size: clamp(28px, 3vw, 46px);
+  font-size: clamp(48px, 7vw, 96px);
   color: var(--gold);
   line-height: 1;
-  margin-bottom: 10px;
-  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
 }
 .stat-label {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--text-sec);
-  line-height: 1.5;
+  line-height: 1.6;
+  max-width: 220px;
 }
 
 @media (max-width: 960px) {
   .why-bali-grid { grid-template-columns: 1fr; gap: 48px; }
   .why-bali-text { padding-right: 0; }
   .why-stats { grid-template-columns: 1fr; }
-  .stat-item { border-left: none; border-top: 1px solid rgba(198,169,107,0.18); padding: 28px 0; }
+  .stat-item { border-left: none !important; border-top: 1px solid rgba(198,169,107,0.3); padding: 32px 0 !important; }
   .stat-item:first-child { border-top: none; }
 }
 
@@ -1034,15 +1068,20 @@ section { position: relative; }
 }
 
 /* ═══════════════════════════════════════════
-   LANGUAGE TOGGLE (data-en / data-fr)
+   LANGUAGE TOGGLE
+   Defaults: EN visible, FR hidden.
+   When body.fr — FR visible, EN hidden.
+   !important guards against any component-level display override.
 ═══════════════════════════════════════════ */
-.lang-fr { display: none; }
-body.fr .lang-en { display: none; }
-body.fr .lang-fr { display: block; }
-body.fr .lang-fr-inline { display: inline; }
-body.fr .lang-en-inline { display: none; }
-.lang-fr-inline { display: none; }
-.lang-en-inline { display: inline; }
+.lang-fr         { display: none !important; }
+.lang-fr-inline  { display: none !important; }
+.lang-en         { display: block; }
+.lang-en-inline  { display: inline; }
+
+body.fr .lang-en         { display: none !important; }
+body.fr .lang-en-inline  { display: none !important; }
+body.fr .lang-fr         { display: block !important; }
+body.fr .lang-fr-inline  { display: inline !important; }
 
 /* ═══════════════════════════════════════════
    MISC UTILS
@@ -1060,7 +1099,7 @@ img { display: block; }
 
 <!-- ─── MOBILE MENU ─── -->
 <nav class="nav-mobile" id="navMobile" role="navigation" aria-label="Mobile menu">
-  <a href="#portfolio"   onclick="closeMobile()"><span class="lang-en-inline">Portfolio</span><span class="lang-fr-inline">Portefeuille</span></a>
+  <a href="#portfolio"   onclick="closeMobile()"><span class="lang-en-inline">Portfolio</span><span class="lang-fr-inline">Portfolio</span></a>
   <a href="#why-bali"    onclick="closeMobile()"><span class="lang-en-inline">Opportunities</span><span class="lang-fr-inline">Opportunités</span></a>
   <a href="#process"     onclick="closeMobile()"><span class="lang-en-inline">Process</span><span class="lang-fr-inline">Processus</span></a>
   <a href="#positioning" onclick="closeMobile()"><span class="lang-en-inline">Philosophy</span><span class="lang-fr-inline">Philosophie</span></a>
@@ -1084,7 +1123,7 @@ img { display: block; }
 
       <!-- Center links -->
       <ul class="nav-links" role="list">
-        <li><a href="#rentals"><span class="lang-en-inline">Portfolio</span><span class="lang-fr-inline">Portefeuille</span></a></li>
+        <li><a href="#rentals"><span class="lang-en-inline">Portfolio</span><span class="lang-fr-inline">Portfolio</span></a></li>
         <li><a href="#why-bali"><span class="lang-en-inline">Opportunities</span><span class="lang-fr-inline">Opportunités</span></a></li>
         <li><a href="#process"><span class="lang-en-inline">Process</span><span class="lang-fr-inline">Processus</span></a></li>
         <li><a href="#positioning"><span class="lang-en-inline">Philosophy</span><span class="lang-fr-inline">Philosophie</span></a></li>
@@ -1184,22 +1223,22 @@ img { display: block; }
   <div class="container">
     <div class="why-bali-grid">
       <!-- Text -->
-      <div class="why-bali-text reveal">
+      <div class="why-bali-text reveal-left">
         <p class="eyebrow">
           <span class="lang-en-inline">The Investment Thesis</span>
           <span class="lang-fr-inline">La Thèse d'Investissement</span>
         </p>
-        <h2 class="display-md" id="whybali-heading" style="margin-top: 20px;">
+        <h2 class="display-md reveal-left reveal-d1" id="whybali-heading" style="margin-top: 20px;">
           <span class="lang-en-inline">Why Bali<br>remains unmatched.</span>
           <span class="lang-fr-inline">Pourquoi Bali<br>reste inégalé.</span>
         </h2>
-        <p>
+        <p class="reveal reveal-d2">
           <span class="lang-en-inline">Bali is not a trend. It is a structural story — a rare intersection of cultural magnetism, infrastructure development, and one of the world's highest rental yields in the luxury segment. Foreign demand shows no signs of ceiling.</span>
           <span class="lang-fr-inline">Bali n'est pas une tendance. C'est une histoire structurelle — une rare intersection entre magnétisme culturel, développement des infrastructures et l'un des rendements locatifs les plus élevés au monde dans le segment luxe. La demande étrangère ne montre aucun signe de plafonnement.</span>
         </p>
       </div>
       <!-- Image -->
-      <div class="why-bali-img reveal reveal-d2">
+      <div class="why-bali-img reveal-right reveal-d1">
         <img
           src="https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1200&q=80"
           alt="Bali aerial rice terraces"
@@ -1212,24 +1251,24 @@ img { display: block; }
     <!-- Stats -->
     <div class="why-stats">
       <div class="stat-item reveal">
-        <div class="stat-number">+6M</div>
+        <div class="stat-number">+6 Millions</div>
         <div class="stat-label">
-          <span class="lang-en-inline">International visitors per year</span>
-          <span class="lang-fr-inline">Visiteurs internationaux par an</span>
+          <span class="lang-en-inline">International visitors welcomed every year</span>
+          <span class="lang-fr-inline">Visiteurs internationaux accueillis chaque année</span>
         </div>
       </div>
       <div class="stat-item reveal reveal-d2">
-        <div class="stat-number">↑ Sustained</div>
+        <div class="stat-number">15–22%</div>
         <div class="stat-label">
-          <span class="lang-en-inline">Asset appreciation trend</span>
-          <span class="lang-fr-inline">Tendance d'appréciation des actifs</span>
+          <span class="lang-en-inline">Estimated gross rental yield — premium zones</span>
+          <span class="lang-fr-inline">Rendement locatif brut estimé — zones premium</span>
         </div>
       </div>
       <div class="stat-item reveal reveal-d3">
         <div class="stat-number">Top 3</div>
         <div class="stat-label">
-          <span class="lang-en-inline">Global premium rental destination</span>
-          <span class="lang-fr-inline">Destination de location premium mondiale</span>
+          <span class="lang-en-inline">Global destination for premium rental investment</span>
+          <span class="lang-fr-inline">Destination mondiale pour l'investissement locatif premium</span>
         </div>
       </div>
     </div>
@@ -1658,7 +1697,7 @@ img { display: block; }
           <span class="lang-fr-inline">Navigation</span>
         </p>
         <ul class="footer-links" role="list">
-          <li><a href="#rentals"><span class="lang-en-inline">Portfolio</span><span class="lang-fr-inline">Portefeuille</span></a></li>
+          <li><a href="#rentals"><span class="lang-en-inline">Portfolio</span><span class="lang-fr-inline">Portfolio</span></a></li>
           <li><a href="#why-bali"><span class="lang-en-inline">Opportunities</span><span class="lang-fr-inline">Opportunités</span></a></li>
           <li><a href="#process"><span class="lang-en-inline">Process</span><span class="lang-fr-inline">Processus</span></a></li>
           <li><a href="#positioning"><span class="lang-en-inline">Philosophy</span><span class="lang-fr-inline">Philosophie</span></a></li>
@@ -1785,7 +1824,7 @@ img { display: block; }
   };
 
   /* ── Scroll reveal (IntersectionObserver) ── */
-  const revealEls = document.querySelectorAll('.reveal');
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
