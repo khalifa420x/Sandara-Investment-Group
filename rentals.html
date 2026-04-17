@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rentals — Sundara Investment Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0B0B0B;
+      color: #F5F5F5;
+      font-family: 'Outfit', sans-serif;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    #cursor {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #C6A96B;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s, height 0.25s, opacity 0.25s;
+    }
+    #cursor.expand {
+      width: 28px;
+      height: 28px;
+      opacity: 0.35;
+    }
+
+    .r-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px clamp(24px, 5vw, 64px);
+      background: rgba(11, 11, 11, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(198, 169, 107, 0.1);
+      z-index: 100;
+    }
+
+    .r-nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14px, 2vw, 18px);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      color: #F5F5F5;
+      font-weight: 400;
+    }
+    .r-nav-logo span { color: #C6A96B; }
+
+    .r-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .cur-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cur-btn {
+      background: none;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+      padding: 2px 0;
+      transition: color 0.25s;
+    }
+    .cur-btn.active { color: #C6A96B; }
+    .cur-btn:hover { color: rgba(198, 169, 107, 0.7); }
+
+    .cur-sep {
+      color: rgba(255, 255, 255, 0.15);
+      font-size: 9px;
+    }
+
+    .r-nav-back {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.35);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .r-nav-back:hover { color: #C6A96B; }
+
+    @media (max-width: 768px) {
+      .cur-switch { display: none; }
+      .r-nav-back { display: none; }
+    }
+
+    /* lang visibility handled by lang.js via body.fr */
+    body:not(.fr) .lang-fr-inline { display: none; }
+    body.fr .lang-en-inline { display: none; }
+
+    .r-hero {
+      padding: clamp(120px, 16vw, 180px) clamp(24px, 7vw, 96px) clamp(56px, 8vw, 96px);
+    }
+
+    .r-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #C6A96B;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .r-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: #C6A96B;
+      flex-shrink: 0;
+    }
+
+    .r-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 300;
+      line-height: 1.1;
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
+    .r-title em {
+      font-style: italic;
+      color: #C6A96B;
+    }
+
+    .r-desc {
+      font-size: clamp(13px, 1.3vw, 14px);
+      font-weight: 300;
+      color: rgba(245, 245, 245, 0.45);
+      line-height: 1.9;
+      max-width: 480px;
+    }
+
+    .r-filters {
+      padding: 0 clamp(24px, 7vw, 96px) 48px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 64px;
+    }
+
+    .filter-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 12px 24px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+      transition: color 0.25s, border-bottom-color 0.25s;
+    }
+    .filter-btn.active {
+      color: #C6A96B;
+      border-bottom-color: #C6A96B;
+    }
+    .filter-btn:hover { color: rgba(245, 245, 245, 0.7); }
+
+    .villa-section {
+      padding: 0 clamp(24px, 7vw, 96px) 80px;
+    }
+
+    .section-header { margin-bottom: 40px; }
+
+    .section-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(198, 169, 107, 0.6);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 300;
+    }
+
+    .villa-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    @media (max-width: 1100px) {
+      .villa-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .villa-grid { grid-template-columns: 1fr; }
+    }
+
+    .villa-card {
+      display: block;
+      text-decoration: none;
+      background: #131313;
+      overflow: hidden;
+      transition: transform 0.4s;
+    }
+    .villa-card:hover { transform: translateY(-4px); }
+
+    .card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s;
+    }
+    .villa-card:hover .card-img-wrap img { transform: scale(1.06); }
+
+    .card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      background: rgba(198, 169, 107, 0.15);
+      border: 1px solid rgba(198, 169, 107, 0.35);
+      color: #C6A96B;
+      backdrop-filter: blur(8px);
+    }
+    .badge-demand {
+      background: rgba(255, 180, 100, 0.12);
+      border: 1px solid rgba(255, 180, 100, 0.3);
+      color: #f0b060;
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 11, 11, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .villa-card:hover .card-overlay { opacity: 1; }
+    .card-overlay span {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #F5F5F5;
+      border-bottom: 1px solid rgba(245, 245, 245, 0.4);
+      padding-bottom: 2px;
+    }
+
+    .card-body { padding: 20px 20px 24px; }
+
+    .card-location {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(198, 169, 107, 0.7);
+      margin-bottom: 6px;
+    }
+
+    .card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 1.8vw, 22px);
+      font-weight: 300;
+      margin-bottom: 8px;
+      line-height: 1.2;
+      color: #F5F5F5;
+    }
+
+    .card-specs {
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(245, 245, 245, 0.35);
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+
+    .card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 400;
+      color: #C6A96B;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .card-price.updating {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    .r-footer-cta {
+      background: #131313;
+      padding: clamp(64px, 8vw, 96px) clamp(24px, 7vw, 96px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 28px;
+    }
+
+    .r-footer-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 300;
+      line-height: 1.2;
+      max-width: 560px;
+    }
+    .r-footer-title em {
+      font-style: italic;
+      color: #C6A96B;
+    }
+
+    .r-footer-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: #C6A96B;
+      color: #0B0B0B;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .r-footer-btn:hover {
+      background: #d4b87a;
+      transform: translateY(-2px);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<header class="r-nav">
+  <a href="index.html" class="r-nav-logo">SUNDARA <span>·</span> Investment Group</a>
+  <div class="r-nav-right">
+    <div class="cur-switch">
+      <button class="cur-btn" data-cur="USD" onclick="setCurrency('USD')">USD</button>
+      <span class="cur-sep">/</span>
+      <button class="cur-btn" data-cur="EUR" onclick="setCurrency('EUR')">EUR</button>
+      <span class="cur-sep">/</span>
+      <button class="cur-btn" data-cur="GBP" onclick="setCurrency('GBP')">GBP</button>
+      <span class="cur-sep">/</span>
+      <button class="cur-btn" data-cur="IDR" onclick="setCurrency('IDR')">IDR</button>
+    </div>
+    <a href="index.html" class="r-nav-back">
+      <span class="lang-en-inline">← Home</span>
+      <span class="lang-fr-inline">← Accueil</span>
+    </a>
+  </div>
+</header>
+
+<section class="r-hero">
+  <p class="r-eyebrow">
+    <span class="lang-en-inline">Our Rentals</span>
+    <span class="lang-fr-inline">Nos Locations</span>
+  </p>
+  <h1 class="r-title">
+    <span class="lang-en-inline">Exceptional villas,<br><em>curated for you.</em></span>
+    <span class="lang-fr-inline">Des villas d'exception,<br><em>sélectionnées pour vous.</em></span>
+  </h1>
+  <p class="r-desc">
+    <span class="lang-en-inline">Each property is personally verified by our team. Private access, full service, immediate response.</span>
+    <span class="lang-fr-inline">Chaque propriété est personnellement vérifiée par notre équipe. Accès privé, service complet, réponse immédiate.</span>
+  </p>
+</section>
+
+<div class="r-filters">
+  <button class="filter-btn active" onclick="filterVillas('all', this)">
+    <span class="lang-en-inline">All</span>
+    <span class="lang-fr-inline">Tout</span>
+  </button>
+  <button class="filter-btn" onclick="filterVillas('short-term', this)">
+    <span class="lang-en-inline">Short-term</span>
+    <span class="lang-fr-inline">Court séjour</span>
+  </button>
+  <button class="filter-btn" onclick="filterVillas('long-term', this)">
+    <span class="lang-en-inline">Long-term</span>
+    <span class="lang-fr-inline">Long séjour</span>
+  </button>
+</div>
+
+<section class="villa-section" id="section-short" data-type="short-term">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">
+      <span class="lang-en-inline">Short-term · <span id="count-short">0</span> villas</span>
+      <span class="lang-fr-inline">Court séjour · <span id="count-short-fr">0</span> villas</span>
+    </p>
+    <h2 class="section-title">
+      <span class="lang-en-inline">Vacation &amp; Private Stays</span>
+      <span class="lang-fr-inline">Vacances &amp; Séjours Privés</span>
+    </h2>
+  </div>
+  <div class="villa-grid" id="grid-short"></div>
+</section>
+
+<section class="villa-section" id="section-long" data-type="long-term">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">
+      <span class="lang-en-inline">Long-term · <span id="count-long">0</span> villas</span>
+      <span class="lang-fr-inline">Long séjour · <span id="count-long-fr">0</span> villas</span>
+    </p>
+    <h2 class="section-title">
+      <span class="lang-en-inline">Residences &amp; Extended Stays</span>
+      <span class="lang-fr-inline">Résidences &amp; Longs Séjours</span>
+    </h2>
+  </div>
+  <div class="villa-grid" id="grid-long"></div>
+</section>
+
+<section class="r-footer-cta">
+  <h2 class="r-footer-title">
+    <span class="lang-en-inline">Don't see what you're looking for?<br>We'll find your <em>perfect villa.</em></span>
+    <span class="lang-fr-inline">Vous ne trouvez pas ce que vous cherchez ?<br>Nous trouvons votre <em>villa idéale.</em></span>
+  </h2>
+  <a href="contact.html?type=rental" class="r-footer-btn">
+    <span class="lang-en-inline">Make a custom request →</span>
+    <span class="lang-fr-inline">Faire une demande sur mesure →</span>
+  </a>
+</section>
+
+<script src="js/lang.js"></script>
+<script src="js/animations.js"></script>
+<script>
+// ── CURSOR ────────────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+  });
+} else if (cursor) {
+  cursor.style.display = 'none';
+  document.body.style.cursor = '';
+}
+
+// ── REVEAL ────────────────────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── CURRENCY SYSTEM ───────────────────────────────────────
+const FALLBACK_RATES = { USD: 0.000063, EUR: 0.000058, GBP: 0.000050 };
+const RATES_KEY = 'sundara-rates';
+const RATES_TTL = 43200000; // 12h
+let rates = { ...FALLBACK_RATES };
+let selectedCurrency = localStorage.getItem('sundara-currency') || 'USD';
+
+async function initRates() {
+  try {
+    const cached = localStorage.getItem(RATES_KEY);
+    if (cached) {
+      const { ts, data } = JSON.parse(cached);
+      if (Date.now() - ts < RATES_TTL) { rates = data; return; }
+    }
+    const res = await fetch('https://open.er-api.com/v6/latest/IDR');
+    const json = await res.json();
+    if (json.rates) {
+      rates = { USD: json.rates.USD, EUR: json.rates.EUR, GBP: json.rates.GBP };
+      localStorage.setItem(RATES_KEY, JSON.stringify({ ts: Date.now(), data: rates }));
+    }
+  } catch { rates = { ...FALLBACK_RATES }; }
+}
+
+function convertPrice(amountIDR, currency) {
+  if (!amountIDR) return '—';
+  if (currency === 'IDR') return 'IDR\u00a0' + amountIDR.toLocaleString('id-ID');
+  const rate = (rates && rates[currency]) || FALLBACK_RATES[currency];
+  const val = Math.round(amountIDR * rate);
+  const sym = { USD: '$', EUR: '€', GBP: '£' }[currency];
+  return sym + val.toLocaleString('en-US');
+}
+
+function setCurrency(c) {
+  selectedCurrency = c;
+  localStorage.setItem('sundara-currency', c);
+  refreshPrices();
+  updateCurrencyButtons();
+}
+
+function refreshPrices() {
+  document.querySelectorAll('[data-price-idr]').forEach(el => {
+    const idr = parseInt(el.dataset.priceIdr, 10);
+    const suffix = el.dataset.priceSuffix || '';
+    el.classList.add('updating');
+    setTimeout(() => {
+      el.textContent = convertPrice(idr, selectedCurrency) + suffix;
+      el.classList.remove('updating');
+    }, 150);
+  });
+}
+
+function updateCurrencyButtons() {
+  document.querySelectorAll('.cur-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cur === selectedCurrency);
+  });
+}
+
+// ── FILTER ────────────────────────────────────────────────
+function filterVillas(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.villa-section').forEach(s => {
+    s.style.display = (type === 'all' || s.dataset.type === type) ? '' : 'none';
+  });
+}
+
+// ── RENDER ────────────────────────────────────────────────
+const getLang = () => localStorage.getItem('sundara-lang') || 'en';
+
+function renderCard(id, villa) {
+  const lang = getLang();
+  const name = villa.name[lang];
+  const location = villa.location[lang];
+  const badge = villa.badge[lang];
+  const img = villa.images[0];
+  const isNight = villa.type === 'short-term';
+  const priceIdr = isNight ? villa.price_idr_night : villa.price_idr_month;
+  const suffix = isNight
+    ? (lang === 'fr' ? '\u00a0/ nuit' : '\u00a0/ night')
+    : (lang === 'fr' ? '\u00a0/ mois' : '\u00a0/ month');
+  const badgeClass = villa.status === 'demand' ? 'card-badge badge-demand' : 'card-badge';
+  return `<a href="villa.html?id=${id}" class="villa-card reveal">
+    <div class="card-img-wrap">
+      <img src="${img}" alt="${name}" loading="lazy">
+      <span class="${badgeClass}">${badge}</span>
+      <div class="card-overlay"><span>${lang === 'fr' ? 'Voir la villa →' : 'View villa →'}</span></div>
+    </div>
+    <div class="card-body">
+      <p class="card-location">${location}</p>
+      <h3 class="card-name">${name}</h3>
+      <p class="card-specs">${villa.bedrooms} bed · ${villa.surface_build}</p>
+      <p class="card-price" data-price-idr="${priceIdr}" data-price-suffix="${suffix}">${convertPrice(priceIdr, selectedCurrency)}${suffix}</p>
+    </div>
+  </a>`;
+}
+
+// ── INIT ──────────────────────────────────────────────────
+async function init() {
+  await initRates();
+  updateCurrencyButtons();
+  const res = await fetch('data/villas.json');
+  const villas = await res.json();
+  const shortGrid = document.getElementById('grid-short');
+  const longGrid = document.getElementById('grid-long');
+  let sc = 0, lc = 0;
+  Object.entries(villas).forEach(([id, villa]) => {
+    if (villa.type === 'short-term') { shortGrid.insertAdjacentHTML('beforeend', renderCard(id, villa)); sc++; }
+    else { longGrid.insertAdjacentHTML('beforeend', renderCard(id, villa)); lc++; }
+  });
+  document.getElementById('count-short').textContent = sc;
+  document.getElementById('count-short-fr').textContent = sc;
+  document.getElementById('count-long').textContent = lc;
+  document.getElementById('count-long-fr').textContent = lc;
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
+  if (cursor) {
+    document.querySelectorAll('.villa-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+    });
+  }
+}
+init();
+</script>
+</body>
+</html>
