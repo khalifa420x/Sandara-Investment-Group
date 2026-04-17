@@ -613,7 +613,8 @@ section { position: relative; }
 .villa-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  align-items: start;
+  gap: 24px;
   margin-bottom: 80px;
 }
 .villa-card {
