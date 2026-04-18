@@ -14,7 +14,81 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/styles.css"/>
   <style>
-    /* BLOG STYLES — à compléter sprint 2 */
+body { background: #f5f2ec; }
+
+.bl-hero { position: relative; height: 520px; overflow: hidden; }
+.bl-hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; transition: transform 10s ease; }
+.bl-hero:hover .bl-hero-img { transform: scale(1.04); }
+.bl-hero-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.28) 50%, rgba(0,0,0,0.68) 100%); }
+.bl-hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 32px; }
+.bl-hero-label { font-family: 'Outfit', sans-serif; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #c4a464; margin-bottom: 18px; opacity: 0; animation: blFadeUp 0.8s 0.3s forwards; }
+.bl-hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 300; color: #f5f2ec; line-height: 1.1; margin-bottom: 16px; opacity: 0; animation: blFadeUp 0.9s 0.5s forwards; }
+.bl-hero-title em { font-style: italic; color: #c4a464; }
+.bl-hero-sub { font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 300; color: rgba(245,242,236,0.65); line-height: 1.75; max-width: 520px; opacity: 0; animation: blFadeUp 0.9s 0.7s forwards; }
+.bl-hero-line { width: 0; height: 1px; background: linear-gradient(90deg, transparent, #c4a464, transparent); margin: 22px auto 0; animation: blExpandLine 0.8s 1s forwards; }
+
+.bl-body { background: #f5f2ec; max-width: 1200px; margin: 0 auto; padding: 56px 40px 80px; }
+
+.bl-btn-gold { display: inline-flex; align-items: center; gap: 6px; font-family: 'Outfit', sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #1a1a18; background: #c4a464; border: 1.5px solid #c4a464; border-radius: 8px; padding: 13px 26px; cursor: pointer; text-decoration: none; transition: background 0.28s ease, color 0.28s ease, transform 0.22s ease, box-shadow 0.28s ease; width: fit-content; }
+.bl-btn-gold:hover { background: transparent; color: #c4a464; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,164,100,0.25); }
+
+.bl-btn-card { display: inline-flex; align-items: center; gap: 5px; font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #c4a464; background: transparent; border: 1.5px solid #c4a464; border-radius: 7px; padding: 8px 16px; cursor: pointer; text-decoration: none; transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease; }
+.bl-btn-card:hover { background: #c4a464; color: #1a1a18; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(196,164,100,0.3); }
+
+.bl-featured { display: grid; grid-template-columns: 1fr 1fr; background: #fff; border: 1px solid rgba(196,164,100,0.2); border-radius: 20px; overflow: hidden; margin-bottom: 56px; box-shadow: 0 4px 32px rgba(0,0,0,0.07); opacity: 0; animation: blFadeUp 0.8s 0.15s forwards; transition: box-shadow 0.38s ease, border-color 0.38s ease; }
+.bl-featured:hover { box-shadow: 0 16px 52px rgba(196,164,100,0.16); border-color: rgba(196,164,100,0.48); }
+.bl-feat-img { position: relative; overflow: hidden; min-height: 380px; }
+.bl-feat-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+.bl-featured:hover .bl-feat-img img { transform: scale(1.06); }
+.bl-feat-badge { position: absolute; top: 16px; left: 16px; font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #c4a464; background: rgba(255,255,255,0.94); border: 1px solid rgba(196,164,100,0.5); border-radius: 50px; padding: 5px 13px; }
+.bl-feat-content { padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; }
+.bl-feat-tag { font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #c4a464; margin-bottom: 14px; }
+.bl-feat-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.2vw, 1.9rem); font-weight: 300; color: #1a1a18; line-height: 1.22; margin-bottom: 14px; }
+.bl-feat-excerpt { font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 300; color: rgba(26,26,24,0.52); line-height: 1.78; margin-bottom: 26px; }
+.bl-feat-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.bl-feat-meta span { font-family: 'Outfit', sans-serif; font-size: 0.68rem; color: rgba(26,26,24,0.35); letter-spacing: 0.06em; }
+.bl-feat-meta i { width: 3px; height: 3px; border-radius: 50%; background: rgba(196,164,100,0.5); display: inline-block; }
+
+.bl-section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid rgba(196,164,100,0.2); }
+.bl-section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: #1a1a18; }
+.bl-section-count { font-family: 'Outfit', sans-serif; font-size: 0.68rem; color: rgba(26,26,24,0.3); letter-spacing: 0.1em; }
+
+.bl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+.bl-card { background: #fff; border: 1px solid rgba(196,164,100,0.15); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.05); opacity: 0; animation: blFadeUp 0.7s forwards; transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s ease, border-color 0.35s ease; }
+.bl-card:nth-child(1) { animation-delay: 0.1s; }
+.bl-card:nth-child(2) { animation-delay: 0.2s; }
+.bl-card:nth-child(3) { animation-delay: 0.3s; }
+.bl-card:nth-child(4) { animation-delay: 0.4s; }
+.bl-card:nth-child(5) { animation-delay: 0.5s; }
+.bl-card:nth-child(6) { animation-delay: 0.6s; }
+.bl-card:hover { transform: translateY(-7px) scale(1.01); box-shadow: 0 18px 44px rgba(196,164,100,0.15); border-color: rgba(196,164,100,0.48); }
+.bl-card-img { position: relative; height: 200px; overflow: hidden; }
+.bl-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.65s cubic-bezier(0.23,1,0.32,1); }
+.bl-card:hover .bl-card-img img { transform: scale(1.08); }
+.bl-card-cat { position: absolute; top: 12px; left: 12px; font-family: 'Outfit', sans-serif; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #c4a464; background: rgba(255,255,255,0.93); border: 1px solid rgba(196,164,100,0.4); border-radius: 50px; padding: 4px 11px; backdrop-filter: blur(6px); }
+.bl-card-body { padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 8px; }
+.bl-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 300; color: #1a1a18; line-height: 1.28; }
+.bl-card-excerpt { font-family: 'Outfit', sans-serif; font-size: 0.76rem; font-weight: 300; color: rgba(26,26,24,0.48); line-height: 1.65; }
+.bl-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+.bl-card-read { font-family: 'Outfit', sans-serif; font-size: 0.64rem; color: rgba(26,26,24,0.28); letter-spacing: 0.04em; }
+
+@keyframes blFadeUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes blExpandLine { from { width: 0; } to { width: 52px; } }
+
+@media (max-width: 900px) {
+  .bl-featured { grid-template-columns: 1fr; }
+  .bl-feat-img { min-height: 260px; }
+  .bl-feat-content { padding: 30px 28px 34px; }
+  .bl-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+  .bl-hero { height: 420px; }
+  .bl-body { padding: 36px 18px 60px; }
+  .bl-grid { grid-template-columns: 1fr; gap: 16px; }
+  .bl-feat-content { padding: 24px 20px 28px; }
+  .bl-section-header { flex-direction: column; gap: 6px; }
+}
   </style>
 </head>
 <body>
@@ -177,6 +251,7 @@
         <li><a href="index.html#why-bali"><span class="lang-en-inline">Opportunities</span><span class="lang-fr-inline">Opportunités</span></a></li>
         <li><a href="index.html#process"><span class="lang-en-inline">Process</span><span class="lang-fr-inline">Processus</span></a></li>
         <li><a href="index.html#positioning"><span class="lang-en-inline">Philosophy</span><span class="lang-fr-inline">Philosophie</span></a></li>
+        <li><a href="blog.html"><span class="lang-en-inline">Insights</span><span class="lang-fr-inline">Insights</span></a></li>
       </ul>
 
       <!-- Right side -->
@@ -199,7 +274,154 @@
 </header>
 
 <!-- ─── MAIN ─── -->
-<main id="blogMain"></main>
+<main id="blogMain">
+
+<div class="bl-hero">
+  <img class="bl-hero-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=85" alt="Bali kecak ceremony" loading="eager">
+  <div class="bl-hero-overlay"></div>
+  <div class="bl-hero-content">
+    <p class="bl-hero-label">
+      <span class="lang-en-inline">Bali Real Estate · Expert Analysis</span>
+      <span class="lang-fr-inline">Immobilier Bali · Analyse Expert</span>
+    </p>
+    <h1 class="bl-hero-title">
+      <span class="lang-en-inline">Bali Investment <em>Insights</em></span>
+      <span class="lang-fr-inline">Insights <em>Investissement</em> Bali</span>
+    </h1>
+    <p class="bl-hero-sub">
+      <span class="lang-en-inline">Market analysis, rental yields, zone guides and investment strategies for Bali's most sought-after real estate markets.</span>
+      <span class="lang-fr-inline">Analyse de marché, rendements locatifs, guides de zones et stratégies d'investissement sur les marchés immobiliers les plus prisés de Bali.</span>
+    </p>
+    <div class="bl-hero-line"></div>
+  </div>
+</div>
+
+<div class="bl-body">
+
+  <div class="bl-featured">
+    <div class="bl-feat-img">
+      <img src="https://images.unsplash.com/photo-1604999333679-b86d54738315?w=1000&q=80" alt="Canggu Bali aerial" loading="lazy">
+      <span class="bl-feat-badge"><span class="lang-en-inline">Featured</span><span class="lang-fr-inline">À la une</span></span>
+    </div>
+    <div class="bl-feat-content">
+      <p class="bl-feat-tag"><span class="lang-en-inline">Market Report · April 2026</span><span class="lang-fr-inline">Rapport de Marché · Avril 2026</span></p>
+      <h2 class="bl-feat-title">
+        <span class="lang-en-inline">Canggu Real Estate Market 2026 — The Numbers Every Investor Must Know</span>
+        <span class="lang-fr-inline">Marché Immobilier de Canggu 2026 — Les Chiffres Clés pour Investir</span>
+      </h2>
+      <p class="bl-feat-excerpt">
+        <span class="lang-en-inline">Average rental yields reach 12–16% annually for well-positioned villas, with land values appreciating 18% year-on-year. A complete breakdown for serious investors.</span>
+        <span class="lang-fr-inline">Les rendements locatifs atteignent 12–16% annuellement pour les villas bien positionnées, avec une valorisation foncière de 18% par an.</span>
+      </p>
+      <div class="bl-feat-meta">
+        <span><span class="lang-en-inline">8 min read</span><span class="lang-fr-inline">8 min de lecture</span></span>
+        <i></i>
+        <span><span class="lang-en-inline">April 2026</span><span class="lang-fr-inline">Avril 2026</span></span>
+      </div>
+      <a href="#" class="bl-btn-gold"><span class="lang-en-inline">Read Article →</span><span class="lang-fr-inline">Lire l'article →</span></a>
+    </div>
+  </div>
+
+  <div class="bl-section-header">
+    <h2 class="bl-section-title"><span class="lang-en-inline">Latest Articles</span><span class="lang-fr-inline">Derniers Articles</span></h2>
+    <span class="bl-section-count"><span class="lang-en-inline">5 articles</span><span class="lang-fr-inline">5 articles</span></span>
+  </div>
+
+  <div class="bl-grid">
+
+    <div class="bl-card">
+      <div class="bl-card-img">
+        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=700&q=80" alt="Uluwatu cliff villa" loading="lazy">
+        <span class="bl-card-cat"><span class="lang-en-inline">Zone Guide</span><span class="lang-fr-inline">Guide de Zone</span></span>
+      </div>
+      <div class="bl-card-body">
+        <h3 class="bl-card-title"><span class="lang-en-inline">Uluwatu Cliff Villas — Why Investors Target the Bukit Peninsula</span><span class="lang-fr-inline">Villas de Falaise à Uluwatu — Pourquoi les Investisseurs Ciblent le Bukit</span></h3>
+        <p class="bl-card-excerpt"><span class="lang-en-inline">30–40% premium nightly rates over Canggu. Supply constraints drive asset values upward while demand from ultra-high-net-worth travellers remains strong.</span><span class="lang-fr-inline">Des tarifs nuitée 30–40% supérieurs à Canggu. La rareté des terrains constructibles soutient la valorisation des actifs.</span></p>
+        <div class="bl-card-footer">
+          <span class="bl-card-read"><span class="lang-en-inline">6 min read</span><span class="lang-fr-inline">6 min de lecture</span></span>
+          <a href="#" class="bl-btn-card"><span class="lang-en-inline">Read →</span><span class="lang-fr-inline">Lire →</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bl-card">
+      <div class="bl-card-img">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80" alt="Bali villa leasehold" loading="lazy">
+        <span class="bl-card-cat"><span class="lang-en-inline">Legal & Structure</span><span class="lang-fr-inline">Juridique & Structure</span></span>
+      </div>
+      <div class="bl-card-body">
+        <h3 class="bl-card-title"><span class="lang-en-inline">Leasehold vs Freehold in Bali — What Foreign Investors Need to Know in 2026</span><span class="lang-fr-inline">Leasehold vs Freehold à Bali — Ce que Tout Investisseur Étranger Doit Savoir</span></h3>
+        <p class="bl-card-excerpt"><span class="lang-en-inline">Foreign nationals cannot own freehold land — but the right leasehold structure delivers exceptional returns over a 25–30 year horizon.</span><span class="lang-fr-inline">Les étrangers ne peuvent détenir de freehold — mais une structure leasehold bien négociée délivre des rendements exceptionnels sur 25–30 ans.</span></p>
+        <div class="bl-card-footer">
+          <span class="bl-card-read"><span class="lang-en-inline">7 min read</span><span class="lang-fr-inline">7 min de lecture</span></span>
+          <a href="#" class="bl-btn-card"><span class="lang-en-inline">Read →</span><span class="lang-fr-inline">Lire →</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bl-card">
+      <div class="bl-card-img">
+        <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=700&q=80" alt="Seminyak villa pool" loading="lazy">
+        <span class="bl-card-cat"><span class="lang-en-inline">Rental Yields</span><span class="lang-fr-inline">Rendement Locatif</span></span>
+      </div>
+      <div class="bl-card-body">
+        <h3 class="bl-card-title"><span class="lang-en-inline">Seminyak Villas — Rental Yield Analysis for the Premium Segment</span><span class="lang-fr-inline">Villas à Seminyak — Analyse des Rendements Locatifs sur le Segment Premium</span></h3>
+        <p class="bl-card-excerpt"><span class="lang-en-inline">4-bedroom villas generate $1,100–$1,800 per night at peak occupancy. Real data across 24 properties over 18 months.</span><span class="lang-fr-inline">Les villas de 4 chambres génèrent 1 100$–1 800$ par nuit en haute saison. Données réelles sur 24 propriétés.</span></p>
+        <div class="bl-card-footer">
+          <span class="bl-card-read"><span class="lang-en-inline">5 min read</span><span class="lang-fr-inline">5 min de lecture</span></span>
+          <a href="#" class="bl-btn-card"><span class="lang-en-inline">Read →</span><span class="lang-fr-inline">Lire →</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bl-card">
+      <div class="bl-card-img">
+        <img src="https://images.unsplash.com/photo-1573790387438-4da905039392?w=700&q=80" alt="North Bali Lovina coast" loading="lazy">
+        <span class="bl-card-cat"><span class="lang-en-inline">Emerging Market</span><span class="lang-fr-inline">Marché Émergent</span></span>
+      </div>
+      <div class="bl-card-body">
+        <h3 class="bl-card-title"><span class="lang-en-inline">North Bali — The Last Undervalued Coastline for Smart Investors</span><span class="lang-fr-inline">Bali Nord — Le Dernier Littoral Sous-Évalué pour les Investisseurs Avisés</span></h3>
+        <p class="bl-card-excerpt"><span class="lang-en-inline">Land prices 60–70% below Canggu with comparable build costs, creating compelling asymmetric upside for early movers.</span><span class="lang-fr-inline">Les prix fonciers restent 60–70% sous Canggu pour des coûts de construction comparables.</span></p>
+        <div class="bl-card-footer">
+          <span class="bl-card-read"><span class="lang-en-inline">6 min read</span><span class="lang-fr-inline">6 min de lecture</span></span>
+          <a href="#" class="bl-btn-card"><span class="lang-en-inline">Read →</span><span class="lang-fr-inline">Lire →</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bl-card">
+      <div class="bl-card-img">
+        <img src="https://images.unsplash.com/photo-1615880484746-a134be9a6ecf?w=700&q=80" alt="Bali villa interior ROI" loading="lazy">
+        <span class="bl-card-cat"><span class="lang-en-inline">Investment Strategy</span><span class="lang-fr-inline">Stratégie d'Investissement</span></span>
+      </div>
+      <div class="bl-card-body">
+        <h3 class="bl-card-title"><span class="lang-en-inline">How to Calculate Your True ROI on a Bali Villa — A Complete Investor Framework</span><span class="lang-fr-inline">Comment Calculer le Vrai ROI d'une Villa à Bali — Cadre Complet pour Investisseurs</span></h3>
+        <p class="bl-card-excerpt"><span class="lang-en-inline">Build costs, occupancy rates, platform fees, and net yield calculations. Everything you need before committing capital.</span><span class="lang-fr-inline">Coûts de construction, taux d'occupation, frais de plateforme et rendement net. Tout ce qu'il faut savoir avant d'investir.</span></p>
+        <div class="bl-card-footer">
+          <span class="bl-card-read"><span class="lang-en-inline">9 min read</span><span class="lang-fr-inline">9 min de lecture</span></span>
+          <a href="#" class="bl-btn-card"><span class="lang-en-inline">Read →</span><span class="lang-fr-inline">Lire →</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bl-card">
+      <div class="bl-card-img">
+        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=700&q=80" alt="Bali aerial drone zones" loading="lazy">
+        <span class="bl-card-cat"><span class="lang-en-inline">Market Trends</span><span class="lang-fr-inline">Tendances du Marché</span></span>
+      </div>
+      <div class="bl-card-body">
+        <h3 class="bl-card-title"><span class="lang-en-inline">Bali Property Prices 2026 — Zone-by-Zone Price Index</span><span class="lang-fr-inline">Prix de l'Immobilier à Bali 2026 — Indice de Prix Zone par Zone</span></h3>
+        <p class="bl-card-excerpt"><span class="lang-en-inline">From $180/m² in Lovina to $1,200/m² in prime Canggu. Where value is still accessible for investors entering in 2026.</span><span class="lang-fr-inline">De 180$/m² à Lovina à 1 200$/m² à Canggu. Où la valeur reste accessible pour les investisseurs entrant en 2026.</span></p>
+        <div class="bl-card-footer">
+          <span class="bl-card-read"><span class="lang-en-inline">7 min read</span><span class="lang-fr-inline">7 min de lecture</span></span>
+          <a href="#" class="bl-btn-card"><span class="lang-en-inline">Read →</span><span class="lang-fr-inline">Lire →</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</main>
 
 <script src="js/lang.js"></script>
 <script src="js/animations.js"></script>
