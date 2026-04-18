@@ -2374,3 +2374,275 @@ img { display: block; }
   padding-top: 60px;
   border-top: 1px solid rgba(198,169,107,0.15);
 }
+
+/* ============================================================
+   VILLA DETAIL — PREMIUM CONTENT SECTIONS (v2)
+   ============================================================ */
+
+/* --- Layout --- */
+.vd-body {
+  background: #F5F0E8;
+  padding: 80px 5% 100px;
+}
+
+.vd-detail {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .vd-detail {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .vd-body {
+    padding: 48px 5% 60px;
+  }
+}
+
+/* --- Section label --- */
+.vd-section-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C6A96B;
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(198,169,107,0.20);
+}
+
+/* --- Description --- */
+.vd-description {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: #4a4540;
+  margin: 0 0 56px;
+  max-width: 580px;
+}
+
+/* --- Specs grid --- */
+.vd-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-bottom: 56px;
+  background: rgba(198,169,107,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(198,169,107,0.18);
+}
+
+@media (max-width: 600px) {
+  .vd-specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.vd-spec {
+  background: #111111;
+  padding: 28px 20px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.vd-spec:hover {
+  background: #181818;
+}
+
+.vd-spec-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: #C6A96B;
+  margin: 0 0 8px;
+  line-height: 1;
+}
+
+.vd-spec-key {
+  font-family: 'Outfit', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+}
+
+/* --- Amenities --- */
+.vd-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.vd-amenity {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #5a5450;
+  background: #ffffff;
+  border: 1px solid rgba(198,169,107,0.22);
+  border-radius: 20px;
+  padding: 8px 16px;
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.vd-amenity:hover {
+  border-color: rgba(198,169,107,0.55);
+  color: #C6A96B;
+}
+
+/* --- Booking card --- */
+.vd-book-card {
+  background: linear-gradient(160deg, #171717 0%, #141414 100%);
+  border: 1px solid rgba(198,169,107,0.18);
+  border-radius: 16px;
+  padding: 36px 32px;
+  position: sticky;
+  top: 100px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 24px 64px rgba(0,0,0,0.28);
+}
+
+.vd-book-price-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.40);
+  margin: 0 0 8px;
+}
+
+.vd-book-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 300;
+  color: #C6A96B;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.vd-book-price-night {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.1em;
+  margin: 6px 0 0;
+}
+
+.vd-book-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: 24px 0;
+}
+
+.vd-book-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.vd-book-row:last-of-type {
+  border-bottom: none;
+}
+
+.vd-book-row-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.38);
+  text-transform: uppercase;
+}
+
+.vd-book-row-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #f2f2f2;
+  letter-spacing: 0.04em;
+}
+
+.vd-book-cta {
+  display: block;
+  width: 100%;
+  margin-top: 28px;
+  padding: 17px 24px;
+  background: #C6A96B;
+  color: #111111;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 1px solid rgba(171,144,86,0.30);
+  box-shadow: 0 12px 28px rgba(198,169,107,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.vd-book-cta:hover {
+  background: #b99c5f;
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px rgba(198,169,107,0.32);
+}
+
+.vd-book-note {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  color: rgba(255,255,255,0.28);
+  text-align: center;
+  margin: 14px 0 0;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+}
+
+/* --- Related villas --- */
+.vd-related {
+  background: #0B0B0B;
+  padding: 80px 5%;
+  margin-top: 80px;
+}
+
+.vd-related-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: #f2f2f2;
+  margin: 0 0 40px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: -0.01em;
+}
+
+.vd-related .rent-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- #vdInfo block spacing --- */
+#vdInfo > div {
+  margin-bottom: 52px;
+}
+
+#vdInfo > div:last-child {
+  margin-bottom: 0;
+}
