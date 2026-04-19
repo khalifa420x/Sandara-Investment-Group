@@ -2763,3 +2763,13 @@ img { display: block; }
 .inv-bottom-line{width:40px;height:1px;background:rgba(198,169,107,0.50);margin:0 auto 36px}
 .inv-bottom-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,58px);font-weight:300;color:#fff;margin:16px 0 18px;line-height:1.05}
 .inv-bottom-desc{font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;color:rgba(255,255,255,0.52);line-height:1.7;margin:0 0 36px}
+
+/* ─── INDEX INVEST TEASER ─── */
+.idx-inv-teaser{background:#F5F0E8;padding:88px 6%;border-top:1px solid rgba(198,169,107,0.14)}
+.idx-inv-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+@media(max-width:768px){.idx-inv-inner{grid-template-columns:1fr;gap:36px}.idx-inv-img{order:-1}}
+.idx-inv-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,50px);font-weight:300;color:#1A1A1A;margin:14px 0 18px;line-height:1.1}
+.idx-inv-desc{font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;color:#6B6560;line-height:1.8;margin:0 0 32px}
+.idx-inv-img{border-radius:8px;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(198,169,107,0.14)}
+.idx-inv-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s}
+.idx-inv-img:hover img{transform:scale(1.04)}
