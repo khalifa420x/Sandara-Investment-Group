@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sundara Investment Group — Simulateur ROI Bali 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#C9A96E;--gold-d:#7A5520;--gold-l:#F0DFB4;--gold-pale:rgba(201,169,110,.08);
+  --gold-pale2:rgba(201,169,110,.14);
+  --teal:#29818F;--teal-pale:rgba(41,129,143,.09);
+  --green:#3DAA6E;--red:#C04040;--amber:#D4880A;
+  --bg:#07100E;--bg2:#0C1512;--bg3:#101A17;--bg4:#16201D;--bg5:#1C2822;
+  --text:#EDE5D5;--text2:rgba(237,229,213,.65);--text3:rgba(237,229,213,.32);
+  --border:rgba(201,169,110,.11);--border2:rgba(201,169,110,.22);--border3:rgba(201,169,110,.38);
+  --radius:14px;--radius-sm:8px;--radius-lg:20px;
+  --shadow:0 2px 24px rgba(0,0,0,.35),0 0 0 1px var(--border);
+  --shadow-gold:0 0 0 1px rgba(201,169,110,.25),0 8px 32px rgba(201,169,110,.08);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Jost',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 0,rgba(201,169,110,.05) 0,transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 100%,rgba(41,129,143,.05) 0,transparent 50%),
+    radial-gradient(ellipse 40% 30% at 50% 50%,rgba(201,169,110,.02) 0,transparent 60%);}
+
+/* ══ NAV ══ */
+nav{
+  position:sticky;top:0;z-index:100;
+  padding:0 40px;height:58px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(7,16,14,.88);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-brand{display:flex;flex-direction:column;gap:1px;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;letter-spacing:.14em;color:var(--gold);}
+.nav-sub{font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--text3);}
+.nav-pill{
+  font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--teal);border:1px solid rgba(41,129,143,.3);
+  padding:5px 13px;border-radius:20px;
+  background:rgba(41,129,143,.06);
+  animation:pulse-border 3s ease-in-out infinite;
+}
+@keyframes pulse-border{0%,100%{border-color:rgba(41,129,143,.3);}50%{border-color:rgba(41,129,143,.55);}}
+
+/* ══ HERO ══ */
+.hero{
+  position:relative;z-index:1;
+  padding:70px 40px 50px;text-align:center;
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+}
+.hero-orb{
+  position:absolute;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,169,110,.07) 0,transparent 70%);
+  top:-100px;left:50%;transform:translateX(-50%);pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);
+  border:1px solid rgba(41,129,143,.25);padding:5px 14px;border-radius:20px;
+  background:rgba(41,129,143,.06);margin-bottom:20px;
+  animation:fadeUp .6s ease both;
+}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:56px;font-weight:300;line-height:1.04;
+  color:var(--text);margin-bottom:14px;
+  animation:fadeUp .7s .1s ease both;
+}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-desc{
+  font-size:14px;font-weight:300;color:var(--text2);
+  max-width:560px;margin:0 auto 28px;line-height:1.75;
+  animation:fadeUp .7s .18s ease both;
+}
+.hero-stats{
+  display:flex;align-items:center;justify-content:center;gap:0;
+  border:1px solid var(--border2);border-radius:var(--radius);
+  background:var(--bg2);overflow:hidden;
+  display:inline-flex;animation:fadeUp .7s .26s ease both;
+}
+.hstat{padding:12px 24px;text-align:center;border-right:1px solid var(--border);}
+.hstat:last-child{border-right:none;}
+.hstat-val{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);}
+.hstat-lbl{font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-top:2px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+
+/* ══ MAIN LAYOUT ══ */
+.main{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:400px 1fr;
+  min-height:calc(100vh - 200px);
+  gap:0;
+}
+@media(max-width:960px){.main{grid-template-columns:1fr;}}
+
+/* ══ SIDEBAR ══ */
+.sidebar{
+  background:var(--bg2);
+  border-right:1px solid var(--border);
+  overflow-y:auto;padding:24px 20px 48px;
+  position:sticky;top:58px;height:calc(100vh - 58px);
+}
+@media(max-width:960px){.sidebar{position:static;height:auto;}}
+
+.s-sec{margin-bottom:24px;}
+.s-head{
+  display:flex;align-items:center;gap:8px;
+  font-size:8px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;
+  padding-bottom:8px;border-bottom:1px solid var(--border);
+}
+.s-head-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;}
+
+/* Zone cards */
+.zone-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.zc{
+  padding:11px 10px;border:1px solid var(--border);
+  background:var(--bg3);cursor:pointer;
+  border-radius:var(--radius-sm);
+  transition:all .22s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:hidden;
+}
+.zc::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,169,110,.08),transparent);
+  opacity:0;transition:opacity .22s;
+}
+.zc:hover{border-color:var(--border2);transform:translateY(-1px);}
+.zc:hover::before{opacity:1;}
+.zc.on{
+  border-color:var(--gold);
+  background:linear-gradient(135deg,rgba(201,169,110,.1),rgba(201,169,110,.04));
+  box-shadow:0 0 0 1px rgba(201,169,110,.15),0 4px 16px rgba(201,169,110,.08);
+}
+.zc.on::before{opacity:1;}
+.zc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.zc-name{font-size:10px;font-weight:500;color:var(--text);}
+.zc-emoji{font-size:14px;}
+.zc-roi{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold);}
+.zc-tag{font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);}
+
+/* Type toggle */
+.type-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.type-card{
+  padding:10px 8px;border:1px solid var(--border);background:var(--bg3);
+  border-radius:var(--radius-sm);cursor:pointer;text-align:center;
+  transition:all .2s;
+}
+.type-card:hover{border-color:var(--border2);}
+.type-card.on{border-color:var(--teal);background:rgba(41,129,143,.08);}
+.type-card .ti{font-size:18px;margin-bottom:4px;}
+.type-card .tl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);}
+.type-card.on .tl{color:var(--teal);}
+
+/* Sliders */
+.sg{margin-bottom:13px;}
+.sg-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+.sg-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);}
+.sg-val{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--gold);line-height:1;}
+.sg-unit{font-size:8px;color:var(--text3);margin-left:2px;}
+input[type=range]{
+  width:100%;-webkit-appearance:none;height:2px;
+  background:linear-gradient(to right,var(--gold) var(--pct,50%),rgba(201,169,110,.12) var(--pct,50%));
+  border-radius:1px;outline:none;cursor:pointer;
+  transition:background .1s;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:16px;height:16px;
+  background:var(--bg);border:2px solid var(--gold);
+  border-radius:50%;cursor:pointer;
+  box-shadow:0 0 0 3px rgba(201,169,110,.15);
+  transition:box-shadow .2s,transform .2s;
+}
+input[type=range]:hover::-webkit-slider-thumb{
+  box-shadow:0 0 0 6px rgba(201,169,110,.12);transform:scale(1.1);
+}
+.sg-mm{display:flex;justify-content:space-between;font-size:7px;color:var(--text3);margin-top:3px;}
+
+/* Option pills */
+.opt-pills{display:flex;gap:5px;flex-wrap:wrap;}
+.opill{
+  font-size:8px;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border:1px solid var(--border);color:var(--text3);
+  cursor:pointer;transition:all .18s;border-radius:20px;user-select:none;
+}
+.opill:hover{border-color:var(--border2);color:var(--text2);}
+.opill.on{border-color:var(--gold);color:var(--gold);background:rgba(201,169,110,.07);}
+
+/* Appre pills */
+.appre-pills{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
+.apill{
+  font-size:8px;letter-spacing:.08em;
+  padding:4px 10px;border:1px solid var(--border);color:var(--text3);
+  cursor:pointer;transition:all .18s;border-radius:20px;user-select:none;
+}
+.apill.on{border-color:var(--teal);color:var(--teal);background:rgba(41,129,143,.07);}
+
+.sdiv{height:1px;background:var(--border);margin:18px 0;}
+
+/* ══ RESULTS ══ */
+.results{padding:28px 28px 56px;overflow-y:auto;}
+
+/* ROI HERO CARD */
+.roi-hero{
+  background:linear-gradient(135deg,var(--bg3) 0,var(--bg2) 100%);
+  border:1px solid var(--border2);border-radius:var(--radius-lg);
+  padding:28px;margin-bottom:16px;
+  position:relative;overflow:hidden;
+  animation:cardIn .5s ease both;
+}
+.roi-hero::before{
+  content:'';position:absolute;
+  top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,169,110,.1) 0,transparent 70%);
+  pointer-events:none;
+}
+.roi-hero-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:center;}
+@media(max-width:700px){.roi-hero-grid{grid-template-columns:1fr 1fr;}}
+.roi-main{grid-column:1;text-align:center;}
+.roi-eyebrow{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
+.roi-big{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:300;color:var(--gold);line-height:.9;}
+.roi-pct{font-size:26px;}
+.roi-lbl{font-size:10px;color:var(--text2);margin-top:6px;}
+.roi-divider{width:1px;background:var(--border2);height:80px;margin:0 auto;}
+.roi-side{}
+.roi-s-lbl{font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;}
+.roi-s-val{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--teal);line-height:1;}
+.roi-s-sub{font-size:8px;color:var(--text3);margin-top:2px;}
+.roi-payback{
+  grid-column:1/-1;
+  padding:10px 14px;background:rgba(201,169,110,.05);
+  border:1px solid rgba(201,169,110,.12);border-radius:var(--radius-sm);
+  font-size:10px;color:var(--text2);text-align:center;
+}
+.roi-payback span{color:var(--gold-l);font-weight:500;}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+
+/* KPI CARDS */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+@media(max-width:700px){.kpi-row{grid-template-columns:1fr 1fr;}}
+.kpi{
+  background:var(--bg3);border:1px solid var(--border);
+  padding:15px 14px;border-radius:var(--radius);
+  position:relative;overflow:hidden;
+  transition:transform .18s,box-shadow .18s;
+  animation:cardIn .5s ease both;
+}
+.kpi:hover{transform:translateY(-2px);box-shadow:var(--shadow-gold);}
+.kpi-accent{position:absolute;top:0;left:0;right:0;height:2px;border-radius:2px 2px 0 0;}
+.kpi-lbl{font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:7px;}
+.kpi-v{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;line-height:1;}
+.kpi-sub{font-size:8px;color:var(--text3);margin-top:4px;}
+
+/* CASHFLOW */
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.cf{
+  background:var(--bg3);border:1px solid var(--border);
+  padding:13px 15px;border-radius:var(--radius);
+  transition:transform .18s;animation:cardIn .5s ease both;
+}
+.cf:hover{transform:translateY(-1px);}
+.cf-lbl{font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-bottom:5px;}
+.cf-v{font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1;}
+.cf-sub{font-size:8px;color:var(--text3);margin-top:2px;}
+
+/* BREAKDOWN */
+.card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:14px;overflow:hidden;
+  animation:cardIn .5s .05s ease both;
+}
+.card-head{
+  padding:12px 18px;border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.card-title{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--text2);}
+.card-note{font-size:8px;color:var(--text3);}
+.brow{
+  display:grid;grid-template-columns:1fr 88px 100px;
+  align-items:center;gap:10px;padding:9px 18px;
+  border-bottom:1px solid rgba(201,169,110,.04);
+  transition:background .15s;
+}
+.brow:hover{background:rgba(201,169,110,.03);}
+.brow:last-child{border-bottom:none;}
+.brow.total{
+  background:rgba(201,169,110,.05);
+  border-top:1px solid var(--border);
+  padding:12px 18px;
+}
+.brow-lbl{font-size:10px;color:var(--text2);}
+.brow.total .brow-lbl{font-weight:500;color:var(--text);}
+.brow-bar-wrap{height:3px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;}
+.brow-bar{height:100%;border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.brow-val{font-family:'Cormorant Garamond',serif;font-size:14px;text-align:right;white-space:nowrap;}
+
+/* ZONE INTEL */
+.zi-badge{font-size:9px;letter-spacing:.1em;padding:3px 10px;border:1px solid var(--border2);color:var(--gold);border-radius:20px;}
+.zi-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.zi-item{padding:12px 18px;border-bottom:1px solid rgba(201,169,110,.04);border-right:1px solid rgba(201,169,110,.04);}
+.zi-item:nth-child(2n){border-right:none;}
+.zi-item:nth-last-child(-n+2){border-bottom:none;}
+.zi-lbl{font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;}
+.zi-v{font-size:13px;color:var(--text);line-height:1.4;}
+.zi-note{font-size:8px;color:var(--text3);margin-top:2px;}
+
+/* ZONE DESCRIPTION */
+.zi-desc{
+  padding:16px 18px;
+  background:rgba(41,129,143,.05);
+  border-top:1px solid rgba(41,129,143,.12);
+}
+.zi-desc-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;font-style:italic;font-weight:300;
+  color:var(--text2);line-height:1.7;
+}
+.zi-desc-text::before{content:'"';color:var(--teal);font-size:20px;line-height:0;vertical-align:-.25em;margin-right:4px;}
+.zi-desc-text::after{content:'"';color:var(--teal);font-size:20px;line-height:0;vertical-align:-.25em;margin-left:4px;}
+.zi-warn{
+  margin:0 18px 14px;padding:10px 13px;
+  background:rgba(192,64,64,.06);border:1px solid rgba(192,64,64,.18);
+  border-radius:var(--radius-sm);
+  font-size:9px;color:rgba(237,229,213,.6);line-height:1.5;
+}
+.zi-warn::before{content:'⚠ ';color:var(--red);}
+
+/* RISK */
+.risk-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
+@media(max-width:700px){.risk-row{grid-template-columns:1fr 1fr;}}
+.risk-c{
+  background:var(--bg3);border:1px solid var(--border);
+  padding:12px 10px;border-radius:var(--radius);text-align:center;
+  transition:transform .18s;animation:cardIn .5s ease both;
+}
+.risk-c:hover{transform:translateY(-1px);}
+.risk-lbl{font-size:7px;letter-spacing:.13em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.risk-bar-w{height:4px;background:rgba(255,255,255,.06);border-radius:2px;margin-bottom:6px;overflow:hidden;}
+.risk-bar-f{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1);}
+.risk-val{font-size:11px;font-weight:500;}
+
+/* PROJ TABLE */
+.proj-table{width:100%;border-collapse:collapse;}
+.proj-table th{
+  padding:9px 14px;font-size:7px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text3);text-align:right;
+  background:var(--bg4);font-weight:400;
+  border-bottom:1px solid var(--border);
+}
+.proj-table th:first-child{text-align:left;}
+.proj-table td{
+  padding:10px 14px;font-size:11px;color:var(--text2);
+  text-align:right;border-bottom:1px solid rgba(201,169,110,.04);
+  transition:background .15s;
+}
+.proj-table tr:hover td{background:rgba(201,169,110,.03);}
+.proj-table td:first-child{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);text-align:left;}
+.proj-table tr:last-child td{
+  border-bottom:none;
+  background:rgba(201,169,110,.05);color:var(--text);font-weight:500;
+}
+.pos{color:var(--green)!important;}
+.neg{color:var(--red)!important;}
+.neu{color:var(--gold)!important;}
+
+/* DISCLAIMER */
+.disc{
+  padding:14px 16px;border:1px solid var(--border);
+  background:rgba(201,169,110,.03);border-radius:var(--radius);
+  font-size:8px;color:var(--text3);line-height:1.7;margin-top:14px;
+}
+.disc strong{color:var(--text2);}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:rgba(201,169,110,.15);border-radius:2px;}
+
+/* MOBILE */
+@media(max-width:700px){
+  nav{padding:0 16px;}
+  .hero{padding:40px 16px 28px;}
+  .hero-title{font-size:36px;}
+  .hero-stats{display:none;}
+  .sidebar,.results{padding:16px 12px 32px;}
+  .roi-big{font-size:52px;}
+  .roi-hero-grid{grid-template-columns:1fr 1fr;}
+  .roi-divider{display:none;}
+  .zone-grid{grid-template-columns:1fr 1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo">Sundara Investment Group</div>
+    <div class="nav-sub">Simulateur ROI — Bali 2025–2026</div>
+  </div>
+  <div class="nav-pill">Données Marché Réelles</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-eyebrow">Outil d'analyse investissement exclusif</div>
+  <h1 class="hero-title">Simulez votre <em>retour</em><br>sur investissement à Bali</h1>
+  <p class="hero-desc">Basé sur les données réelles 2025–2026. Revenus locatifs, charges, appréciation foncière et projection patrimoine sur 5 ans — par zone et profil d'investissement.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-val">6</div><div class="hstat-lbl">Zones analysées</div></div>
+    <div class="hstat"><div class="hstat-val">12–18%</div><div class="hstat-lbl">ROI brut prime</div></div>
+    <div class="hstat"><div class="hstat-val">5 ans</div><div class="hstat-lbl">Projection</div></div>
+    <div class="hstat"><div class="hstat-val">2025</div><div class="hstat-lbl">Données marché</div></div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════ SIDEBAR ══════ -->
+<div class="sidebar">
+
+  <div class="s-sec">
+    <div class="s-head"><div class="s-head-dot"></div>Zone d'investissement</div>
+    <div class="zone-grid" id="zone-grid"></div>
+  </div>
+
+  <div class="s-sec">
+    <div class="s-head"><div class="s-head-dot"></div>Type de location</div>
+    <div class="type-row">
+      <div class="type-card on" id="tc-court" onclick="setType('court')">
+        <div class="ti">🌴</div>
+        <div class="tl">Courte durée<br><span style="opacity:.55;font-size:7px">Airbnb / nuitée</span></div>
+      </div>
+      <div class="type-card" id="tc-long" onclick="setType('long')">
+        <div class="ti">📅</div>
+        <div class="tl">Longue durée<br><span style="opacity:.55;font-size:7px">Mensuel / annuel</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sdiv"></div>
+
+  <div class="s-sec">
+    <div class="s-head"><div class="s-head-dot"></div>Budget & villa</div>
+    <div class="sg">
+      <div class="sg-top"><span class="sg-lbl">Prix d'acquisition</span><span><span class="sg-val" id="v-budget">350,000</span><span class="sg-unit">USD</span></span></div>
+      <input type="range" id="s-budget" min="80000" max="2000000" step="10000" value="350000" oninput="sr(this,'v-budget',fUSD);go()">
+      <div class="sg-mm"><span>$80k</span><span>$2M</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-top"><span class="sg-lbl">Chambres</span><span><span class="sg-val" id="v-beds">3</span><span class="sg-unit">ch.</span></span></div>
+      <input type="range" id="s-beds" min="1" max="7" step="1" value="3" oninput="sr(this,'v-beds',x=>x);go()">
+      <div class="sg-mm"><span>1</span><span>7+</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-top"><span class="sg-lbl">Surface bâtie</span><span><span class="sg-val" id="v-size">250</span><span class="sg-unit">m²</span></span></div>
+      <input type="range" id="s-size" min="60" max="1200" step="10" value="250" oninput="sr(this,'v-size',x=>x);go()">
+      <div class="sg-mm"><span>60</span><span>1200m²</span></div>
+    </div>
+  </div>
+
+  <div class="s-sec">
+    <div class="s-head"><div class="s-head-dot"></div>Paramètres locatifs</div>
+    <div class="sg" id="sg-nightly">
+      <div class="sg-top"><span class="sg-lbl">Tarif nuitée moyen</span><span><span class="sg-val" id="v-nightly">350</span><span class="sg-unit">USD/nuit</span></span></div>
+      <input type="range" id="s-nightly" min="50" max="2500" step="10" value="350" oninput="sr(this,'v-nightly',x=>x);go()">
+      <div class="sg-mm"><span>$50</span><span>$2,500</span></div>
+    </div>
+    <div class="sg" id="sg-monthly" style="display:none">
+      <div class="sg-top"><span class="sg-lbl">Loyer mensuel</span><span><span class="sg-val" id="v-monthly">2500</span><span class="sg-unit">USD/mois</span></span></div>
+      <input type="range" id="s-monthly" min="300" max="15000" step="100" value="2500" oninput="sr(this,'v-monthly',x=>x);go()">
+      <div class="sg-mm"><span>$300</span><span>$15k</span></div>
+    </div>
+    <div class="sg" id="sg-occ">
+      <div class="sg-top"><span class="sg-lbl">Taux d'occupation</span><span><span class="sg-val" id="v-occ">70</span><span class="sg-unit">%</span></span></div>
+      <input type="range" id="s-occ" min="20" max="95" step="1" value="70" oninput="sr(this,'v-occ',x=>x);go()">
+      <div class="sg-mm"><span>20%</span><span>95%</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-top"><span class="sg-lbl">Frais gestion OTA + manager</span><span><span class="sg-val" id="v-mgmt">25</span><span class="sg-unit">%</span></span></div>
+      <input type="range" id="s-mgmt" min="10" max="40" step="1" value="25" oninput="sr(this,'v-mgmt',x=>x);go()">
+      <div class="sg-mm"><span>10%</span><span>40%</span></div>
+    </div>
+  </div>
+
+  <div class="s-sec">
+    <div class="s-head"><div class="s-head-dot"></div>Charges opérationnelles / an</div>
+    <div class="sg">
+      <div class="sg-top"><span class="sg-lbl">Entretien & maintenance</span><span><span class="sg-val" id="v-maint">4000</span><span class="sg-unit">USD</span></span></div>
+      <input type="range" id="s-maint" min="500" max="25000" step="250" value="4000" oninput="sr(this,'v-maint',x=>x);go()">
+      <div class="sg-mm"><span>$500</span><span>$25k</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-top"><span class="sg-lbl">Staff (gardien, ménage…)</span><span><span class="sg-val" id="v-staff">6000</span><span class="sg-unit">USD</span></span></div>
+      <input type="range" id="s-staff" min="0" max="30000" step="500" value="6000" oninput="sr(this,'v-staff',x=>x);go()">
+      <div class="sg-mm"><span>$0</span><span>$30k</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-top"><span class="sg-lbl">Utilities (eau, élec, internet)</span><span><span class="sg-val" id="v-util">2400</span><span class="sg-unit">USD</span></span></div>
+      <input type="range" id="s-util" min="600" max="12000" step="200" value="2400" oninput="sr(this,'v-util',x=>x);go()">
+      <div class="sg-mm"><span>$600</span><span>$12k</span></div>
+    </div>
+    <div class="sg">
+      <div class="sg-top"><span class="sg-lbl">Taxes & assurances</span><span><span class="sg-val" id="v-tax">2000</span><span class="sg-unit">USD</span></span></div>
+      <input type="range" id="s-tax" min="500" max="15000" step="250" value="2000" oninput="sr(this,'v-tax',x=>x);go()">
+      <div class="sg-mm"><span>$500</span><span>$15k</span></div>
+    </div>
+  </div>
+
+  <div class="s-sec">
+    <div class="s-head"><div class="s-head-dot"></div>Options premium</div>
+    <div class="opt-pills">
+      <div class="opill on" onclick="tOpt(this,'pool')">🏊 Piscine</div>
+      <div class="opill on" onclick="tOpt(this,'staff')">👤 Staff</div>
+      <div class="opill" onclick="tOpt(this,'ocean')">🌊 Vue mer</div>
+      <div class="opill" onclick="tOpt(this,'airbnb')">⭐ Airbnb Pro</div>
+      <div class="opill" onclick="tOpt(this,'new')">✨ Neuf</div>
+      <div class="opill" onclick="tOpt(this,'managed')">⚙️ Géré clé en main</div>
+    </div>
+    <div style="margin-top:12px;font-size:7px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-bottom:7px;">Appréciation foncière / an</div>
+    <div class="appre-pills">
+      <div class="apill" id="ap-low" onclick="setAp('low',this)">📉 5% conservateur</div>
+      <div class="apill on" id="ap-mid" onclick="setAp('mid',this)">📈 10% marché</div>
+      <div class="apill" id="ap-high" onclick="setAp('high',this)">🚀 15% premium</div>
+    </div>
+  </div>
+
+</div><!-- /sidebar -->
+
+<!-- ══════ RESULTS ══════ -->
+<div class="results">
+
+  <!-- ROI HERO -->
+  <div class="roi-hero">
+    <div class="roi-hero-grid">
+      <div class="roi-main">
+        <div class="roi-eyebrow">Rendement brut annuel</div>
+        <div class="roi-big"><span id="r-gross-pct">11.2</span><span class="roi-pct">%</span></div>
+        <div class="roi-lbl">Sur prix d'acquisition</div>
+      </div>
+      <div class="roi-divider"></div>
+      <div class="roi-side">
+        <div class="roi-s-lbl">Rendement net</div>
+        <div class="roi-s-val"><span id="r-net-pct">7.4</span>%</div>
+        <div class="roi-s-sub">Après toutes charges</div>
+        <div style="margin-top:12px;">
+          <div class="roi-s-lbl">Cashflow mensuel net</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:24px;" id="r-cf-style">+$2,156</div>
+        </div>
+      </div>
+      <div class="roi-payback" id="r-payback-txt">Capital remboursé en <span>8.9 ans</span> via les seuls revenus locatifs nets</div>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(to right,var(--gold),transparent)"></div>
+      <div class="kpi-lbl">Revenu brut / an</div>
+      <div class="kpi-v neu" id="r-gross-amt">$39,200</div>
+      <div class="kpi-sub">Avant charges</div>
+    </div>
+    <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(to right,var(--teal),transparent)"></div>
+      <div class="kpi-lbl">Revenu net / an</div>
+      <div class="kpi-v" id="r-net-amt" style="color:var(--teal)">$25,900</div>
+      <div class="kpi-sub">Après toutes charges</div>
+    </div>
+    <div class="kpi"><div class="kpi-accent" style="background:linear-gradient(to right,var(--green),transparent)"></div>
+      <div class="kpi-lbl">Valeur estimée an 5</div>
+      <div class="kpi-v pos" id="r-val5">$563k</div>
+      <div class="kpi-sub" id="r-val5-sub">+10% / an</div>
+    </div>
+  </div>
+
+  <!-- CF -->
+  <div class="cf-row">
+    <div class="cf">
+      <div class="cf-lbl">Revenu locatif mensuel moyen</div>
+      <div class="cf-v pos" id="r-rev-mo">+$3,267</div>
+      <div class="cf-sub">Brut</div>
+    </div>
+    <div class="cf">
+      <div class="cf-lbl">Charges mensuelles totales</div>
+      <div class="cf-v neg" id="r-ch-mo">-$1,111</div>
+      <div class="cf-sub">Gestion + opérationnel</div>
+    </div>
+  </div>
+
+  <!-- BREAKDOWN -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">Décomposition revenus & charges</span>
+      <span class="card-note">USD / an</span>
+    </div>
+    <div id="breakdown"></div>
+  </div>
+
+  <!-- ZONE INTEL -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">Intelligence marché</span>
+      <span class="zi-badge" id="zi-badge">Canggu</span>
+    </div>
+    <div id="zi-grid"></div>
+    <div class="zi-desc"><div class="zi-desc-text" id="zi-desc"></div></div>
+    <div class="zi-warn" id="zi-warn"></div>
+  </div>
+
+  <!-- RISK -->
+  <div class="risk-row" id="risk-row"></div>
+
+  <!-- 5-YEAR PROJ -->
+  <div class="card">
+    <div class="card-head">
+      <span class="card-title">Projection patrimoine sur 5 ans</span>
+      <span class="card-note">Revenus cumulés + appréciation foncière</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="proj-table">
+        <thead><tr>
+          <th>Année</th><th>Revenu net</th><th>Cumul revenus</th>
+          <th>Valeur villa</th><th>Patrimoine total</th><th>ROI cumulé</th>
+        </tr></thead>
+        <tbody id="proj-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="disc">
+    <strong>Avertissement :</strong> Ce simulateur est fourni à titre indicatif, basé sur des données de marché moyennes 2025–2026 (sources : Bamboo Routes, Bali Villa Realty, Rumavi, Coco Development Group, BaliHomeImmo). Les rendements réels dépendent de l'emplacement précis, la qualité de gestion, la saisonnalité et les conditions de marché. <strong>Ce document ne constitue pas un conseil en investissement.</strong> Projections non contractuelles.
+  </div>
+
+</div><!-- /results -->
+</div><!-- /main -->
+
+<script>
+const Z={
+  canggu:{
+    name:'Canggu',full:'Canggu / Berawa',e:'🏄',
+    netY:[7,12],grossY:[10,15],
+    occH:85,occL:65,
+    nb:{1:180,2:280,3:420,4:600,5:800,6:1100,7:1400},
+    nbH:{1:280,2:480,3:700,4:950,5:1300,6:1800,7:2400},
+    ml:{1:900,2:1500,3:2200,4:3000,5:4000,6:5500,7:7000},
+    pr:'$300k – $1.2M',psm:1671,appr:12,la:'$35k–$80k / are',
+    dem:'Digital nomads, surfers, expatriés long séjour',
+    tag:'Marché mature · Haute liquidité · Blue-chip',
+    desc:'Canggu est le marché le plus liquide et le plus demandé de Bali. Plébiscitée par les digital nomads, la clientèle surf et les expatriés, cette zone offre une infrastructure moderne (fibre, coworkings, restaurants internationaux) qui maintient un flux constant de locataires premium toute l\'année. C\'est l\'actif "blue-chip" de Bali — entrée coûteuse, mais exit rapide et pool d\'acheteurs profond.',
+    risk:'Saturation croissante depuis 2022–2024 : suroffre de villas génériques. La différenciation (design, gestion pro, Airbnb SuperHost) devient indispensable pour tenir les taux d\'occupation. Réglementation en durcissement sur les nouvelles constructions.',
+    rs:{dem:9,comp:3,reg:4,liq:9}
+  },
+  seminyak:{
+    name:'Seminyak',full:'Seminyak / Petitenget',e:'🌅',
+    netY:[6,11],grossY:[9,14],
+    occH:82,occL:60,
+    nb:{1:200,2:320,3:480,4:700,5:950,6:1300,7:1700},
+    nbH:{1:350,2:550,3:800,4:1100,5:1500,6:2100,7:2800},
+    ml:{1:1000,2:1800,3:2800,4:3800,5:5000,6:7000,7:9000},
+    pr:'$350k – $1.5M',psm:1224,appr:10,la:'$40k–$100k / are',
+    dem:'Couples luxury, famille premium, clientèle hôtelière haut-de-gamme',
+    tag:'Luxe établi · Premium pricing · Clientèle aisée',
+    desc:'Seminyak est la zone la plus mature et la plus premium de Bali. Elle attire une clientèle internationale à fort pouvoir d\'achat, habituée aux standards 5 étoiles. Les villas 4+ chambres avec pool et staff intégré y surperforment systématiquement. Le prix au m² reste élevé, mais les tarifs nuitée sont les plus hauts de l\'île, ce qui génère un cashflow brut exceptionnel pour des propriétés bien positionnées.',
+    risk:'Prix d\'entrée parmi les plus élevés de Bali. Concurrence frontale avec les hôtels et resorts de luxe. Une villa sous-gérée ou mal décorée sera rapidement hors marché. Budget décoration et gestion professionnelle sont non-négociables.',
+    rs:{dem:8,comp:4,reg:4,liq:8}
+  },
+  uluwatu:{
+    name:'Uluwatu',full:'Uluwatu / Bukit',e:'🏔️',
+    netY:[7,11],grossY:[9,13],
+    occH:80,occL:58,
+    nb:{1:160,2:280,3:420,4:620,5:850,6:1200,7:1600},
+    nbH:{1:280,2:500,3:750,4:1050,5:1400,6:2000,7:2700},
+    ml:{1:700,2:1200,3:1900,4:2700,5:3600,6:5000,7:6500},
+    pr:'$200k – $900k',psm:966,appr:13,la:'$18k–$55k / are',
+    dem:'Surfeurs premium, villas cliffside, yoga retreats, jeunes créatifs',
+    tag:'Meilleur ROI 2026 · ~40% moins cher que Canggu · Fort potentiel',
+    desc:'Uluwatu représente l\'opportunité la plus intéressante de 2026 selon les analystes. Comparable à Canggu en termes de tarifs nuitée, mais avec un prix d\'entrée ~40% inférieur — ce gap génère un ROI potentiel nettement supérieur. La péninsule du Bukit attire une clientèle ultra-premium (villas cliff, vue océan, couchers de soleil spectaculaires) et bénéficie d\'une demande en forte croissance portée par le surf et le wellness.',
+    risk:'Infrastructure encore en développement : certaines routes restent étroites, la connexion internet peut être instable dans les zones les plus reculées. L\'accessibilité réduit la demande locative de masse, ce qui exige un positionnement premium clair. Zoning critique : vérification ITR indispensable après le durcissement réglementaire de juillet 2025.',
+    rs:{dem:8,comp:6,reg:5,liq:7}
+  },
+  ubud:{
+    name:'Ubud',full:'Ubud / Tegalalang',e:'🌿',
+    netY:[4,7],grossY:[6,9],
+    occH:78,occL:55,
+    nb:{1:120,2:200,3:300,4:420,5:580,6:800,7:1050},
+    nbH:{1:200,2:350,3:520,4:750,5:1000,6:1400,7:1900},
+    ml:{1:550,2:900,3:1400,4:1900,5:2600,6:3600,7:4700},
+    pr:'$150k – $600k',psm:427,appr:7,la:'$8k–$25k / are',
+    dem:'Voyageurs wellness, retraites spirituelles, yoga, séjours culturels longue durée',
+    tag:'Niche wellness · Revenus stables · Clientèle fidèle',
+    desc:'Ubud est le coeur culturel et spirituel de Bali — et un marché immobilier à part. Les tarifs nuitée sont plus bas qu\'en zone côtière, mais la clientèle est plus fidèle, le séjour plus long, et la saisonnalité moins prononcée. Les villas avec vue rizières, piscine à débordement et architecture balinaise authentique génèrent des revenus stables dans un segment de niche très qualitatif. Idéal pour un investisseur cherchant tranquillité et régularité plutôt que maximisation des rendements.',
+    risk:'Rendements globaux les plus faibles de l\'île. La saturation du marché wellness en 2024–2025 a créé une pression sur les tarifs. Le positionnement doit être très différenciant : architecture, expérience culturelle unique, relation directe avec les hôtes — une villa générique n\'y trouve pas sa clientèle facilement.',
+    rs:{dem:6,comp:5,reg:6,liq:5}
+  },
+  pererenan:{
+    name:'Pererenan',full:'Pererenan / Seseh',e:'🌾',
+    netY:[8,13],grossY:[11,16],
+    occH:80,occL:60,
+    nb:{1:150,2:240,3:370,4:530,5:720,6:1000,7:1300},
+    nbH:{1:250,2:420,3:640,4:900,5:1200,6:1700,7:2200},
+    ml:{1:750,2:1300,3:2000,4:2800,5:3800,6:5200,7:6800},
+    pr:'$150k – $700k',psm:800,appr:14,la:'$15k–$40k / are',
+    dem:'Expatriés familles, digital nomads lifestyle, long séjour qualité',
+    tag:'Canggu de 2019 · Meilleure opportunité buy-and-hold · Croissance rapide',
+    desc:'Pererenan est LA zone émergente à surveiller en 2026. Situé juste au nord de Canggu, elle combine le charme d\'un village balinais préservé avec une infrastructure moderne en pleine expansion. Accès surf direct, cafés et coworkings qui fleurissent, prix encore 30–40% inférieurs à Canggu — mais en rattrapage rapide. Les investisseurs early-mover de 2022–2023 voient déjà leur capital s\'apprécier significativement. C\'est le profil buy-and-hold par excellence : rendement locatif déjà solide + plus-value structurelle à 5 ans.',
+    risk:'Liquidité plus faible que Canggu ou Seminyak — la revente peut prendre plus de temps. L\'infrastructure (routes, adressage) reste inégale selon les sous-zones. Choisir son terrain/village précis est critique : 500 mètres peuvent faire une différence majeure sur l\'occupation.',
+    rs:{dem:7,comp:7,reg:6,liq:5}
+  },
+  lovina:{
+    name:'Lovina',full:'Lovina / North Bali',e:'🐬',
+    netY:[4,7],grossY:[5,9],
+    occH:60,occL:35,
+    nb:{1:80,2:130,3:200,4:290,5:400,6:560,7:740},
+    nbH:{1:140,2:240,3:370,4:530,5:730,6:1000,7:1350},
+    ml:{1:300,2:500,3:800,4:1100,5:1500,6:2100,7:2800},
+    pr:'$60k – $350k',psm:250,appr:15,la:'$3k–$12k / are',
+    dem:'Éco-touristes, retraités expatriés, long séjour budget-premium, plongée',
+    tag:'Pari long terme · Aéroport international prévu · Prix plancher',
+    desc:'Lovina est le marché le plus spéculatif et le plus excitant de Bali à horizon 5–10 ans. Les prix fonciers sont 10 à 15 fois inférieurs à Canggu, la demande locative reste limitée aujourd\'hui — mais le projet d\'aéroport international de Bali Nord (North Bali International Airport) pourrait radicalement transformer la dynamique. Les investisseurs avec un horizon long et un appétit pour le risque peuvent acquérir des terrains et villas à des prix plancher avant la revalorisation. Sundara Investment Group y développe des projets depuis 2023.',
+    risk:'Rendements locatifs actuels faibles (5–9% brut) et taux d\'occupation bas (35–60%). L\'aéroport n\'est pas encore construit — le calendrier et la réalisation restent incertains. Infrastructure et services limités. Ce marché est adapté aux investisseurs patients avec une vision long terme, pas à ceux cherchant un cashflow immédiat.',
+    rs:{dem:4,comp:9,reg:8,liq:3}
+  }
+};
+
+let az='canggu',lt='court',opts=new Set(['pool','staff']),appre='mid';
+const apRates={low:.05,mid:.10,high:.15};
+
+function buildZones(){
+  const g=document.getElementById('zone-grid');
+  g.innerHTML=Object.entries(Z).map(([k,z])=>`
+    <div class="zc ${k===az?'on':''}" onclick="setZ('${k}')">
+      <div class="zc-top"><span class="zc-name">${z.e} ${z.name}</span></div>
+      <div class="zc-roi">${z.netY[0]}–${z.netY[1]}%</div>
+      <div class="zc-tag">net ROI</div>
+    </div>`).join('');
+}
+
+function setZ(k){
+  az=k;buildZones();
+  const z=Z[k],beds=Math.min(7,Math.max(1,parseInt(gv('s-beds'))));
+  if(lt==='court'){
+    const s=z.nb[beds]||z.nb[3];
+    set('s-nightly',s);sr(g('s-nightly'),'v-nightly',x=>x);
+    const o=Math.round((z.occH+z.occL)/2);
+    set('s-occ',o);sr(g('s-occ'),'v-occ',x=>x);
+  }else{
+    const s=z.ml[beds]||z.ml[3];
+    set('s-monthly',s);sr(g('s-monthly'),'v-monthly',x=>x);
+  }
+  go();
+}
+
+function setType(t){
+  lt=t;
+  g('tc-court').classList.toggle('on',t==='court');
+  g('tc-long').classList.toggle('on',t==='long');
+  g('sg-nightly').style.display=t==='court'?'block':'none';
+  g('sg-monthly').style.display=t==='long'?'block':'none';
+  g('sg-occ').style.display=t==='court'?'block':'none';
+  setZ(az);
+}
+
+function tOpt(el,k){opts.has(k)?opts.delete(k):opts.add(k);el.classList.toggle('on');go();}
+function setAp(k,el){
+  appre=k;
+  document.querySelectorAll('[id^=ap-]').forEach(e=>e.classList.remove('on'));
+  el.classList.add('on');go();
+}
+
+function fUSD(v){
+  if(v>=1000000)return(v/1000000).toFixed(2).replace(/\.?0+$/,'')+'M';
+  if(v>=1000&&v%1000===0)return(v/1000)+'k';
+  return Math.round(v).toLocaleString('en-US');
+}
+function sr(el,vid,fmt){
+  const v=parseFloat(el.value),mn=parseFloat(el.min),mx=parseFloat(el.max);
+  el.style.setProperty('--pct',((v-mn)/(mx-mn)*100).toFixed(1)+'%');
+  g(vid).textContent=fmt(v);
+}
+function g(id){return document.getElementById(id);}
+function gv(id){return parseFloat(g(id).value);}
+function set(id,v){g(id).value=v;}
+function st(id,v){g(id).textContent=v;}
+
+function go(){
+  const z=Z[az];
+  const budget=gv('s-budget'),beds=Math.min(7,Math.max(1,Math.round(gv('s-beds'))));
+  const mgmtR=gv('s-mgmt')/100;
+  const maint=gv('s-maint'),staff=gv('s-staff'),util=gv('s-util'),tax=gv('s-tax');
+
+  let bonus=1;
+  if(opts.has('pool'))    bonus+=.12;
+  if(opts.has('ocean'))   bonus+=.18;
+  if(opts.has('airbnb'))  bonus+=.08;
+  if(opts.has('managed')) bonus+=.06;
+  if(opts.has('new'))     bonus+=.10;
+  if(opts.has('staff'))   bonus+=.04;
+
+  let gross=0,mgmtFees=0;
+  if(lt==='court'){
+    const nightly=gv('s-nightly')*bonus;
+    const days=Math.round(365*gv('s-occ')/100);
+    gross=nightly*days;
+    mgmtFees=gross*mgmtR;
+  }else{
+    const mo=gv('s-monthly')*bonus;
+    gross=mo*12;
+    mgmtFees=gross*.10;
+  }
+  const charges=mgmtFees+maint+staff+util+tax;
+  const net=gross-charges;
+  const roiG=(gross/budget*100),roiN=(net/budget*100);
+  const payback=net>0?(budget/net):999;
+  const cfMo=net/12,revMo=gross/12,chMo=charges/12;
+  const apr=apRates[appre];
+  const val5=budget*Math.pow(1+apr,5);
+
+  // ROI hero
+  st('r-gross-pct',roiG.toFixed(1));
+  st('r-net-pct',roiN.toFixed(1));
+  const cfEl=g('r-cf-style');
+  cfEl.textContent=(cfMo>=0?'+':'')+'\$'+Math.abs(Math.round(cfMo)).toLocaleString('en-US');
+  cfEl.style.color=cfMo>=0?'var(--green)':'var(--red)';
+  g('r-payback-txt').innerHTML=`Capital remboursé en <span>${payback<50?payback.toFixed(1):'50+'} ans</span> via les seuls revenus locatifs nets`;
+
+  // KPIs
+  st('r-gross-amt','$'+Math.round(gross).toLocaleString('en-US'));
+  st('r-net-amt','$'+Math.round(net).toLocaleString('en-US'));
+  g('r-net-amt').style.color=net>=0?'var(--teal)':'var(--red)';
+  st('r-val5','$'+Math.round(val5/1000)+'k');
+  st('r-val5-sub',`+${(apr*100).toFixed(0)}% / an`);
+
+  // CF
+  g('r-rev-mo').textContent='+$'+Math.round(revMo).toLocaleString('en-US');
+  g('r-ch-mo').textContent='-$'+Math.round(chMo).toLocaleString('en-US');
+
+  // Breakdown
+  const rows=[
+    {l:'Revenu locatif brut',v:gross,bar:100,c:'var(--gold)'},
+    {l:`Frais gestion / OTA (${Math.round(mgmtR*100)}%)`,v:-mgmtFees,bar:mgmtFees/gross*100,c:'var(--red)'},
+    {l:'Entretien & maintenance',v:-maint,bar:maint/gross*100,c:'var(--red)'},
+    {l:'Staff',v:-staff,bar:staff/gross*100,c:'var(--red)'},
+    {l:'Utilities',v:-util,bar:util/gross*100,c:'var(--red)'},
+    {l:'Taxes & assurances',v:-tax,bar:tax/gross*100,c:'var(--red)'},
+    {l:'REVENU NET ANNUEL',v:net,bar:Math.max(0,net/gross*100),c:net>=0?'var(--green)':'var(--red)',tot:true},
+  ];
+  g('breakdown').innerHTML=rows.map(r=>`
+    <div class="brow${r.tot?' total':''}">
+      <div class="brow-lbl">${r.l}</div>
+      <div class="brow-bar-wrap"><div class="brow-bar" style="width:${Math.max(0,Math.min(100,r.bar)).toFixed(1)}%;background:${r.c}"></div></div>
+      <div class="brow-val" style="color:${r.c}">${r.v>=0?'+':''}<span style="font-size:10px">$</span>${Math.abs(Math.round(r.v)).toLocaleString('en-US')}</div>
+    </div>`).join('');
+
+  // Zone intel
+  st('zi-badge',z.full);
+  g('zi-grid').innerHTML=`
+    <div class="zi-grid">
+      <div class="zi-item"><div class="zi-lbl">Fourchette acquisition</div><div class="zi-v">${z.pr}</div><div class="zi-note">Leasehold / PT PMA</div></div>
+      <div class="zi-item"><div class="zi-lbl">Prix moyen / m²</div><div class="zi-v">$${z.psm.toLocaleString('en-US')}</div><div class="zi-note">Données 2025</div></div>
+      <div class="zi-item"><div class="zi-lbl">Occupation haute saison</div><div class="zi-v">${z.occH}%</div><div class="zi-note">Juil–Août · Déc–Jan</div></div>
+      <div class="zi-item"><div class="zi-lbl">Occupation basse saison</div><div class="zi-v">${z.occL}%</div><div class="zi-note">Mai–Juin · Sep–Nov</div></div>
+      <div class="zi-item"><div class="zi-lbl">Appréciation foncière</div><div class="zi-v">~${z.appr}% / an</div><div class="zi-note">Tendance 2022–2025</div></div>
+      <div class="zi-item"><div class="zi-lbl">Coût terrain</div><div class="zi-v">${z.la}</div><div class="zi-note">Leasehold marché</div></div>
+      <div class="zi-item" style="grid-column:1/-1"><div class="zi-lbl">Profil locataires</div><div class="zi-v">${z.dem}</div><div class="zi-note">${z.tag}</div></div>
+    </div>`;
+  st('zi-desc',z.desc);
+  st('zi-warn',z.risk);
+
+  // Risk
+  const rs=z.rs;
+  const risks=[
+    {l:'Demande',s:rs.dem,c:'var(--green)'},
+    {l:'Faible concurrence',s:rs.comp,c:'var(--teal)'},
+    {l:'Réglementation',s:rs.reg,c:'var(--gold)'},
+    {l:'Liquidité',s:rs.liq,c:'var(--gold-l)'},
+  ];
+  g('risk-row').innerHTML=risks.map(r=>`
+    <div class="risk-c">
+      <div class="risk-lbl">${r.l}</div>
+      <div class="risk-bar-w"><div class="risk-bar-f" style="width:${r.s*10}%;background:${r.c}"></div></div>
+      <div class="risk-val" style="color:${r.c}">${r.s}/10</div>
+    </div>`).join('');
+
+  // 5-year projection
+  let cumRev=0,tbody='';
+  for(let yr=1;yr<=5;yr++){
+    const inf=Math.pow(1.05,yr-1);
+    const yrNet=net*inf;
+    cumRev+=yrNet;
+    const vv=budget*Math.pow(1+apr,yr);
+    const pat=vv+cumRev;
+    const roiC=((cumRev+vv-budget)/budget*100);
+    tbody+=`<tr>
+      <td>An ${yr}</td>
+      <td class="${yrNet>=0?'pos':'neg'}">${yrNet>=0?'+':''}<span style="font-size:9px">$</span>${Math.round(yrNet).toLocaleString('en-US')}</td>
+      <td class="${cumRev>=0?'pos':'neg'}">${cumRev>=0?'+':''}<span style="font-size:9px">$</span>${Math.round(cumRev).toLocaleString('en-US')}</td>
+      <td style="color:var(--text2)">$${Math.round(vv/1000)}k</td>
+      <td style="color:var(--gold-l)">$${Math.round(pat/1000)}k</td>
+      <td class="pos">+${roiC.toFixed(0)}%</td>
+    </tr>`;
+  }
+  const totROI=((cumRev+budget*Math.pow(1+apr,5)-budget)/budget*100);
+  tbody+=`<tr>
+    <td>Total 5 ans</td>
+    <td class="pos">+$${Math.round(cumRev).toLocaleString('en-US')}</td>
+    <td>—</td>
+    <td>$${Math.round(budget*Math.pow(1+apr,5)/1000)}k</td>
+    <td style="color:var(--gold-l)">$${Math.round((cumRev+budget*Math.pow(1+apr,5))/1000)}k</td>
+    <td class="pos" style="font-weight:600">+${totROI.toFixed(0)}%</td>
+  </tr>`;
+  g('proj-body').innerHTML=tbody;
+}
+
+// Init
+buildZones();
+document.querySelectorAll('input[type=range]').forEach(el=>{
+  const v=parseFloat(el.value),mn=parseFloat(el.min),mx=parseFloat(el.max);
+  el.style.setProperty('--pct',((v-mn)/(mx-mn)*100).toFixed(1)+'%');
+});
+go();
+</script>
+</body>
+</html>
