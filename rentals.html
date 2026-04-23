@@ -436,46 +436,23 @@ const VILLAS = [
   },
   {
     id: "villa-peacock-bumbak",
-    name_en: "Villa Peacock \u2014 Umalas, Kerobokan",
-    name_fr: "Villa Peacock \u2014 Umalas, Kerobokan",
-    location: "Jalan Bumbak \u2014 Umalas, Kerobokan",
+    name_en: "Villa Peacock",
+    name_fr: "Villa Peacock",
+    location: "Umalas, Kerobokan \u2014 Bali",
     type: "long-term",
-    extended: true,
+    bedrooms: 3,
+    sqm: 300,
+    pool: true,
+    price_usd: 2848,
     badge_en: "Available",
     badge_fr: "Disponible",
     badge_cls: "rv-badge-green",
-    specs_en: "3 Bedrooms\u2002|\u2002300 m\u00b2\u2002|\u200210m Pool\u2002|\u2002Furnished",
-    specs_fr: "3 Chambres\u2002|\u2002300 m\u00b2\u2002|\u2002Piscine 10m\u2002|\u2002Meubl\u00e9e",
-    desc_en: "Serene tropical retreat on Jalan Bumbak \u2013 Umalas. Private 3BR villa, 10m pool, garden bungalow. Perfect for long-stay residency or rental investment in Bali.",
-    desc_fr: "Havre de paix tropical \u00e0 Jalan Bumbak \u2013 Umalas. Villa priv\u00e9e 3 chambres, piscine 10m, bungalow jardin. Id\u00e9ale pour r\u00e9sidence long terme ou investissement locatif \u00e0 Bali.",
     image: "images/villas/villa-bumbak/cover.png",
-    gallery: [
-      "images/villas/villa-bumbak/cover.png",
-      "images/villas/villa-bumbak/garden.png",
-      "images/villas/villa-bumbak/chambre1face.jpg",
-      "images/villas/villa-bumbak/chambre2.jpg",
-      "images/villas/villa-bumbak/chambre3.jpg",
-      "images/villas/villa-bumbak/chambre1cote.jpg",
-      "images/villas/villa-bumbak/salledebain.jpg",
-      "images/villas/villa-bumbak/salon1.jpg",
-      "images/villas/villa-bumbak/salon2cote.jpg",
-      "images/villas/villa-bumbak/salon2feuilles.jpg",
-      "images/villas/villa-bumbak/sejourcote.jpg",
-      "images/villas/villa-bumbak/sejourface.jpg",
-      "images/villas/villa-bumbak/statue1.jpg",
-      "images/villas/villa-bumbak/statue2.jpg",
-      "images/villas/villa-bumbak/statue3.jpg"
-    ],
-    prices_en: [
-      { label: "10-year lease", value: "3,400,000,000 IDR", note: "fully furnished" },
-      { label: "20-year lease", value: "4,850,000,000 IDR", note: "fully furnished" },
-      { label: "Monthly rental", value: "45,000,000 IDR\u00a0/ month", note: "" }
-    ],
-    prices_fr: [
-      { label: "Bail 10 ans", value: "3\u00a0400\u00a0000\u00a0000 IDR", note: "meubl\u00e9e" },
-      { label: "Bail 20 ans", value: "4\u00a0850\u00a0000\u00a0000 IDR", note: "meubl\u00e9e" },
-      { label: "Location mensuelle", value: "45\u00a0000\u00a0000 IDR\u00a0/ mois", note: "" }
-    ]
+    suffix_en: "\u00a0/ month",
+    suffix_fr: "\u00a0/ mois",
+    cta_href: "https://wa.me/6281215597625",
+    cta_en: "Book a Visit\u00a0\u2192",
+    cta_fr: "Demander une visite\u00a0\u2192"
   }
 ];
 
@@ -597,9 +574,11 @@ function renderCards() {
       /* ── Standard card ── */
       const name = fr ? v.name_fr : v.name_en;
       const badge = fr ? v.badge_fr : v.badge_en;
-      const suffix = fr ? '\u00a0/ nuit' : '\u00a0/ night';
+      const suffix = fr ? (v.suffix_fr || '\u00a0/ nuit') : (v.suffix_en || '\u00a0/ night');
       const fromLbl = fr ? '\u00c0 partir de' : 'From';
-      const ctaLbl = fr ? 'V\u00e9rifier disponibilit\u00e9s\u00a0\u2192' : 'Check Availability\u00a0\u2192';
+      const ctaLbl = fr ? (v.cta_fr || 'V\u00e9rifier disponibilit\u00e9s\u00a0\u2192') : (v.cta_en || 'Check Availability\u00a0\u2192');
+      const ctaHref = v.cta_href || 'contact.html?type=rental';
+      const ctaExtra = v.cta_href ? ' target="_blank" rel="noopener"' : '';
       const viewLbl = fr ? 'Voir les d\u00e9tails\u00a0\u2192' : 'View Details\u00a0\u2192';
       const statusLbl = fr ? 'Statut' : 'Status';
       const rateLbl = fr ? 'Tarif' : 'Rate';
@@ -632,7 +611,7 @@ function renderCards() {
             '</div>' +
           '</div>' +
           '<div class="rv-card-actions">' +
-            '<a href="contact.html?type=rental" class="rv-card-btn" onclick="event.stopPropagation()">' + ctaLbl + '</a>' +
+            '<a href="' + ctaHref + '" class="rv-card-btn" onclick="event.stopPropagation()"' + ctaExtra + '>' + ctaLbl + '</a>' +
             '<a href="villa.html?id=' + v.id + '" class="rv-card-btn-secondary" onclick="event.stopPropagation()">' + viewLbl + '</a>' +
           '</div>' +
         '</div>';
