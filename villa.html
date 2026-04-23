@@ -153,6 +153,47 @@ const VILLAS = [
     desc_fr: "Perchée de façon spectaculaire sur les falaises calcaires d'Uluwatu, la Villa Samudra Cliff offre un panorama ininterrompu à 270° sur l'océan Indien. Cet extraordinaire domaine de 6 chambres est une déclaration architecturale audacieuse — terrasses en porte-à-faux, piscine à débordement fusionnant avec l'horizon.",
     amenities_en: ["Cliff-edge infinity pool", "Ocean view terraces", "Private chef", "Butler service", "Daily housekeeping", "Home theater", "Fitness room", "High-speed WiFi", "Wine cellar", "Helipad access"],
     amenities_fr: ["Piscine à débordement falaise", "Terrasses vue océan", "Chef privé", "Service majordome", "Ménage quotidien", "Home théâtre", "Salle de sport", "WiFi haut débit", "Cave à vins", "Accès hélipad"]
+  },
+  {
+    id: "villa-peacock-bumbak",
+    name_en: "Villa Peacock",
+    name_fr: "Villa Peacock",
+    location: "Umalas, Kerobokan \u2014 Bali",
+    type: "long-term",
+    bedrooms: 3,
+    bathrooms: 3,
+    sqm: 300,
+    pool: true,
+    price_usd: 2848,
+    badge_en: "Available",
+    badge_fr: "Disponible",
+    badge_cls: "rv-badge-green",
+    suffix_en: "\u00a0/ month",
+    suffix_fr: "\u00a0/ mois",
+    price_period_en: "per month",
+    price_period_fr: "par mois",
+    cta_href: "https://wa.me/6281215597625",
+    images: [
+      "images/villas/villa-bumbak/cover.png",
+      "images/villas/villa-bumbak/garden.png",
+      "images/villas/villa-bumbak/chambre1face.jpg",
+      "images/villas/villa-bumbak/chambre2.jpg",
+      "images/villas/villa-bumbak/chambre3.jpg",
+      "images/villas/villa-bumbak/chambre1cote.jpg",
+      "images/villas/villa-bumbak/salledebain.jpg",
+      "images/villas/villa-bumbak/salon1.jpg",
+      "images/villas/villa-bumbak/salon2cote.jpg",
+      "images/villas/villa-bumbak/salon2feuilles.jpg",
+      "images/villas/villa-bumbak/sejourcote.jpg",
+      "images/villas/villa-bumbak/sejourface.jpg",
+      "images/villas/villa-bumbak/statue1.jpg",
+      "images/villas/villa-bumbak/statue2.jpg",
+      "images/villas/villa-bumbak/statue3.jpg"
+    ],
+    desc_en: "Serene tropical retreat on Jalan Bumbak \u2013 Umalas, Kerobokan. Private 3BR villa with 60m\u00b2 master suite, garden bungalow, fully equipped kitchen, 3 bathrooms, office area and 10m pool with children\u2019s area and gazebo. Secured private residence with parking.",
+    desc_fr: "Havre de paix tropical \u00e0 Jalan Bumbak \u2013 Umalas, Kerobokan. Villa priv\u00e9e 3 chambres avec suite parentale 60m\u00b2 \u00e0 l\u2019\u00e9tage, bungalow priv\u00e9 dans le jardin, cuisine \u00e9quip\u00e9e, 3 salles de bains, bureau et piscine 10m avec espace enfants et gazebo. R\u00e9sidence priv\u00e9e s\u00e9curis\u00e9e avec parking.",
+    amenities_en: ["Private 10m pool", "Garden bungalow", "Fully equipped kitchen", "Air conditioning", "Gazebo", "Private parking", "High-speed WiFi", "Office area"],
+    amenities_fr: ["Piscine priv\u00e9e 10m", "Bungalow jardin", "Cuisine \u00e9quip\u00e9e", "Climatisation", "Gazebo", "Parking priv\u00e9", "WiFi haut d\u00e9bit", "Bureau"]
   }
 ];
 
@@ -198,7 +239,7 @@ function buildHero(v, lang) {
   const fr     = lang === 'fr';
   const name   = fr ? v.name_fr  : v.name_en;
   const badge  = fr ? v.badge_fr : v.badge_en;
-  const suffix = fr ? '\u00a0/ nuit' : '\u00a0/ night';
+  const suffix = fr ? (v.suffix_fr || '\u00a0/ nuit') : (v.suffix_en || '\u00a0/ night');
   const fromLbl = fr ? '\u00c0 partir de' : 'From';
   const specs  = fr
     ? v.bedrooms + '\u00a0chambres\u00a0\u00b7 Piscine priv\u00e9e\u00a0\u00b7 ' + v.sqm + '\u00a0m\u00b2'
@@ -223,6 +264,8 @@ function buildHero(v, lang) {
 
   /* sticky bar */
   const ctaLbl = fr ? 'V\u00e9rifier\u00a0\u2192' : 'Check Availability\u00a0\u2192';
+  const stickyCtaHref = v.cta_href || ('contact.html?type=rental&villa=' + v.id);
+  const stickyCtaExtra = v.cta_href ? ' target="_blank" rel="noopener"' : '';
   document.getElementById('vdStickyWrap').innerHTML =
     '<div class="vd-sticky-bar" id="vdStickyBar">' +
       '<span class="vd-sticky-name">' + name + '</span>' +
@@ -230,7 +273,7 @@ function buildHero(v, lang) {
         '<span class="vd-sticky-price" data-price-usd="' + v.price_usd + '" data-suffix="' + suffix + '">' +
           fmtPrice(v.price_usd, activeCur) + suffix +
         '</span>' +
-        '<a href="contact.html?type=rental&villa=' + v.id + '" class="vd-sticky-btn">' + ctaLbl + '</a>' +
+        '<a href="' + stickyCtaHref + '" class="vd-sticky-btn"' + stickyCtaExtra + '>' + ctaLbl + '</a>' +
       '</div>' +
     '</div>';
 
@@ -267,7 +310,7 @@ function buildThumbs(v) {
 function buildDetail(v, lang) {
   const fr = lang === 'fr';
 
-  const suffix    = fr ? '\u00a0/ nuit'    : '\u00a0/ night';
+  const suffix    = fr ? (v.suffix_fr || '\u00a0/ nuit') : (v.suffix_en || '\u00a0/ night');
   const desc      = fr ? v.desc_fr         : v.desc_en;
   const amenList  = fr ? v.amenities_fr    : v.amenities_en;
 
@@ -279,7 +322,7 @@ function buildDetail(v, lang) {
   const sqmLbl    = fr ? 'Surface'                : 'Area';
   const poolLbl   = fr ? 'Piscine'                : 'Pool';
   const fromLbl   = fr ? '\u00c0 partir de'       : 'From';
-  const nightLbl  = fr ? 'par nuit'               : 'per night';
+  const nightLbl  = fr ? (v.price_period_fr || 'par nuit') : (v.price_period_en || 'per night');
   const ctaLbl    = fr ? 'Demander la disponibilit\u00e9 \u2192' : 'Check Availability \u2192';
   const noteLbl   = fr ? 'R\u00e9ponse garantie sous 48h\u00a0\u00b7 Service confidentiel'
                        : '48h guaranteed response\u00a0\u00b7 Confidential service';
@@ -325,7 +368,7 @@ function buildDetail(v, lang) {
       '<div class="vd-book-row"><span class="vd-book-row-label">' + sqmRow   + '</span><span class="vd-book-row-val">' + v.sqm + ' m\u00b2</span></div>' +
       '<div class="vd-book-row"><span class="vd-book-row-label">' + typeRow  + '</span><span class="vd-book-row-val">' + typeVal + '</span></div>' +
       '<div class="vd-book-divider"></div>' +
-      '<a href="contact.html?type=rental&villa=' + v.id + '" class="vd-book-cta">' + ctaLbl + '</a>' +
+      '<a href="' + (v.cta_href || ('contact.html?type=rental&villa=' + v.id)) + '" class="vd-book-cta"' + (v.cta_href ? ' target="_blank" rel="noopener"' : '') + '>' + ctaLbl + '</a>' +
       '<p class="vd-book-note">' + noteLbl + '</p>' +
     '</div>';
 
@@ -339,7 +382,6 @@ function buildRelated(currentId, lang) {
   if (!others.length) return;
 
   const titleText = fr ? 'Autres villas disponibles' : 'Other available villas';
-  const suffix    = fr ? '\u00a0/ nuit'                            : '\u00a0/ night';
   const fromLbl   = fr ? '\u00c0 partir de'                        : 'From';
   const ctaLbl    = fr ? 'V\u00e9rifier disponibilit\u00e9s\u00a0\u2192' : 'Check Availability\u00a0\u2192';
   const viewLbl   = fr ? 'Voir les d\u00e9tails\u00a0\u2192'       : 'View Details\u00a0\u2192';
@@ -351,9 +393,10 @@ function buildRelated(currentId, lang) {
 
   const grid = document.getElementById('relatedGrid');
   others.forEach(v => {
-    const name  = fr ? v.name_fr : v.name_en;
-    const badge = fr ? v.badge_fr : v.badge_en;
-    const specs = fr
+    const name    = fr ? v.name_fr : v.name_en;
+    const badge   = fr ? v.badge_fr : v.badge_en;
+    const suffix  = fr ? (v.suffix_fr || '\u00a0/ nuit') : (v.suffix_en || '\u00a0/ night');
+    const specs   = fr
       ? v.bedrooms + '\u00a0chambres\u00a0\u00b7 Piscine priv\u00e9e\u00a0\u00b7 ' + v.sqm + '\u00a0m\u00b2'
       : v.bedrooms + '\u00a0bedrooms\u00a0\u00b7 Private pool\u00a0\u00b7 ' + v.sqm + '\u00a0sqm';
 
