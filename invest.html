@@ -272,7 +272,7 @@
       <h2 class="inv-sec-title" style="color:#f2f2f2"><span class="lang-en-inline">Investment-grade villa opportunities.</span><span class="lang-fr-inline">Opportunités de villas d'investissement.</span></h2>
     </div>
     <div class="inv-opps-grid">
-      <div id="investDynamicGrid"></div>
+      <div id="investDynamicGrid" class="sel-cards-grid"></div>
     </div>
   </div>
 </section>
@@ -417,48 +417,56 @@ document.querySelectorAll('.reveal').forEach(el=>rvIO.observe(el));
     const name = fr ? v.name.fr : v.name.en;
     const bestLease = getBestLease(v);
     const leaseDisplay = bestLease
-      ? 'IDR ' + bestLease.price_idr.toLocaleString('id-ID')
+      ? '
+    invIO.observe(div);
+  });
+})();
+
+const invIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      invIO.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+</script>
+</body>
+</html>
+ + Math.round(bestLease.price_idr / 15800).toLocaleString('en-US')
       : '';
     const leaseLbl = bestLease
       ? (fr ? bestLease.label.fr : bestLease.label.en)
       : '';
     const visitLbl  = fr ? 'Demander une visite →' : 'Book a Visit →';
     const detailLbl = fr ? 'Voir les détails →' : 'View Details →';
-    const bedsLbl   = fr ? 'Chambres' : 'Bedrooms';
 
     const div = document.createElement('div');
-    div.className = 'inv-opp reveal';
+    div.className = 'sel-card reveal';
     div.innerHTML =
-      '<div class="inv-opp-img">' +
+      '<div class="sel-card-img">' +
         '<img src="' + v.cover + '" alt="' + name + '" loading="lazy">' +
-        '<span class="inv-opp-badge">Leasehold</span>' +
+        '<span class="audit-badge">Leasehold</span>' +
       '</div>' +
-      '<div class="inv-opp-body">' +
-        '<p class="inv-opp-loc">' + v.location + '</p>' +
-        '<h3 class="inv-opp-name">' + name + '</h3>' +
-        '<div class="inv-opp-kpis">' +
-          '<div class="inv-kpi">' +
-            '<span class="inv-kpi-val">' + (v.invest_yield || '') + '</span>' +
-            '<span class="inv-kpi-lbl">' +
-              (fr ? 'Rendement est.' : 'Est. Yield') +
-            '</span>' +
+      '<div class="sel-card-body">' +
+        '<p class="sel-card-location">' + v.location + '</p>' +
+        '<h3 class="sel-card-name">' + name + '</h3>' +
+        '<div class="sel-card-metrics">' +
+          '<div class="metric-item">' +
+            '<div class="metric-value">' + (v.invest_yield || '—') + '</div>' +
+            '<div class="metric-label">' + (fr ? 'Rendement net' : 'Net yield') + '</div>' +
           '</div>' +
-          '<div class="inv-kpi">' +
-            '<span class="inv-kpi-val inv-kpi-val--small"' +
-              ' style="font-size:13px">' + leaseDisplay + '</span>' +
-            '<span class="inv-kpi-lbl">' + leaseLbl + '</span>' +
-          '</div>' +
-          '<div class="inv-kpi">' +
-            '<span class="inv-kpi-val">' + (v.bedrooms || '—') + '</span>' +
-            '<span class="inv-kpi-lbl">' + bedsLbl + '</span>' +
+          '<div class="metric-item">' +
+            '<div class="metric-value" style="font-size:18px">' + leaseDisplay + '</div>' +
+            '<div class="metric-label">' + leaseLbl + '</div>' +
           '</div>' +
         '</div>' +
-        '<a href="' + (v.cta_href || 'contact.html') + '"' +
-          ' class="inv-opp-cta" target="_blank" rel="noopener">' +
+        '<a href="https://wa.me/6281215597625" class="villa-cta selection-secondary-cta"' +
+          ' target="_blank" rel="noopener"' +
+          ' style="display:block;margin-bottom:8px">' +
           visitLbl +
         '</a>' +
-        '<a href="villa.html?id=' + v.id + '"' +
-          ' class="inv-opp-cta" style="margin-top:8px">' +
+        '<a href="villa.html?id=' + v.id + '" class="villa-cta selection-secondary-cta">' +
           detailLbl +
         '</a>' +
       '</div>';

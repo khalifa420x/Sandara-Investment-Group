@@ -2785,3 +2785,8 @@ img { display: block; }
 .inv-proof-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px}
 .inv-proof-pills .pill{display:inline-flex;align-items:center;background:#1a1a1a;color:#ffffff;border-radius:12px;padding:6px 12px;font-family:'Outfit',sans-serif;font-size:0.85rem;font-weight:500;letter-spacing:0.06em;transition:transform 0.25s ease,filter 0.25s ease;cursor:default}
 .inv-proof-pills .pill:hover{transform:translateY(-2px);filter:brightness(1.12)}
+
+/* ─── SEL-CARDS-GRID (invest dynamic grid) ─── */
+.sel-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;width:100%}
+@media(max-width:960px){.sel-cards-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.sel-cards-grid{grid-template-columns:1fr}}
