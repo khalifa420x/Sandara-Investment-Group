@@ -32,32 +32,6 @@
     lastScroll = sy;
   }, { passive: true });
 
-  /* ── Hamburger / mobile menu ── */
-  const hamburger    = document.getElementById('hamburger');
-  const navMobile    = document.getElementById('navMobile');
-  let mobileOpen = false;
-
-  window.toggleMobile = function () {
-    mobileOpen = !mobileOpen;
-    hamburger.classList.toggle('open', mobileOpen);
-    hamburger.setAttribute('aria-expanded', mobileOpen);
-    if (mobileOpen) {
-      navMobile.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    } else {
-      navMobile.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  };
-
-  window.closeMobile = function () {
-    mobileOpen = false;
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', false);
-    navMobile.classList.remove('open');
-    document.body.style.overflow = '';
-  };
-
   /* ── Scroll reveal (IntersectionObserver) ── */
   const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
   if ('IntersectionObserver' in window) {
@@ -146,7 +120,9 @@ document.querySelectorAll('[data-target]').forEach(el => {
 
 // === LAZY LOAD IMAGES ===
 document.querySelectorAll('img').forEach(img => {
-  img.setAttribute('loading', 'lazy');
+  if (img.getAttribute('loading') !== 'eager') {
+    img.setAttribute('loading', 'lazy');
+  }
 });
 
 // === MOBILE MENU ===

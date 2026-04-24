@@ -12,6 +12,15 @@ async function loadVillas() {
     return VILLAS;
   } catch(e) {
     console.error('Erreur chargement villas.json', e);
+    const errHtml = '<p style="color:#B8922A;text-align:center;padding:48px 24px;font-family:Outfit,sans-serif;font-size:14px;letter-spacing:.08em;text-transform:uppercase;">Unable to load properties — please refresh the page.</p>';
+    const investGrid = document.getElementById('investDynamicGrid');
+    if (investGrid) investGrid.innerHTML = errHtml;
+    const rentGrid = document.getElementById('rentGrid');
+    if (rentGrid) rentGrid.innerHTML = errHtml;
+    const vdLoading = document.getElementById('vdLoading');
+    if (vdLoading) {
+      vdLoading.innerHTML = '<p style="color:#B8922A;text-align:center;padding:48px 24px;font-family:Outfit,sans-serif;font-size:14px;letter-spacing:.08em;text-transform:uppercase;">Unable to load villa — please refresh the page.</p>';
+    }
     return [];
   }
 }

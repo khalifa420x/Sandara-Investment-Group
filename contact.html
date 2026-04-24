@@ -773,6 +773,7 @@ const bannerMessages = {
   }
 };
 
+const currentLang = localStorage.getItem('sundara-lang') || 'en';
 if (type && bannerMessages[type] && banner) {
   const msg = bannerMessages[type][currentLang]
            || bannerMessages[type].en;
