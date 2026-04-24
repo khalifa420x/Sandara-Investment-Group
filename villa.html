@@ -13,7 +13,7 @@
   <style>
     /* ── Mobile layout fixes ─────────────────────────────────── */
     @media (max-width: 768px) {
-      .vd-body { padding-left: 20px !important; padding-right: 20px !important; overflow-x: hidden; }
+      .vd-body { padding-left: 0 !important; padding-right: 0 !important; overflow-x: hidden; }
       .vd-detail { max-width: 100%; }
       .vd-description { max-width: 100%; }
       .vd-specs-grid { width: 100%; max-width: 100%; box-sizing: border-box; }
@@ -91,7 +91,7 @@
     }
     .vd-carousel-wrap {
       width: 100%;
-      height: clamp(500px, 70vh, 900px);
+      height: clamp(600px, 78vh, 960px);
       overflow: hidden;
       position: relative;
       background: #0a0a0a;
@@ -99,9 +99,9 @@
     }
     @media (max-width: 768px) {
       .vd-carousel-wrap {
-        height: 75vw;
-        min-height: 280px;
-        max-height: 450px;
+        height: 100vw;
+        min-height: 320px;
+        max-height: 520px;
       }
     }
     @media (max-width: 768px) {
@@ -348,6 +348,119 @@
   <div id="vdCarousel"></div>
   <div class="vd-related" id="vdRelated"></div>
 </div>
+
+<!-- CTA SECTION -->
+<section style="
+  position: relative;
+  padding: 100px 5%;
+  text-align: center;
+  background: #111111;
+  border-top: 1px solid rgba(198,169,107,0.12);
+">
+  <p style="
+    font-family:'Outfit',sans-serif;
+    font-size:10px;font-weight:500;
+    letter-spacing:0.26em;text-transform:uppercase;
+    color:#C6A96B;margin:0 0 20px;
+  ">
+    <span class="lang-en-inline">Private Investment</span>
+    <span class="lang-fr-inline">Investissement Privé</span>
+  </p>
+  <h2 style="
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(28px,4vw,52px);font-weight:300;
+    color:#f2f2f2;line-height:1.1;
+    margin:0 0 32px;letter-spacing:-0.01em;
+  ">
+    <span class="lang-en-inline">Interested in this property?</span>
+    <span class="lang-fr-inline">Cette propriété vous intéresse ?</span>
+  </h2>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://wa.me/6281215597625" target="_blank" rel="noopener" style="
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:52px;padding:0 32px;
+      background:#C6A96B;color:#111111;
+      font-family:'Outfit',sans-serif;font-size:11px;
+      font-weight:600;letter-spacing:0.16em;text-transform:uppercase;
+      text-decoration:none;border-radius:8px;
+      border:1px solid rgba(171,144,86,0.3);
+      box-shadow:0 12px 28px rgba(198,169,107,0.25);
+      transition:all 0.3s;
+    ">
+      <span class="lang-en-inline">Book a Visit →</span>
+      <span class="lang-fr-inline">Demander une visite →</span>
+    </a>
+    <a href="contact.html?type=investment" style="
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:52px;padding:0 32px;
+      background:transparent;color:rgba(255,255,255,0.78);
+      font-family:'Outfit',sans-serif;font-size:11px;
+      font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+      text-decoration:none;border-radius:8px;
+      border:1px solid rgba(255,255,255,0.2);
+      transition:all 0.3s;
+    ">
+      <span class="lang-en-inline">Investor Enquiry →</span>
+      <span class="lang-fr-inline">Demande investisseur →</span>
+    </a>
+  </div>
+  <p style="margin-top:20px;font-family:'Outfit',sans-serif;font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.08em;">
+    <span class="lang-en-inline">Response within 48h · Confidential</span>
+    <span class="lang-fr-inline">Réponse sous 48h · Confidentiel</span>
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo" aria-label="Sundara Investment Group">
+          <span class="footer-logo-name">SUNDARA</span>
+          <span class="nav-logo-dot" aria-hidden="true" style="margin-bottom:4px;"></span>
+        </a>
+        <p class="footer-tagline">
+          <span class="lang-en-inline">Private real estate investment in Bali. Curated acquisitions. Managed returns. Exclusive access.</span>
+          <span class="lang-fr-inline">Investissement immobilier privé à Bali. Acquisitions curatées. Rendements gérés. Accès exclusif.</span>
+        </p>
+      </div>
+      <div>
+        <p class="footer-heading">
+          <span class="lang-en-inline">Navigation</span>
+          <span class="lang-fr-inline">Navigation</span>
+        </p>
+        <ul class="footer-links" role="list">
+          <li><a href="rentals.html"><span class="lang-en-inline">Rentals</span><span class="lang-fr-inline">Locations</span></a></li>
+          <li><a href="invest.html"><span class="lang-en-inline">Invest</span><span class="lang-fr-inline">Investir</span></a></li>
+          <li><a href="index.html#positioning"><span class="lang-en-inline">Philosophy</span><span class="lang-fr-inline">Philosophie</span></a></li>
+          <li><a href="blog.html"><span class="lang-en-inline">Insights</span><span class="lang-fr-inline">Insights</span></a></li>
+          <li><a href="contact.html"><span class="lang-en-inline">Enquire</span><span class="lang-fr-inline">Contact</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-legal">
+        <p class="footer-heading">
+          <span class="lang-en-inline">Legal</span>
+          <span class="lang-fr-inline">Mentions Légales</span>
+        </p>
+        <p>
+          <span class="lang-en-inline">Sundara Investment Group is not a licensed financial institution. All investment activities are conducted through appropriate legal structures in Indonesia.</span>
+          <span class="lang-fr-inline">Sundara Investment Group n'est pas un établissement financier agréé. Toutes les activités d'investissement sont menées par des structures juridiques appropriées en Indonésie.</span>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copyright">
+        © 2024 Sundara Investment Group.
+        <span class="lang-en-inline">All rights reserved.</span>
+        <span class="lang-fr-inline">Tous droits réservés.</span>
+      </span>
+      <div class="footer-bottom-links">
+        <a href="#"><span class="lang-en-inline">Privacy Policy</span><span class="lang-fr-inline">Politique de Confidentialité</span></a>
+        <a href="#"><span class="lang-en-inline">Terms of Use</span><span class="lang-fr-inline">Conditions d'utilisation</span></a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script src="js/lang.js"></script>
 <script src="js/animations.js"></script>

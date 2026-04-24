@@ -2388,7 +2388,7 @@ img { display: block; }
 /* --- Layout --- */
 .vd-body {
   background: #F5F0E8;
-  padding: 80px 5% 100px;
+  padding: 80px 0 100px;
 }
 
 .vd-detail {
@@ -2398,15 +2398,18 @@ img { display: block; }
   max-width: 1200px;
   margin: 0 auto;
   align-items: start;
+  padding: 0 5%;
+  box-sizing: border-box;
 }
 
 @media (max-width: 960px) {
   .vd-detail {
     grid-template-columns: 1fr;
     gap: 40px;
+    padding: 0 20px;
   }
   .vd-body {
-    padding: 48px 5% 60px;
+    padding: 48px 0 60px;
   }
 }
 
