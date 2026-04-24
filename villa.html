@@ -36,14 +36,18 @@
     }
     .vd-carousel-wrap {
       width: 100%;
-      height: 500px;
+      aspect-ratio: 16/9;
+      max-height: 600px;
       overflow: hidden;
       position: relative;
       background: #0a0a0a;
       margin-bottom: 48px;
     }
-    @media (max-width: 640px) {
-      .vd-carousel-wrap { height: 300px; }
+    @media (max-width: 768px) {
+      .vd-carousel-wrap {
+        aspect-ratio: 4/3;
+        max-height: unset;
+      }
     }
     .vd-carousel-track {
       display: flex;
@@ -127,6 +131,14 @@
       padding: 4px 12px;
       border-radius: 20px;
       z-index: 10;
+    }
+
+    /* ── Section centering ────────────────────────────────────── */
+    #vdInfo {
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
     }
 
     /* ── Lease price rows (Villa Peacock booking card) ─────────── */
@@ -708,6 +720,29 @@ function init() {
 }
 
 init();
+
+/* ── Language rebuild hook ────────────────────────────────────── */
+(function() {
+  var _origSetLang = window.setLang;
+  var villaId = new URLSearchParams(window.location.search).get('id');
+  var v = VILLAS.find(function(x) { return x.id === villaId; }) || VILLAS[0];
+
+  function rebuildForLang(lang) {
+    buildHero(v, lang);
+    buildDetail(v, lang);
+    buildRelated(v.id, lang);
+  }
+
+  window.setLang = function(lang) {
+    _origSetLang(lang);
+    rebuildForLang(lang);
+  };
+
+  window.toggleLang = function() {
+    var cur = localStorage.getItem('sundara-lang') || 'en';
+    window.setLang(cur === 'en' ? 'fr' : 'en');
+  };
+})();
 </script>
 
 </body>
