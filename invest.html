@@ -405,44 +405,32 @@ const rvIO=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isInterse
 document.querySelectorAll('.reveal').forEach(el=>rvIO.observe(el));
 </script>
 
-
 <script>
 (async function() {
   await loadVillas();
   const lang = localStorage.getItem('sundara-lang') || 'en';
   const fr = lang === 'fr';
   const grid = document.getElementById('investDynamicGrid');
+  if (!grid) return;
 
-  VILLAS.filter(v => v.invest_show).forEach(v => {
+  VILLAS.filter(function(v) { return v.invest_show; }).forEach(function(v) {
     const name = fr ? v.name.fr : v.name.en;
+
     const bestLease = getBestLease(v);
     const leaseDisplay = bestLease
-      ? '
-    invIO.observe(div);
-  });
-})();
-
-const invIO = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      invIO.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.07 });
-</script>
-</body>
-</html>
- + Math.round(bestLease.price_idr / 15800).toLocaleString('en-US')
-      : '';
+      ? '$' + Math.round(bestLease.price_idr / 15800).toLocaleString('en-US')
+      : '—';
     const leaseLbl = bestLease
       ? (fr ? bestLease.label.fr : bestLease.label.en)
-      : '';
+      : (fr ? 'Acquisition' : 'Acquisition');
+
     const visitLbl  = fr ? 'Demander une visite →' : 'Book a Visit →';
     const detailLbl = fr ? 'Voir les détails →' : 'View Details →';
+    const yieldLbl  = fr ? 'Rendement net' : 'Net yield';
 
     const div = document.createElement('div');
     div.className = 'sel-card reveal';
+
     div.innerHTML =
       '<div class="sel-card-img">' +
         '<img src="' + v.cover + '" alt="' + name + '" loading="lazy">' +
@@ -454,36 +442,38 @@ const invIO = new IntersectionObserver(entries => {
         '<div class="sel-card-metrics">' +
           '<div class="metric-item">' +
             '<div class="metric-value">' + (v.invest_yield || '—') + '</div>' +
-            '<div class="metric-label">' + (fr ? 'Rendement net' : 'Net yield') + '</div>' +
+            '<div class="metric-label">' + yieldLbl + '</div>' +
           '</div>' +
           '<div class="metric-item">' +
             '<div class="metric-value" style="font-size:18px">' + leaseDisplay + '</div>' +
             '<div class="metric-label">' + leaseLbl + '</div>' +
           '</div>' +
         '</div>' +
-        '<a href="https://wa.me/6281215597625" class="villa-cta selection-secondary-cta"' +
+        '<a href="https://wa.me/6281215597625"' +
+          ' class="villa-cta selection-secondary-cta"' +
           ' target="_blank" rel="noopener"' +
           ' style="display:block;margin-bottom:8px">' +
           visitLbl +
         '</a>' +
-        '<a href="villa.html?id=' + v.id + '" class="villa-cta selection-secondary-cta">' +
+        '<a href="villa.html?id=' + v.id + '"' +
+          ' class="villa-cta selection-secondary-cta">' +
           detailLbl +
         '</a>' +
       '</div>';
 
     grid.appendChild(div);
-    invIO.observe(div);
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.07 });
+    io.observe(div);
   });
 })();
-
-const invIO = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      invIO.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.07 });
 </script>
 </body>
 </html>
