@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <script src="js/villas.js"></script>
   <meta name="description" content="Villa Peacock — Luxury 3-bedroom tropical villa for rent in Umalas, Kerobokan, Bali. Private 10m pool, 60m² master suite, garden bungalow. Available as long-term lease or investment opportunity.">
   <style>
     /* ── Mobile layout fixes ─────────────────────────────────── */
@@ -351,165 +352,6 @@
 <script src="js/lang.js"></script>
 <script src="js/animations.js"></script>
 <script>
-/* ── VILLA DATA ───────────────────────────────────────────────────── */
-const VILLAS = [
-  {
-    id: "villa-sundara-serenity",
-    name_en: "Villa Sundara Serenity",
-    name_fr: "Villa Sundara Serenity",
-    location: "Seminyak, Bali",
-    type: "short-term",
-    bedrooms: 4,
-    bathrooms: 4,
-    sqm: 650,
-    pool: true,
-    price_usd: 1200,
-    badge_en: "Available Now",
-    badge_fr: "Disponible",
-    badge_cls: "rv-badge-green",
-    images: [
-      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1200&q=80",
-      "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1200&q=80",
-      "https://images.unsplash.com/photo-1615880484746-a134be9a6ecf?w=1200&q=80",
-      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=80"
-    ],
-    desc_en: "Nestled in the heart of Seminyak, Villa Sundara Serenity offers an unparalleled retreat for those seeking luxury and tranquility. This exquisite 4-bedroom villa blends contemporary Balinese architecture with refined modern comforts, creating a sanctuary that feels both intimate and expansive. Surrounded by lush tropical gardens, each space has been thoughtfully designed to invite natural light and gentle breezes.",
-    desc_fr: "Nichée au cœur de Seminyak, la Villa Sundara Serenity offre un séjour inégalé à ceux qui recherchent luxe et tranquillité. Cette villa d'exception de 4 chambres allie architecture balinaise contemporaine et conforts modernes raffinés, créant un sanctuaire à la fois intime et spacieux, entouré de jardins tropicaux luxuriants.",
-    amenities_en: ["Private infinity pool", "Tropical garden", "Full kitchen", "Air conditioning", "Daily housekeeping", "High-speed WiFi", "Pool sun loungers", "Outdoor dining area", "Smart TV", "Bicycle rental"],
-    amenities_fr: ["Piscine à débordement", "Jardin tropical", "Cuisine équipée", "Climatisation", "Ménage quotidien", "WiFi haut débit", "Transats", "Espace repas extérieur", "Smart TV", "Location de vélos"]
-  },
-  {
-    id: "villa-puri-emas",
-    name_en: "Villa Puri Emas",
-    name_fr: "Villa Puri Emas",
-    location: "Canggu, Bali",
-    type: "short-term",
-    bedrooms: 5,
-    bathrooms: 5,
-    sqm: 820,
-    pool: true,
-    price_usd: 1850,
-    badge_en: "High Demand",
-    badge_fr: "Forte Demande",
-    badge_cls: "rv-badge-orange",
-    images: [
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80",
-      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80",
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80"
-    ],
-    desc_en: "A golden jewel in Canggu's most sought-after enclave, Villa Puri Emas is a masterpiece of contemporary luxury. Five spacious suites open onto lush tropical grounds where an oversized pool takes center stage. The villa's warm teak interiors and hand-crafted Balinese details are a testament to artisanal craftsmanship elevated to the level of fine art.",
-    desc_fr: "Joyau doré de l'enclave la plus prisée de Canggu, la Villa Puri Emas est un chef-d'œuvre du luxe contemporain. Cinq suites spacieuses ouvrent sur de luxuriants jardins tropicaux. Les intérieurs en teck chaleureux et les détails balinais artisanaux témoignent d'un savoir-faire exceptionnel.",
-    amenities_en: ["Oversized private pool", "Chef's kitchen", "Outdoor bar", "Jacuzzi", "Daily housekeeping", "Concierge service", "High-speed WiFi", "Home cinema", "Private parking", "Yoga pavilion"],
-    amenities_fr: ["Grande piscine privée", "Cuisine de chef", "Bar extérieur", "Jacuzzi", "Ménage quotidien", "Service conciergerie", "WiFi haut débit", "Home cinéma", "Parking privé", "Pavillon yoga"]
-  },
-  {
-    id: "villa-samudra-cliff",
-    name_en: "Villa Samudra Cliff",
-    name_fr: "Villa Samudra Cliff",
-    location: "Uluwatu, Bali",
-    type: "short-term",
-    bedrooms: 6,
-    bathrooms: 6,
-    sqm: 1100,
-    pool: true,
-    price_usd: 2600,
-    badge_en: "Available Now",
-    badge_fr: "Disponible",
-    badge_cls: "rv-badge-green",
-    images: [
-      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80",
-      "https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?w=1200&q=80",
-      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=80",
-      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1200&q=80"
-    ],
-    desc_en: "Perched dramatically on Uluwatu's limestone cliffs, Villa Samudra Cliff commands an uninterrupted 270-degree panorama of the Indian Ocean. This extraordinary 6-bedroom estate is a statement in architectural boldness — cantilevered terraces, an infinity pool that dissolves into the horizon, and interiors that celebrate the sublime theatre of the sea below.",
-    desc_fr: "Perchée de façon spectaculaire sur les falaises calcaires d'Uluwatu, la Villa Samudra Cliff offre un panorama ininterrompu à 270° sur l'océan Indien. Cet extraordinaire domaine de 6 chambres est une déclaration architecturale audacieuse — terrasses en porte-à-faux, piscine à débordement fusionnant avec l'horizon.",
-    amenities_en: ["Cliff-edge infinity pool", "Ocean view terraces", "Private chef", "Butler service", "Daily housekeeping", "Home theater", "Fitness room", "High-speed WiFi", "Wine cellar", "Helipad access"],
-    amenities_fr: ["Piscine à débordement falaise", "Terrasses vue océan", "Chef privé", "Service majordome", "Ménage quotidien", "Home théâtre", "Salle de sport", "WiFi haut débit", "Cave à vins", "Accès hélipad"]
-  },
-  {
-    id: "villa-peacock-bumbak",
-    name_en: "Villa Peacock",
-    name_fr: "Villa Peacock",
-    location: "Umalas, Kerobokan \u2014 Bali",
-    type: "long-term",
-    bedrooms: 3,
-    bathrooms: 3,
-    sqm: 300,
-    pool: true,
-    price_usd: 2848,
-    price_idr: 45000000,
-    badge_en: "Available",
-    badge_fr: "Disponible",
-    badge_cls: "rv-badge-green",
-    suffix_en: "\u00a0/ month",
-    suffix_fr: "\u00a0/ mois",
-    price_period_en: "per month",
-    price_period_fr: "par mois",
-    cta_href: "https://wa.me/6281215597625",
-    lease_10yr_usd: 215190,
-    lease_10yr_idr: 3400000000,
-    lease_20yr_usd: 306962,
-    lease_20yr_idr: 4850000000,
-    images: [
-      "images/villas/villa-bumbak/cover.png",
-      "images/villas/villa-bumbak/garden.png",
-      "images/villas/villa-bumbak/chambre1face.jpg",
-      "images/villas/villa-bumbak/chambre2.jpg",
-      "images/villas/villa-bumbak/chambre3.jpg",
-      "images/villas/villa-bumbak/chambre1cote.jpg",
-      "images/villas/villa-bumbak/salledebain.jpg",
-      "images/villas/villa-bumbak/salon1.jpg",
-      "images/villas/villa-bumbak/salon2cote.jpg",
-      "images/villas/villa-bumbak/salon2feuilles.jpg",
-      "images/villas/villa-bumbak/sejourcote.jpg",
-      "images/villas/villa-bumbak/sejourface.jpg",
-      "images/villas/villa-bumbak/statue1.jpg",
-      "images/villas/villa-bumbak/statue2.jpg",
-      "images/villas/villa-bumbak/statue3.jpg"
-    ],
-    desc_en: "Nestled in the heart of Jalan Bumbak \u2013 Umalas, one of Bali\u2019s most sought-after residential corridors, Villa Peacock is a rare tropical retreat that blends privacy, comfort and investment potential. Just minutes from Seminyak and Canggu, it offers the ultimate balance between secluded villa living and easy access to Bali\u2019s best dining, surf breaks and lifestyle hubs.<br><br>Spread across 300\u00a0m\u00b2 of lush grounds, the villa offers 200\u00a0m\u00b2 of refined living space. The 60\u00a0m\u00b2 master suite sits on the upper floor with its own private terrace, while two additional en-suite bedrooms open directly onto the tropical garden. A detached garden bungalow adds versatile space \u2014 ideal as a home office, guest studio or yoga room.<br><br>At the heart of the villa, a 10-metre private pool with children\u2019s area and adjacent gazebo creates a resort-style setting for year-round outdoor living. The fully equipped kitchen, spacious dining terrace and generous living areas make Villa Peacock equally suited to long-term residency or high-yield short-term rental.<br><br>Part of a secured private compound with car and scooter parking, this villa is available as a 10 or 20-year leasehold, fully furnished and ready to welcome its next tenant or investor.",
-    desc_fr: "Situ\u00e9e au c\u0153ur de Jalan Bumbak \u2013 Umalas, l\u2019un des quartiers r\u00e9sidentiels les plus pris\u00e9s de Bali, la Villa Peacock est un havre de paix tropical alliant intimit\u00e9, confort et potentiel locatif exceptionnel. \u00c0 quelques minutes de Seminyak et Canggu, elle offre l\u2019\u00e9quilibre parfait entre vie priv\u00e9e et acc\u00e8s aux meilleurs restaurants, spots de surf et boutiques de l\u2019\u00eele.<br><br>D\u00e9ploy\u00e9e sur 300\u00a0m\u00b2 de jardin luxuriant, la villa propose 200\u00a0m\u00b2 de surface habitable raffin\u00e9e. La suite parentale de 60\u00a0m\u00b2 occupe l\u2019\u00e9tage avec terrasse priv\u00e9e, tandis que deux chambres suppl\u00e9mentaires avec salles de bains en-suite s\u2019ouvrent directement sur le jardin tropical. Un bungalow s\u00e9par\u00e9 offre un espace polyvalent id\u00e9al pour un bureau, un studio ind\u00e9pendant ou une salle de yoga.<br><br>Au c\u0153ur de la villa, une piscine priv\u00e9e de 10 m\u00e8tres avec espace enfants et gazebo cr\u00e9e un cadre resort pour la vie en ext\u00e9rieur toute l\u2019ann\u00e9e. La cuisine enti\u00e8rement \u00e9quip\u00e9e, la terrasse repas spacieuse et les grands espaces de vie font de la Villa Peacock une r\u00e9sidence id\u00e9ale aussi bien en location longue dur\u00e9e qu\u2019en investissement locatif saisonnier \u00e0 fort rendement.<br><br>Int\u00e9gr\u00e9e dans une r\u00e9sidence priv\u00e9e s\u00e9curis\u00e9e avec parking voiture et scooter, cette villa est disponible en bail emphyt\u00e9otique de 10 ou 20 ans, enti\u00e8rement meubl\u00e9e, pr\u00eate \u00e0 accueillir son prochain locataire ou investisseur.",
-    amenities_en: ["10m Private Pool", "Children’s Pool Area", "60m² Master Suite", "Garden Bungalow / Office", "Fully Equipped Kitchen", "3 Bathrooms En-Suite", "Gazebo", "Car & Scooter Parking", "Air Conditioning", "High-Speed WiFi"],
-    amenities_fr: ["Piscine priv\u00e9e 10m", "Espace enfants piscine", "Suite parentale 60m\u00b2", "Bungalow jardin / Bureau", "Cuisine enti\u00e8rement \u00e9quip\u00e9e", "3 salles de bain en-suite", "Gazebo", "Parking voiture & scooter", "Climatisation", "WiFi haut d\u00e9bit"]
-  }
-];
-
-/* ── CURRENCY ─────────────────────────────────────────────────────── */
-const CUR_RATES = { USD: 1, EUR: 0.92, GBP: 0.79, IDR: 15800 };
-const CUR_SYMS  = { USD: '$', EUR: '€', GBP: '£', IDR: 'IDR\u00a0' };
-let activeCur = localStorage.getItem('sundara-currency') || 'USD';
-
-function fmtPrice(usd, cur, idr) {
-  if (cur === 'IDR') {
-    const val = (idr !== undefined && idr !== null) ? idr : Math.round(usd * CUR_RATES['IDR']);
-    return 'IDR\u00a0' + val.toLocaleString('id-ID');
-  }
-  const val = Math.round(usd * CUR_RATES[cur]);
-  return CUR_SYMS[cur] + val.toLocaleString('en-US');
-}
-
-function setCurrency(cur) {
-  activeCur = cur;
-  localStorage.setItem('sundara-currency', cur);
-  document.querySelectorAll('[data-price-usd]').forEach(el => {
-    el.classList.add('updating');
-    setTimeout(() => {
-      const idr = el.dataset.priceIdr ? +el.dataset.priceIdr : undefined;
-      el.textContent = fmtPrice(+el.dataset.priceUsd, activeCur, idr) + (el.dataset.suffix || '');
-      el.classList.remove('updating');
-    }, 150);
-  });
-  syncCurBtns();
-}
-
-function syncCurBtns() {
-  document.querySelectorAll('.cur-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.cur === activeCur);
-  });
-}
-
 /* ── REVEAL OBSERVER ──────────────────────────────────────────────── */
 const rvIO = new IntersectionObserver(entries => {
   entries.forEach(e => {
@@ -520,17 +362,19 @@ const rvIO = new IntersectionObserver(entries => {
 /* ── BUILD HERO ───────────────────────────────────────────────────── */
 function buildHero(v, lang) {
   const fr     = lang === 'fr';
-  const name   = fr ? v.name_fr  : v.name_en;
-  const badge  = fr ? v.badge_fr : v.badge_en;
-  const suffix = fr ? (v.suffix_fr || '\u00a0/ nuit') : (v.suffix_en || '\u00a0/ night');
-  const fromLbl = fr ? '\u00c0 partir de' : 'From';
+  const name   = fr ? v.name.fr  : v.name.en;
+  const suffix = fr ? (v.suffix ? v.suffix.fr : ' / nuit') : (v.suffix ? v.suffix.en : ' / night');
+  const fromLbl = fr ? 'À partir de' : 'From';
   const specs  = fr
-    ? v.bedrooms + '\u00a0chambres\u00a0\u00b7 Piscine priv\u00e9e\u00a0\u00b7 ' + v.sqm + '\u00a0m\u00b2'
-    : v.bedrooms + '\u00a0bedrooms\u00a0\u00b7 Private pool\u00a0\u00b7 ' + v.sqm + '\u00a0sqm';
+    ? v.bedrooms + ' chambres · Piscine privée · ' + v.sqm + ' m²'
+    : v.bedrooms + ' bedrooms · Private pool · ' + v.sqm + ' sqm';
+
+  const usd = getMainUsd(v);
+  const idr = getMainIdr(v);
 
   document.getElementById('vdHeroWrap').innerHTML =
     '<section class="vd-hero" id="vdHero">' +
-      '<div class="vd-hero-bg" id="vdHeroBg" style="background-image:url(' + v.images[0] + ')"></div>' +
+      '<div class="vd-hero-bg" id="vdHeroBg" style="background-image:url(' + v.cover + ')"></div>' +
       '<div class="vd-hero-overlay"></div>' +
       '<div class="vd-hero-content">' +
         '<p class="vd-hero-location">' + v.location + '</p>' +
@@ -538,33 +382,31 @@ function buildHero(v, lang) {
         '<p class="vd-hero-specs">' + specs + '</p>' +
         '<div class="vd-hero-price-wrap">' +
           '<span class="vd-hero-price-label">' + fromLbl + '</span>' +
-          '<span class="vd-hero-price" data-price-usd="' + v.price_usd + '"' +
-            (v.price_idr ? ' data-price-idr="' + v.price_idr + '"' : '') +
+          '<span class="vd-hero-price" data-price-usd="' + usd + '"' +
+            (idr ? ' data-price-idr="' + idr + '"' : '') +
             ' data-suffix="' + suffix + '">' +
-            fmtPrice(v.price_usd, activeCur, v.price_idr) + suffix +
+            fmtPrice(usd, activeCur, idr) + suffix +
           '</span>' +
         '</div>' +
       '</div>' +
     '</section>';
 
-  /* sticky bar */
-  const ctaLbl = fr ? 'V\u00e9rifier\u00a0\u2192' : 'Check Availability\u00a0\u2192';
+  const ctaLbl = fr ? 'Vérifier →' : 'Check Availability →';
   const stickyCtaHref = v.cta_href || ('contact.html?type=rental&villa=' + v.id);
   const stickyCtaExtra = v.cta_href ? ' target="_blank" rel="noopener"' : '';
   document.getElementById('vdStickyWrap').innerHTML =
     '<div class="vd-sticky-bar" id="vdStickyBar">' +
       '<span class="vd-sticky-name">' + name + '</span>' +
       '<div class="vd-sticky-right">' +
-        '<span class="vd-sticky-price" data-price-usd="' + v.price_usd + '"' +
-          (v.price_idr ? ' data-price-idr="' + v.price_idr + '"' : '') +
+        '<span class="vd-sticky-price" data-price-usd="' + usd + '"' +
+          (idr ? ' data-price-idr="' + idr + '"' : '') +
           ' data-suffix="' + suffix + '">' +
-          fmtPrice(v.price_usd, activeCur, v.price_idr) + suffix +
+          fmtPrice(usd, activeCur, idr) + suffix +
         '</span>' +
         '<a href="' + stickyCtaHref + '" class="vd-sticky-btn"' + stickyCtaExtra + '>' + ctaLbl + '</a>' +
       '</div>' +
     '</div>';
 
-  /* show sticky bar when hero leaves viewport */
   const heroEl   = document.getElementById('vdHero');
   const stickyEl = document.getElementById('vdStickyBar');
   const heroObs  = new IntersectionObserver(entries => {
@@ -575,7 +417,7 @@ function buildHero(v, lang) {
 
 /* ── BUILD THUMBS ─────────────────────────────────────────────────── */
 function buildThumbs(v) {
-  if (v.id === 'villa-peacock-bumbak') return;
+  if (v.images && v.images.length > 1) return;
   const wrap   = document.getElementById('vdThumbs');
   wrap.className = 'vd-thumbs';
   wrap.innerHTML = '';
@@ -584,7 +426,7 @@ function buildThumbs(v) {
   v.images.forEach((src, i) => {
     const div = document.createElement('div');
     div.className = 'vd-thumb' + (i === 0 ? ' active' : '');
-    div.innerHTML = '<img src="' + src + '" alt="' + v.name_en + ' ' + (i + 1) + '" loading="lazy">';
+    div.innerHTML = '<img src="' + src + '" alt="' + v.name.en + ' ' + (i + 1) + '" loading="lazy">';
     div.addEventListener('click', () => {
       if (heroBg) heroBg.style.backgroundImage = 'url(' + src + ')';
       wrap.querySelectorAll('.vd-thumb').forEach(t => t.classList.remove('active'));
@@ -603,7 +445,7 @@ function buildCarousel(v) {
   let cur = 0;
 
   const slides = imgs.map((src, i) =>
-    '<div class="vd-carousel-slide"><img src="' + src + '" alt="' + (v.name_en || '') + ' ' + (i + 1) + '" loading="' + (i === 0 ? 'eager' : 'lazy') + '"></div>'
+    '<div class="vd-carousel-slide"><img src="' + src + '" alt="' + (v.name.en || '') + ' ' + (i + 1) + '" loading="' + (i === 0 ? 'eager' : 'lazy') + '"></div>'
   ).join('');
 
   const dots = imgs.map((_, i) =>
@@ -630,7 +472,6 @@ function buildCarousel(v) {
   window.vdCarNav = function(dir) { goTo(cur + dir); };
   window.vdCarGo  = function(n)   { goTo(n); };
 
-  /* touch swipe */
   let txStart = 0;
   const cWrap = wrap.querySelector('.vd-carousel-wrap');
   cWrap.addEventListener('touchstart', e => { txStart = e.touches[0].clientX; }, { passive: true });
@@ -644,29 +485,29 @@ function buildCarousel(v) {
 function buildDetail(v, lang) {
   const fr = lang === 'fr';
 
-  const suffix    = fr ? (v.suffix_fr || '\u00a0/ nuit') : (v.suffix_en || '\u00a0/ night');
-  const desc      = fr ? v.desc_fr         : v.desc_en;
-  const amenList  = fr ? v.amenities_fr    : v.amenities_en;
+  const suffix    = fr ? (v.suffix ? v.suffix.fr : ' / nuit') : (v.suffix ? v.suffix.en : ' / night');
+  const desc      = fr ? v.desc.fr      : v.desc.en;
+  const amenList  = fr ? v.amenities.fr : v.amenities.en;
 
-  const aboutLbl  = fr ? '\u00c0 propos'         : 'About this villa';
-  const specsLbl  = fr ? 'Caract\u00e9ristiques' : 'Specifications';
-  const amenLbl   = fr ? '\u00c9quipements'       : 'Amenities';
+  const aboutLbl  = fr ? 'À propos'         : 'About this villa';
+  const specsLbl  = fr ? 'Caractéristiques' : 'Specifications';
+  const amenLbl   = fr ? 'Équipements'       : 'Amenities';
   const bedLbl    = fr ? 'Chambres'               : 'Bedrooms';
   const bathLbl   = fr ? 'Salles de bain'         : 'Bathrooms';
   const sqmLbl    = fr ? 'Surface'                : 'Area';
   const poolLbl   = fr ? 'Piscine'                : 'Pool';
-  const fromLbl   = fr ? '\u00c0 partir de'       : 'From';
-  const nightLbl  = fr ? (v.price_period_fr || 'par nuit') : (v.price_period_en || 'per night');
-  const ctaLbl    = fr ? 'Demander la disponibilit\u00e9 \u2192' : 'Check Availability \u2192';
-  const noteLbl   = fr ? 'R\u00e9ponse garantie sous 48h\u00a0\u00b7 Service confidentiel'
-                       : '48h guaranteed response\u00a0\u00b7 Confidential service';
-  const bedsRow   = fr ? 'Chambres'               : 'Bedrooms';
-  const bathRow   = fr ? 'Salles de bain'         : 'Bathrooms';
-  const sqmRow    = fr ? 'Surface'                : 'Area';
-  const typeRow   = fr ? 'Type de s\u00e9jour'    : 'Stay type';
+  const fromLbl   = fr ? 'À partir de'       : 'From';
+  const nightLbl  = fr ? (v.period ? v.period.fr : 'par nuit') : (v.period ? v.period.en : 'per night');
+  const ctaLbl    = fr ? 'Demander la disponibilité →' : 'Check Availability →';
+  const noteLbl   = fr ? 'Réponse garantie sous 48h · Service confidentiel'
+                       : '48h guaranteed response · Confidential service';
+  const bedsRow   = fr ? 'Chambres'            : 'Bedrooms';
+  const bathRow   = fr ? 'Salles de bain'      : 'Bathrooms';
+  const sqmRow    = fr ? 'Surface'             : 'Area';
+  const typeRow   = fr ? 'Type de séjour' : 'Stay type';
   const typeVal   = v.type === 'short-term'
-    ? (fr ? 'Court s\u00e9jour' : 'Short-term')
-    : (fr ? 'Long s\u00e9jour'  : 'Long-term');
+    ? (fr ? 'Court séjour' : 'Short-term')
+    : (fr ? 'Long séjour'  : 'Long-term');
 
   const amenItems = amenList.map(a => '<div class="vd-amenity">' + a + '</div>').join('');
 
@@ -680,8 +521,8 @@ function buildDetail(v, lang) {
       '<div class="vd-specs-grid">' +
         '<div class="vd-spec"><p class="vd-spec-val">' + v.bedrooms  + '</p><p class="vd-spec-key">' + bedLbl  + '</p></div>' +
         '<div class="vd-spec"><p class="vd-spec-val">' + v.bathrooms + '</p><p class="vd-spec-key">' + bathLbl + '</p></div>' +
-        '<div class="vd-spec"><p class="vd-spec-val">' + v.sqm       + '</p><p class="vd-spec-key">' + sqmLbl + ' m\u00b2</p></div>' +
-        '<div class="vd-spec"><p class="vd-spec-val">\u2714</p><p class="vd-spec-key">' + poolLbl + '</p></div>' +
+        '<div class="vd-spec"><p class="vd-spec-val">' + v.sqm       + '</p><p class="vd-spec-key">' + sqmLbl + ' m²</p></div>' +
+        '<div class="vd-spec"><p class="vd-spec-val">✔</p><p class="vd-spec-key">' + poolLbl + '</p></div>' +
       '</div>' +
     '</div>' +
     '<div class="reveal">' +
@@ -689,23 +530,28 @@ function buildDetail(v, lang) {
       '<div class="vd-amenities">' + amenItems + '</div>' +
     '</div>';
 
-  const leaseBlock = (v.lease_10yr_usd || v.lease_10yr_idr) ? (function() {
-    const leaseLbl = fr ? 'Options d\u2019achat' : 'Lease Options';
+  const usd = getMainUsd(v);
+  const idr = getMainIdr(v);
+
+  const leaseBlock = v.lease_10yr_idr ? (function() {
+    const leaseLbl = fr ? 'Options d’achat' : 'Lease Options';
     const l10Lbl   = fr ? 'Bail 10 ans' : '10-yr Lease';
     const l20Lbl   = fr ? 'Bail 20 ans' : '20-yr Lease';
+    const l10usd   = v.lease_10yr_idr / 15800;
+    const l20usd   = v.lease_20yr_idr / 15800;
     return '<div class="vd-lease-block">' +
       '<p class="vd-lease-title">' + leaseLbl + '</p>' +
       '<div class="vd-lease-row">' +
         '<span class="vd-lease-label">' + l10Lbl + '</span>' +
-        '<span class="vd-lease-price" data-price-usd="' + v.lease_10yr_usd + '"' +
-          (v.lease_10yr_idr ? ' data-price-idr="' + v.lease_10yr_idr + '"' : '') +
-          ' data-suffix="">' + fmtPrice(v.lease_10yr_usd, activeCur, v.lease_10yr_idr) + '</span>' +
+        '<span class="vd-lease-price" data-price-usd="' + l10usd + '"' +
+          ' data-price-idr="' + v.lease_10yr_idr + '"' +
+          ' data-suffix="">' + fmtPrice(l10usd, activeCur, v.lease_10yr_idr) + '</span>' +
       '</div>' +
       '<div class="vd-lease-row">' +
         '<span class="vd-lease-label">' + l20Lbl + '</span>' +
-        '<span class="vd-lease-price" data-price-usd="' + v.lease_20yr_usd + '"' +
-          (v.lease_20yr_idr ? ' data-price-idr="' + v.lease_20yr_idr + '"' : '') +
-          ' data-suffix="">' + fmtPrice(v.lease_20yr_usd, activeCur, v.lease_20yr_idr) + '</span>' +
+        '<span class="vd-lease-price" data-price-usd="' + l20usd + '"' +
+          ' data-price-idr="' + v.lease_20yr_idr + '"' +
+          ' data-suffix="">' + fmtPrice(l20usd, activeCur, v.lease_20yr_idr) + '</span>' +
       '</div>' +
     '</div>';
   })() : '';
@@ -713,16 +559,16 @@ function buildDetail(v, lang) {
   document.getElementById('vdBooking').innerHTML =
     '<div class="vd-book-card reveal">' +
       '<p class="vd-book-price-label">' + fromLbl + '</p>' +
-      '<p class="vd-book-price" data-price-usd="' + v.price_usd + '"' +
-        (v.price_idr ? ' data-price-idr="' + v.price_idr + '"' : '') +
+      '<p class="vd-book-price" data-price-usd="' + usd + '"' +
+        (idr ? ' data-price-idr="' + idr + '"' : '') +
         ' data-suffix="">' +
-        fmtPrice(v.price_usd, activeCur, v.price_idr) +
+        fmtPrice(usd, activeCur, idr) +
       '</p>' +
       '<p class="vd-book-price-night">' + nightLbl + '</p>' +
       '<div class="vd-book-divider"></div>' +
       '<div class="vd-book-row"><span class="vd-book-row-label">' + bedsRow  + '</span><span class="vd-book-row-val">' + v.bedrooms  + '</span></div>' +
       '<div class="vd-book-row"><span class="vd-book-row-label">' + bathRow  + '</span><span class="vd-book-row-val">' + v.bathrooms + '</span></div>' +
-      '<div class="vd-book-row"><span class="vd-book-row-label">' + sqmRow   + '</span><span class="vd-book-row-val">' + v.sqm + ' m\u00b2</span></div>' +
+      '<div class="vd-book-row"><span class="vd-book-row-label">' + sqmRow   + '</span><span class="vd-book-row-val">' + v.sqm + ' m²</span></div>' +
       '<div class="vd-book-row"><span class="vd-book-row-label">' + typeRow  + '</span><span class="vd-book-row-val">' + typeVal + '</span></div>' +
       '<div class="vd-book-divider"></div>' +
       leaseBlock +
@@ -740,9 +586,9 @@ function buildRelated(currentId, lang) {
   if (!others.length) return;
 
   const titleText = fr ? 'Autres villas disponibles' : 'Other available villas';
-  const fromLbl   = fr ? '\u00c0 partir de'                        : 'From';
-  const ctaLbl    = fr ? 'V\u00e9rifier disponibilit\u00e9s\u00a0\u2192' : 'Check Availability\u00a0\u2192';
-  const viewLbl   = fr ? 'Voir les d\u00e9tails\u00a0\u2192'       : 'View Details\u00a0\u2192';
+  const fromLbl   = fr ? 'À partir de' : 'From';
+  const ctaLbl    = fr ? 'Vérifier disponibilités →' : 'Check Availability →';
+  const viewLbl   = fr ? 'Voir les détails →' : 'View Details →';
 
   const wrap = document.getElementById('vdRelated');
   wrap.innerHTML =
@@ -751,12 +597,14 @@ function buildRelated(currentId, lang) {
 
   const grid = document.getElementById('relatedGrid');
   others.forEach(v => {
-    const name    = fr ? v.name_fr : v.name_en;
-    const badge   = fr ? v.badge_fr : v.badge_en;
-    const suffix  = fr ? (v.suffix_fr || '\u00a0/ nuit') : (v.suffix_en || '\u00a0/ night');
+    const name    = fr ? v.name.fr : v.name.en;
+    const badge   = fr ? v.badge.fr : v.badge.en;
+    const suffix  = fr ? (v.suffix ? v.suffix.fr : ' / nuit') : (v.suffix ? v.suffix.en : ' / night');
     const specs   = fr
-      ? v.bedrooms + '\u00a0chambres\u00a0\u00b7 Piscine priv\u00e9e\u00a0\u00b7 ' + v.sqm + '\u00a0m\u00b2'
-      : v.bedrooms + '\u00a0bedrooms\u00a0\u00b7 Private pool\u00a0\u00b7 ' + v.sqm + '\u00a0sqm';
+      ? v.bedrooms + ' chambres · Piscine privée · ' + v.sqm + ' m²'
+      : v.bedrooms + ' bedrooms · Private pool · ' + v.sqm + ' sqm';
+    const vusd = getMainUsd(v);
+    const vidr = getMainIdr(v);
 
     const card = document.createElement('div');
     card.className = 'rv-card reveal';
@@ -764,8 +612,8 @@ function buildRelated(currentId, lang) {
 
     card.innerHTML =
       '<div class="rv-card-img">' +
-        '<img src="' + v.images[0] + '" alt="' + name + '" loading="lazy">' +
-        '<span class="rv-card-badge ' + v.badge_cls + '">' + badge + '</span>' +
+        '<img src="' + v.cover + '" alt="' + name + '" loading="lazy">' +
+        '<span class="rv-card-badge ' + v.badge.cls + '">' + badge + '</span>' +
         '<div class="rv-card-overlay"><span class="rv-card-overlay-text">' + viewLbl + '</span></div>' +
       '</div>' +
       '<div class="rv-card-body">' +
@@ -773,8 +621,10 @@ function buildRelated(currentId, lang) {
         '<h3 class="rv-card-name">' + name + '</h3>' +
         '<p class="rv-card-specs">' + specs + '</p>' +
         '<p class="rv-card-price-label">' + fromLbl + '</p>' +
-        '<p class="rv-card-price" data-price-usd="' + v.price_usd + '" data-suffix="' + suffix + '">' +
-          fmtPrice(v.price_usd, activeCur) + suffix +
+        '<p class="rv-card-price" data-price-usd="' + vusd + '"' +
+          (vidr ? ' data-price-idr="' + vidr + '"' : '') +
+          ' data-suffix="' + suffix + '">' +
+          fmtPrice(vusd, activeCur, vidr) + suffix +
         '</p>' +
         '<a href="villa.html?id=' + v.id + '" class="rv-card-btn" onclick="event.stopPropagation()">' + ctaLbl + '</a>' +
       '</div>';
@@ -785,18 +635,19 @@ function buildRelated(currentId, lang) {
 }
 
 /* ── INIT ─────────────────────────────────────────────────────────── */
-function init() {
+async function init() {
+  await loadVillas();
   syncCurBtns();
 
   const lang    = localStorage.getItem('sundara-lang') || 'en';
   const villaId = new URLSearchParams(window.location.search).get('id');
   const v       = VILLAS.find(x => x.id === villaId) || VILLAS[0];
 
-  document.title = (lang === 'fr' ? v.name_fr : v.name_en) + ' \u2014 Sundara Investment Group';
+  document.title = (lang === 'fr' ? v.name.fr : v.name.en) + ' — Sundara Investment Group';
 
   buildHero(v, lang);
   buildThumbs(v);
-  if (v.id === 'villa-peacock-bumbak') buildCarousel(v);
+  if (v.images && v.images.length > 1) buildCarousel(v);
   buildDetail(v, lang);
   buildRelated(v.id, lang);
 
@@ -813,9 +664,9 @@ init();
 (function() {
   var _origSetLang = window.setLang;
   var villaId = new URLSearchParams(window.location.search).get('id');
-  var v = VILLAS.find(function(x) { return x.id === villaId; }) || VILLAS[0];
 
   function rebuildForLang(lang) {
+    var v = VILLAS.find(function(x) { return x.id === villaId; }) || VILLAS[0];
     buildHero(v, lang);
     buildDetail(v, lang);
     buildRelated(v.id, lang);
@@ -832,6 +683,8 @@ init();
   };
 })();
 </script>
+
+
 
 </body>
 </html>

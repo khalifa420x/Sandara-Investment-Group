@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <script src="js/villas.js"></script>
   <style>
     .villa-card {
       background:
@@ -485,257 +486,120 @@
 <script src="js/lang.js"></script>
 <script src="js/animations.js"></script>
 <script>
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ VILLA DATA Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
-const VILLAS = [
-  {
-    id: "villa-sundara-serenity",
-    name_en: "Villa Sundara Serenity",
-    name_fr: "Villa Sundara Serenity",
-    location: "Seminyak, Bali",
-    type: "short-term",
-    bedrooms: 4,
-    bathrooms: 4,
-    sqm: 650,
-    pool: true,
-    price_usd: 1200,
-    badge_en: "Available Now",
-    badge_fr: "Disponible",
-    badge_cls: "rv-badge-green",
-    image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&q=80"
-  },
-  {
-    id: "villa-puri-emas",
-    name_en: "Villa Puri Emas",
-    name_fr: "Villa Puri Emas",
-    location: "Canggu, Bali",
-    type: "short-term",
-    bedrooms: 5,
-    bathrooms: 5,
-    sqm: 820,
-    pool: true,
-    price_usd: 1850,
-    badge_en: "High Demand",
-    badge_fr: "Forte Demande",
-    badge_cls: "rv-badge-orange",
-    image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80"
-  },
-  {
-    id: "villa-samudra-cliff",
-    name_en: "Villa Samudra Cliff",
-    name_fr: "Villa Samudra Cliff",
-    location: "Uluwatu, Bali",
-    type: "short-term",
-    bedrooms: 6,
-    bathrooms: 6,
-    sqm: 1100,
-    pool: true,
-    price_usd: 2600,
-    badge_en: "Available Now",
-    badge_fr: "Disponible",
-    badge_cls: "rv-badge-green",
-    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80"
-  },
-  {
-    id: "villa-peacock-bumbak",
-    name_en: "Villa Peacock",
-    name_fr: "Villa Peacock",
-    location: "Umalas, Kerobokan \u2014 Bali",
-    type: "long-term",
-    bedrooms: 3,
-    sqm: 300,
-    pool: true,
-    price_usd: 2848,
-    badge_en: "Available",
-    badge_fr: "Disponible",
-    badge_cls: "rv-badge-green",
-    image: "images/villas/villa-bumbak/cover.png",
-    suffix_en: "\u00a0/ month",
-    suffix_fr: "\u00a0/ mois",
-    cta_href: "https://wa.me/6281215597625",
-    cta_en: "Book a Visit\u00a0\u2192",
-    cta_fr: "Demander une visite\u00a0\u2192"
-  }
-];
-
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ CURRENCY Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
-const CUR_RATES = { USD: 1, EUR: 0.92, GBP: 0.79, IDR: 15800 };
-const CUR_SYMS  = { USD: '$', EUR: '€', GBP: '£', IDR: 'IDR\u00a0' };
-let activeCur = localStorage.getItem('sundara-currency') || 'USD';
-
-function fmtPrice(usd, cur) {
-  const val = Math.round(usd * CUR_RATES[cur]);
-  if (cur === 'IDR') return 'IDR\u00a0' + val.toLocaleString('id-ID');
-  return CUR_SYMS[cur] + val.toLocaleString('en-US');
-}
-
-function setCurrency(cur) {
-  activeCur = cur;
-  localStorage.setItem('sundara-currency', cur);
-  document.querySelectorAll('[data-price-usd]').forEach(el => {
-    el.classList.add('updating');
-    setTimeout(() => {
-      el.textContent = fmtPrice(+el.dataset.priceUsd, activeCur) + (el.dataset.suffix || '');
-      el.classList.remove('updating');
-    }, 150);
-  });
-  syncCurBtns();
-}
-
-function syncCurBtns() {
-  document.querySelectorAll('.cur-btn, .rent-cur-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.cur === activeCur);
-  });
-}
-
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ REVEAL OBSERVER Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 const rvIO = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); rvIO.unobserve(e.target); }
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      rvIO.unobserve(e.target);
+    }
   });
-}, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.06 });
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ FILTER Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 function filterVillas(type, btn) {
-  document.querySelectorAll('.rent-filter-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.rent-filter-tab')
+    .forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   let n = 0;
-  document.querySelectorAll('.rv-card').forEach(c => {
+  document.querySelectorAll('.villa-card').forEach(c => {
     const show = type === 'all' || c.dataset.type === type;
     c.style.display = show ? '' : 'none';
     if (show) n++;
   });
-  document.getElementById('rentCount').textContent = n + (n === 1 ? ' villa' : ' villas');
+  document.getElementById('rentCount').textContent =
+    n + (n === 1 ? ' villa' : ' villas');
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ RENDER Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
-function renderCards() {
+function renderRentals() {
   const lang = localStorage.getItem('sundara-lang') || 'en';
   const fr = lang === 'fr';
   const grid = document.getElementById('rentGrid');
   grid.innerHTML = '';
 
-  VILLAS.forEach(v => {
+  const list = VILLAS.filter(v => v.rental_show);
+
+  list.forEach(v => {
+    const name   = fr ? v.name.fr : v.name.en;
+    const badge  = fr ? v.badge.fr : v.badge.en;
+    const suffix = fr ? v.suffix.fr : v.suffix.en;
+    const ctaLbl = fr ? v.cta_label.fr : v.cta_label.en;
+    const ctaHref = v.cta_href || ('contact.html?type=rental&villa=' + v.id);
+    const ctaExtra = v.cta_href ? ' target="_blank" rel="noopener"' : '';
+    const viewLbl  = fr ? 'Voir les détails →' : 'View Details →';
+    const rateLbl  = fr ? 'Tarif' : 'Rate';
+    const statusLbl = fr ? 'Statut' : 'Status';
+    const fromLbl  = fr ? 'À partir de' : 'From';
+
+    const specs = v.type === 'land'
+      ? (fr
+          ? (v.sqm_land || v.sqm) + ' m² · Terrain'
+          : (v.sqm_land || v.sqm) + ' sqm · Land')
+      : (fr
+          ? v.bedrooms + ' chambres · Piscine · ' + v.sqm + ' m²'
+          : v.bedrooms + ' bedrooms · Pool · ' + v.sqm + ' sqm');
+
+    const idr = getMainIdr(v);
+    const usd = getMainUsd(v);
+    const idrAttr = idr ? ' data-price-idr="' + idr + '"' : '';
+
     const card = document.createElement('div');
     card.className = 'villa-card reveal';
     card.dataset.type = v.type;
+    card.addEventListener('click', () => {
+      window.location = 'villa.html?id=' + v.id;
+    });
 
-    if (v.extended) {
-      /* ── Extended card: local images · IDR prices · photo gallery · bilingual via CSS ── */
-      const galleryHtml = v.gallery.map(img =>
-        '<img src="' + img + '" alt="' + v.name_en + '" loading="lazy">'
-      ).join('');
-      const pricesHtml = v.prices_en.map(function(p, i) {
-        const pfr = v.prices_fr[i];
-        return '<p style="margin:0 0 6px;font-family:\'Outfit\',sans-serif;font-size:11px;font-weight:600;color:#c6a96b;letter-spacing:0.07em;line-height:1.5">' +
-          '<span class="lang-en-inline">' + p.label + ': ' + p.value + (p.note ? ' \u2014 ' + p.note : '') + '</span>' +
-          '<span class="lang-fr-inline">' + pfr.label + '\u00a0: ' + pfr.value + (pfr.note ? ' \u2014 ' + pfr.note : '') + '</span>' +
-        '</p>';
-      }).join('');
-      card.innerHTML =
-        '<div class="rv-card-img">' +
-          '<img src="' + v.image + '" alt="' + v.name_en + '" loading="lazy">' +
-          '<span class="rv-card-badge ' + v.badge_cls + '">' +
-            '<span class="lang-en-inline">' + v.badge_en + '</span>' +
-            '<span class="lang-fr-inline">' + v.badge_fr + '</span>' +
-          '</span>' +
-          '<div class="rv-card-overlay"><span class="rv-card-overlay-text">' +
-            '<span class="lang-en-inline">' + v.specs_en + '</span>' +
-            '<span class="lang-fr-inline">' + v.specs_fr + '</span>' +
-          '</span></div>' +
+    card.innerHTML =
+      '<div class="rv-card-img">' +
+        '<img src="' + v.cover + '" alt="' + name + '" loading="lazy">' +
+        '<span class="rv-card-badge ' + v.badge.cls + '">' + badge + '</span>' +
+        '<div class="rv-card-overlay">' +
+          '<span class="rv-card-overlay-text">' + viewLbl + '</span>' +
         '</div>' +
-        '<div class="rv-card-body">' +
-          '<div class="rv-card-header">' +
-            '<h3 class="rv-card-name">' + v.name_en + '</h3>' +
-            '<p class="rv-card-location">' + v.location + '</p>' +
-          '</div>' +
-          '<p class="rv-card-specs">' +
-            '<span class="lang-en-inline">' + v.specs_en + '</span>' +
-            '<span class="lang-fr-inline">' + v.specs_fr + '</span>' +
-          '</p>' +
-          '<p style="margin:4px 0 0;color:rgba(255,255,255,0.55);font-family:\'Outfit\',sans-serif;font-size:12px;line-height:1.65">' +
-            '<span class="lang-en-inline">' + v.desc_en + '</span>' +
-            '<span class="lang-fr-inline">' + v.desc_fr + '</span>' +
-          '</p>' +
-          '<div style="margin-top:14px;padding:14px;border-radius:14px;background:rgba(198,169,107,0.05);border:1px solid rgba(198,169,107,0.14)">' +
-            '<p class="rv-metric-label" style="margin:0 0 10px">' +
-              '<span class="lang-en-inline">Pricing</span>' +
-              '<span class="lang-fr-inline">Tarifs</span>' +
+      '</div>' +
+      '<div class="rv-card-body">' +
+        '<div class="rv-card-header">' +
+          '<h3 class="rv-card-name">' + name + '</h3>' +
+          '<p class="rv-card-location">' + v.location + '</p>' +
+        '</div>' +
+        '<p class="rv-card-specs">' + specs + '</p>' +
+        '<div class="rv-card-metrics">' +
+          '<div class="rv-metric">' +
+            '<p class="rv-card-price-label">' + rateLbl + '</p>' +
+            '<p class="rv-card-price" data-price-usd="' + usd + '"' +
+              idrAttr + ' data-suffix="' + suffix + '">' +
+              fromLbl + ' ' + fmtPrice(usd, activeCur, idr) + suffix +
             '</p>' +
-            pricesHtml +
           '</div>' +
-          '<div class="villa-gallery"><div class="villa-gallery-scroll">' + galleryHtml + '</div></div>' +
-          '<div class="rv-card-actions" style="grid-template-columns:1fr">' +
-            '<a href="https://wa.me/62812155976250" class="rv-card-btn" onclick="event.stopPropagation()" target="_blank" rel="noopener">' +
-              '<span class="lang-en-inline">Book a Visit</span>' +
-              '<span class="lang-fr-inline">Demander une visite</span>' +
-            '</a>' +
+          '<div class="rv-metric">' +
+            '<p class="rv-metric-label">' + statusLbl + '</p>' +
+            '<p class="rv-card-badge-copy">' + badge + '</p>' +
           '</div>' +
-        '</div>';
-    } else {
-      /* ── Standard card ── */
-      const name = fr ? v.name_fr : v.name_en;
-      const badge = fr ? v.badge_fr : v.badge_en;
-      const suffix = fr ? (v.suffix_fr || '\u00a0/ nuit') : (v.suffix_en || '\u00a0/ night');
-      const fromLbl = fr ? '\u00c0 partir de' : 'From';
-      const ctaLbl = fr ? (v.cta_fr || 'V\u00e9rifier disponibilit\u00e9s\u00a0\u2192') : (v.cta_en || 'Check Availability\u00a0\u2192');
-      const ctaHref = v.cta_href || 'contact.html?type=rental';
-      const ctaExtra = v.cta_href ? ' target="_blank" rel="noopener"' : '';
-      const viewLbl = fr ? 'Voir les d\u00e9tails\u00a0\u2192' : 'View Details\u00a0\u2192';
-      const statusLbl = fr ? 'Statut' : 'Status';
-      const rateLbl = fr ? 'Tarif' : 'Rate';
-      const specs = fr
-        ? `${v.bedrooms}\u00a0chambres\u00a0\u00b7 Piscine priv\u00e9e\u00a0\u00b7 ${v.sqm}\u00a0m\u00b2`
-        : `${v.bedrooms}\u00a0bedrooms\u00a0\u00b7 Private pool\u00a0\u00b7 ${v.sqm}\u00a0sqm`;
-      card.addEventListener('click', () => { window.location = 'villa.html?id=' + v.id; });
-      card.innerHTML =
-        '<div class="rv-card-img">' +
-          '<img src="' + v.image + '" alt="' + name + '" loading="lazy">' +
-          '<span class="rv-card-badge ' + v.badge_cls + '">' + badge + '</span>' +
-          '<div class="rv-card-overlay"><span class="rv-card-overlay-text">' + viewLbl + '</span></div>' +
         '</div>' +
-        '<div class="rv-card-body">' +
-          '<div class="rv-card-header">' +
-            '<h3 class="rv-card-name">' + name + '</h3>' +
-            '<p class="rv-card-location">' + v.location + '</p>' +
-          '</div>' +
-          '<p class="rv-card-specs">' + specs + '</p>' +
-          '<div class="rv-card-metrics">' +
-            '<div class="rv-metric">' +
-              '<p class="rv-card-price-label">' + rateLbl + '</p>' +
-              '<p class="rv-card-price" data-price-usd="' + v.price_usd + '" data-suffix="' + suffix + '">' +
-                fromLbl + ' ' + fmtPrice(v.price_usd, activeCur) + suffix +
-              '</p>' +
-            '</div>' +
-            '<div class="rv-metric">' +
-              '<p class="rv-metric-label">' + statusLbl + '</p>' +
-              '<p class="rv-card-badge-copy">' + badge + '</p>' +
-            '</div>' +
-          '</div>' +
-          '<div class="rv-card-actions">' +
-            '<a href="' + ctaHref + '" class="rv-card-btn" onclick="event.stopPropagation()"' + ctaExtra + '>' + ctaLbl + '</a>' +
-            '<a href="villa.html?id=' + v.id + '" class="rv-card-btn-secondary" onclick="event.stopPropagation()">' + viewLbl + '</a>' +
-          '</div>' +
-        '</div>';
-    }
+        '<div class="rv-card-actions">' +
+          '<a href="' + ctaHref + '" class="rv-card-btn"' +
+            ' onclick="event.stopPropagation()"' + ctaExtra + '>' +
+            ctaLbl +
+          '</a>' +
+          '<a href="villa.html?id=' + v.id + '" class="rv-card-btn-secondary"' +
+            ' onclick="event.stopPropagation()">' +
+            viewLbl +
+          '</a>' +
+        '</div>' +
+      '</div>';
 
     grid.appendChild(card);
     rvIO.observe(card);
   });
 
-  document.getElementById('rentCount').textContent = VILLAS.length + ' villas';
+  document.getElementById('rentCount').textContent =
+    list.length + ' villas';
   syncCurBtns();
 }
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ CURSOR (supplement animations.js for dynamic cards) */
-const cur = document.getElementById('cursor');
-function bindCursorCard(el) {
-  if (!cur) return;
-  el.addEventListener('mouseenter', () => cur.classList.add('expand'));
-  el.addEventListener('mouseleave', () => cur.classList.remove('expand'));
-}
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ INIT Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
-renderCards();
-document.querySelectorAll('.rv-card').forEach(bindCursorCard);
+(async function() {
+  await loadVillas();
+  renderRentals();
+})();
 </script>
 
 </body>
