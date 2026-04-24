@@ -11,6 +11,131 @@
 <link rel="stylesheet" href="css/styles.css"/>
 <script src="js/villas.js"></script>
 <!-- styles loaded from css/styles.css -->
+<style>
+  .sel-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    width: 100%;
+    margin-top: 40px;
+  }
+  @media (max-width: 960px) {
+    .sel-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .sel-cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* Forcer fond blanc sur sel-card dans invest.html */
+  .inv-opps .sel-card {
+    background: #f7f4ee;
+    border: 1px solid rgba(17,17,17,0.06);
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .inv-opps .sel-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+  }
+  .inv-opps .sel-card-img {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+  .inv-opps .sel-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .inv-opps .sel-card:hover .sel-card-img img {
+    transform: scale(1.04);
+  }
+  .inv-opps .sel-card-body {
+    padding: 24px;
+  }
+  .inv-opps .sel-card-location {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(42,42,42,0.42);
+    margin-bottom: 8px;
+  }
+  .inv-opps .sel-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #171717;
+    margin-bottom: 18px;
+    line-height: 1.2;
+  }
+  .inv-opps .sel-card-metrics {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .inv-opps .metric-item {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(17,17,17,0.06);
+  }
+  .inv-opps .metric-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #C6A96B;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .inv-opps .metric-label {
+    font-size: 0.62rem;
+    color: rgba(198,169,107,0.92);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .inv-opps .villa-cta {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: #C6A96B;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(198,169,107,0.35);
+    padding-bottom: 2px;
+    transition: border-color 0.25s;
+    width: fit-content;
+  }
+  .inv-opps .villa-cta:hover {
+    border-color: #C6A96B;
+  }
+  .inv-opps .audit-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    padding: 5px 10px;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C6A96B;
+    border-radius: 6px;
+    border: 1px solid rgba(17,17,17,0.06);
+  }
+</style>
 </head>
 <body>
 
