@@ -243,6 +243,107 @@
 
 <div id="cursor"></div>
 
+<div id="mobile-menu" style="
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #0d0d0d;
+  z-index: 999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 32px 48px;
+  overflow-y: auto;
+">
+
+  <!-- CLOSE BUTTON — top right, always visible -->
+  <button onclick="closeMobileMenu()" style="position:fixed;top:18px;right:18px;width:38px;height:38px;border-radius:50%;background:rgba(198,169,107,0.15);border:1px solid rgba(198,169,107,0.4);color:#C6A96B;font-size:20px;cursor:pointer;z-index:1001;display:flex;align-items:center;justify-content:center;">×</button>
+
+  <!-- NAV LINKS -->
+  <nav style="
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    gap: 0;
+  ">
+    <a href="rentals.html" onclick="closeMobileMenu()" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F5F5F5;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;">
+      <span class="lang-en-inline">Rentals</span>
+      <span class="lang-fr-inline">Locations</span>
+    </a>
+    <a href="invest.html" onclick="closeMobileMenu()" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F5F5F5;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;">
+      <span class="lang-en-inline">Invest</span>
+      <span class="lang-fr-inline">Investir</span>
+    </a>
+    <a href="simulator.html" onclick="closeMobileMenu()" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F5F5F5;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;">
+      <span class="lang-en-inline">Simulator</span>
+      <span class="lang-fr-inline">Simulateur</span>
+    </a>
+    <a href="index.html#positioning" onclick="closeMobileMenu()" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F5F5F5;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;">
+      <span class="lang-en-inline">Philosophy</span>
+      <span class="lang-fr-inline">Philosophie</span>
+    </a>
+    <a href="blog.html" onclick="closeMobileMenu()" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F5F5F5;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;">
+      <span class="lang-en-inline">Insights</span>
+      <span class="lang-fr-inline">Insights</span>
+    </a>
+  </nav>
+
+  <!-- LANG TOGGLE -->
+  <div style="
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  ">
+    <button onclick="setLang('en'); closeMobileMenu();" style="
+      background: none;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #C6A96B;
+      cursor: pointer;
+      padding: 4px 0;
+    ">EN</button>
+    <span style="color:rgba(255,255,255,0.15);font-size:11px">/</span>
+    <button onclick="setLang('fr'); closeMobileMenu();" style="
+      background: none;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      cursor: pointer;
+      padding: 4px 0;
+    ">FR</button>
+  </div>
+
+  <!-- ENQUIRE CTA -->
+  <a href="contact.html" onclick="closeMobileMenu()" style="
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #131313;
+    background: #C6A96B;
+    padding: 15px 32px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s;
+  "><span class="lang-en-inline">Enquire →</span><span class="lang-fr-inline">Contact →</span></a>
+
+</div>
+
 <!-- Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ NAV Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ -->
 <header id="nav" role="banner">
   <div class="container">

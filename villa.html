@@ -8,10 +8,69 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <meta name="description" content="Villa Peacock — Luxury 3-bedroom tropical villa for rent in Umalas, Kerobokan, Bali. Private 10m pool, 60m² master suite, garden bungalow. Available as long-term lease or investment opportunity.">
+  <style>
+    @media (max-width: 600px) {
+      .vd-hero-price { font-size: 13px !important; white-space: normal !important; }
+      .vd-sticky-bar { gap: 6px; flex-wrap: wrap; }
+      .vd-sticky-name { font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 40vw; }
+      .vd-sticky-price { font-size: 11px; white-space: nowrap; }
+    }
+    .vd-carousel-wrap { width: 100%; overflow: hidden; position: relative; background: #0d0d0d; margin-bottom: 64px; }
+    .vd-carousel-track { display: flex; transition: transform 0.42s cubic-bezier(0.22,1,0.36,1); will-change: transform; }
+    .vd-carousel-slide { flex: 0 0 100%; min-width: 0; }
+    .vd-carousel-slide img { width: 100%; height: 460px; object-fit: cover; display: block; }
+    @media (max-width: 640px) { .vd-carousel-slide img { height: 260px; } }
+    .vd-car-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(13,13,13,0.6); border: 1px solid rgba(198,169,107,0.4);
+      color: #C6A96B; font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s; z-index: 10;
+    }
+    .vd-car-btn:hover { background: rgba(198,169,107,0.15); border-color: rgba(198,169,107,0.7); }
+    .vd-car-btn.prev { left: 14px; }
+    .vd-car-btn.next { right: 14px; }
+    .vd-carousel-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 7px; }
+    .vd-carousel-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: background 0.2s, transform 0.2s; border: none; padding: 0; }
+    .vd-carousel-dot.active { background: #C6A96B; transform: scale(1.3); }
+    .vd-carousel-counter { position: absolute; top: 14px; right: 16px; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.1em; color: rgba(255,255,255,0.65); background: rgba(0,0,0,0.45); padding: 4px 10px; border-radius: 20px; }
+  </style>
 </head>
 <body>
 
 <div id="cursor"></div>
+
+<div id="mobile-menu" style="
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #0d0d0d;
+  z-index: 999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 32px 48px;
+  overflow-y: auto;
+">
+  <button onclick="closeMobileMenu()" style="position:fixed;top:18px;right:18px;width:38px;height:38px;border-radius:50%;background:rgba(198,169,107,0.15);border:1px solid rgba(198,169,107,0.4);color:#C6A96B;font-size:20px;cursor:pointer;z-index:1001;display:flex;align-items:center;justify-content:center;">×</button>
+  <nav style="display:flex;flex-direction:column;width:100%;margin-top:40px;margin-bottom:40px;gap:0;">
+    <a href="rentals.html" onclick="closeMobileMenu()" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F5F5F5;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;"><span class="lang-en-inline">Rentals</span><span class="lang-fr-inline">Locations</span></a>
+    <a href="invest.html" onclick="closeMobileMenu()" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F5F5F5;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;"><span class="lang-en-inline">Invest</span><span class="lang-fr-inline">Investir</span></a>
+    <a href="simulator.html" onclick="closeMobileMenu()" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F5F5F5;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;"><span class="lang-en-inline">Simulator</span><span class="lang-fr-inline">Simulateur</span></a>
+    <a href="index.html#positioning" onclick="closeMobileMenu()" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F5F5F5;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;"><span class="lang-en-inline">Philosophy</span><span class="lang-fr-inline">Philosophie</span></a>
+    <a href="blog.html" onclick="closeMobileMenu()" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F5F5F5;text-decoration:none;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;"><span class="lang-en-inline">Insights</span><span class="lang-fr-inline">Insights</span></a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;">
+    <button onclick="setLang('en'); closeMobileMenu();" style="background:none;border:none;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#C6A96B;cursor:pointer;padding:4px 0;">EN</button>
+    <span style="color:rgba(255,255,255,0.15);font-size:11px">/</span>
+    <button onclick="setLang('fr'); closeMobileMenu();" style="background:none;border:none;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);cursor:pointer;padding:4px 0;">FR</button>
+  </div>
+  <a href="contact.html" onclick="closeMobileMenu()" style="display:inline-block;font-family:'Outfit',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#131313;background:#C6A96B;padding:15px 32px;text-decoration:none;border-radius:6px;transition:background 0.3s;"><span class="lang-en-inline">Enquire →</span><span class="lang-fr-inline">Contact →</span></a>
+</div>
 
 <!-- ─── LOADING ─── -->
 <div class="vd-loading" id="vdLoading">
@@ -71,6 +130,7 @@
     <div id="vdInfo"></div>
     <div id="vdBooking"></div>
   </div>
+  <div id="vdCarousel"></div>
   <div class="vd-related" id="vdRelated"></div>
 </div>
 
@@ -190,10 +250,10 @@ const VILLAS = [
       "images/villas/villa-bumbak/statue2.jpg",
       "images/villas/villa-bumbak/statue3.jpg"
     ],
-    desc_en: "Serene tropical retreat on Jalan Bumbak \u2013 Umalas, Kerobokan. Private 3BR villa with 60m\u00b2 master suite, garden bungalow, fully equipped kitchen, 3 bathrooms, office area and 10m pool with children\u2019s area and gazebo. Secured private residence with parking.",
-    desc_fr: "Havre de paix tropical \u00e0 Jalan Bumbak \u2013 Umalas, Kerobokan. Villa priv\u00e9e 3 chambres avec suite parentale 60m\u00b2 \u00e0 l\u2019\u00e9tage, bungalow priv\u00e9 dans le jardin, cuisine \u00e9quip\u00e9e, 3 salles de bains, bureau et piscine 10m avec espace enfants et gazebo. R\u00e9sidence priv\u00e9e s\u00e9curis\u00e9e avec parking.",
-    amenities_en: ["Private 10m pool", "Garden bungalow", "Fully equipped kitchen", "Air conditioning", "Gazebo", "Private parking", "High-speed WiFi", "Office area"],
-    amenities_fr: ["Piscine priv\u00e9e 10m", "Bungalow jardin", "Cuisine \u00e9quip\u00e9e", "Climatisation", "Gazebo", "Parking priv\u00e9", "WiFi haut d\u00e9bit", "Bureau"]
+    desc_en: "Nestled in the heart of Jalan Bumbak \u2013 Umalas, one of Bali\u2019s most sought-after residential corridors, Villa Peacock is a rare tropical retreat that blends privacy, comfort and investment potential. Just minutes from Seminyak and Canggu, it offers the ultimate balance between secluded villa living and easy access to Bali\u2019s best dining, surf breaks and lifestyle hubs.<br><br>Spread across 300\u00a0m\u00b2 of lush grounds, the villa offers 200\u00a0m\u00b2 of refined living space. The 60\u00a0m\u00b2 master suite sits on the upper floor with its own private terrace, while two additional en-suite bedrooms open directly onto the tropical garden. A detached garden bungalow adds versatile space \u2014 ideal as a home office, guest studio or yoga room.<br><br>At the heart of the villa, a 10-metre private pool with children\u2019s area and adjacent gazebo creates a resort-style setting for year-round outdoor living. The fully equipped kitchen, spacious dining terrace and generous living areas make Villa Peacock equally suited to long-term residency or high-yield short-term rental.<br><br>Part of a secured private compound with car and scooter parking, this villa is available as a 10 or 20-year leasehold, fully furnished and ready to welcome its next tenant or investor.",
+    desc_fr: "Situ\u00e9e au c\u0153ur de Jalan Bumbak \u2013 Umalas, l\u2019un des quartiers r\u00e9sidentiels les plus pris\u00e9s de Bali, la Villa Peacock est un havre de paix tropical alliant intimit\u00e9, confort et potentiel locatif exceptionnel. \u00c0 quelques minutes de Seminyak et Canggu, elle offre l\u2019\u00e9quilibre parfait entre vie priv\u00e9e et acc\u00e8s aux meilleurs restaurants, spots de surf et boutiques de l\u2019\u00eele.<br><br>D\u00e9ploy\u00e9e sur 300\u00a0m\u00b2 de jardin luxuriant, la villa propose 200\u00a0m\u00b2 de surface habitable raffin\u00e9e. La suite parentale de 60\u00a0m\u00b2 occupe l\u2019\u00e9tage avec terrasse priv\u00e9e, tandis que deux chambres suppl\u00e9mentaires avec salles de bains en-suite s\u2019ouvrent directement sur le jardin tropical. Un bungalow s\u00e9par\u00e9 offre un espace polyvalent id\u00e9al pour un bureau, un studio ind\u00e9pendant ou une salle de yoga.<br><br>Au c\u0153ur de la villa, une piscine priv\u00e9e de 10 m\u00e8tres avec espace enfants et gazebo cr\u00e9e un cadre resort pour la vie en ext\u00e9rieur toute l\u2019ann\u00e9e. La cuisine enti\u00e8rement \u00e9quip\u00e9e, la terrasse repas spacieuse et les grands espaces de vie font de la Villa Peacock une r\u00e9sidence id\u00e9ale aussi bien en location longue dur\u00e9e qu\u2019en investissement locatif saisonnier \u00e0 fort rendement.<br><br>Int\u00e9gr\u00e9e dans une r\u00e9sidence priv\u00e9e s\u00e9curis\u00e9e avec parking voiture et scooter, cette villa est disponible en bail emphyt\u00e9otique de 10 ou 20 ans, enti\u00e8rement meubl\u00e9e, pr\u00eate \u00e0 accueillir son prochain locataire ou investisseur.",
+    amenities_en: ["10m Private Pool", "Children’s Pool Area", "60m² Master Suite", "Garden Bungalow / Office", "Fully Equipped Kitchen", "3 Bathrooms En-Suite", "Gazebo", "Car & Scooter Parking", "Air Conditioning", "High-Speed WiFi"],
+    amenities_fr: ["Piscine priv\u00e9e 10m", "Espace enfants piscine", "Suite parentale 60m\u00b2", "Bungalow jardin / Bureau", "Cuisine enti\u00e8rement \u00e9quip\u00e9e", "3 salles de bain en-suite", "Gazebo", "Parking voiture & scooter", "Climatisation", "WiFi haut d\u00e9bit"]
   }
 ];
 
@@ -288,6 +348,7 @@ function buildHero(v, lang) {
 
 /* ── BUILD THUMBS ─────────────────────────────────────────────────── */
 function buildThumbs(v) {
+  if (v.id === 'villa-peacock-bumbak') return;
   const wrap   = document.getElementById('vdThumbs');
   wrap.className = 'vd-thumbs';
   wrap.innerHTML = '';
@@ -304,6 +365,52 @@ function buildThumbs(v) {
     });
     wrap.appendChild(div);
   });
+}
+
+/* ── BUILD CAROUSEL ───────────────────────────────────────────────── */
+function buildCarousel(v) {
+  const wrap = document.getElementById('vdCarousel');
+  if (!wrap || !v.images || !v.images.length) return;
+
+  const imgs = v.images;
+  let cur = 0;
+
+  const slides = imgs.map((src, i) =>
+    '<div class="vd-carousel-slide"><img src="' + src + '" alt="' + (v.name_en || '') + ' ' + (i + 1) + '" loading="' + (i === 0 ? 'eager' : 'lazy') + '"></div>'
+  ).join('');
+
+  const dots = imgs.map((_, i) =>
+    '<button class="vd-carousel-dot' + (i === 0 ? ' active' : '') + '" onclick="vdCarGo(' + i + ')" aria-label="Image ' + (i + 1) + '"></button>'
+  ).join('');
+
+  wrap.innerHTML =
+    '<div class="vd-carousel-wrap">' +
+      '<div class="vd-carousel-track" id="vdCTrack">' + slides + '</div>' +
+      '<button class="vd-car-btn prev" onclick="vdCarNav(-1)" aria-label="Previous">&#8249;</button>' +
+      '<button class="vd-car-btn next" onclick="vdCarNav(1)" aria-label="Next">&#8250;</button>' +
+      '<div class="vd-carousel-dots" id="vdCDots">' + dots + '</div>' +
+      '<span class="vd-carousel-counter" id="vdCCount">1 / ' + imgs.length + '</span>' +
+    '</div>';
+
+  function goTo(n) {
+    cur = ((n % imgs.length) + imgs.length) % imgs.length;
+    document.getElementById('vdCTrack').style.transform = 'translateX(-' + (cur * 100) + '%)';
+    document.querySelectorAll('.vd-carousel-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+    const counter = document.getElementById('vdCCount');
+    if (counter) counter.textContent = (cur + 1) + ' / ' + imgs.length;
+  }
+
+  window.vdCarNav = function(dir) { goTo(cur + dir); };
+  window.vdCarGo  = function(n)   { goTo(n); };
+
+  /* touch swipe */
+  let txStart = 0;
+  const cWrap = wrap.querySelector('.vd-carousel-wrap');
+  cWrap.addEventListener('touchstart', e => { txStart = e.touches[0].clientX; }, { passive: true });
+  cWrap.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - txStart;
+    if (Math.abs(diff) > 40) goTo(cur + (diff < 0 ? 1 : -1));
+  }, { passive: true });
 }
 
 /* ── BUILD DETAIL ─────────────────────────────────────────────────── */
@@ -438,6 +545,7 @@ function init() {
 
   buildHero(v, lang);
   buildThumbs(v);
+  if (v.id === 'villa-peacock-bumbak') buildCarousel(v);
   buildDetail(v, lang);
   buildRelated(v.id, lang);
 
