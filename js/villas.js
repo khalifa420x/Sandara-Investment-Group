@@ -37,6 +37,18 @@ function getMainUsd(v) {
   return v.price_usd_night || 0;
 }
 
+function getBestLease(v) {
+  if (!v.leases || !v.leases.length) return null;
+  return v.leases.reduce((best, l) =>
+    l.years > best.years ? l : best
+  );
+}
+
+function fmtLease(lease, cur) {
+  if (!lease) return '';
+  return fmtPrice(lease.price_idr / 15800, cur, lease.price_idr);
+}
+
 function setCurrency(cur) {
   activeCur = cur;
   localStorage.setItem('sundara-currency', cur);

@@ -14,14 +14,37 @@
       "pool": true,
       "price_idr_night": null,
       "price_idr_month": 45000000,
-      "lease_10yr_idr": 3400000000,
-      "lease_20yr_idr": 4850000000,
+      "leases": [
+        {
+          "years": 10,
+          "price_idr": 3400000000,
+          "label": { "en": "10-yr Lease", "fr": "Bail 10 ans" }
+        },
+        {
+          "years": 20,
+          "price_idr": 4850000000,
+          "label": { "en": "20-yr Lease", "fr": "Bail 20 ans" }
+        }
+      ],
       "suffix": { "en": "\u00a0/ month", "fr": "\u00a0/ mois" },
       "period": { "en": "per month", "fr": "par mois" },
       "cta_href": "https://wa.me/6281215597625",
       "cta_label": { "en": "Book a Visit \u2192", "fr": "Demander une visite \u2192" },
       "invest_yield": "15\u201320%",
-      "invest_label": { "en": "10yr Lease", "fr": "Bail 10 ans" },
+      "seo": {
+        "title": {
+          "en": "Villa Peacock \u2014 Umalas Bali | 3BR Family Villa with Pool | Long-Term Lease",
+          "fr": "Villa Peacock \u2014 Umalas Bali | Villa Familiale 3 Chambres avec Piscine | Bail Longue Dur\u00e9e"
+        },
+        "description": {
+          "en": "Luxury 3-bedroom villa with private pool in Umalas-Kerobokan, Bali. Minutes from French School, Canggu & Seminyak. Available 10 or 20-year leasehold. ROI 15-20%.",
+          "fr": "Villa 3 chambres avec piscine priv\u00e9e \u00e0 Umalas-Kerobokan, Bali. \u00c0 quelques minutes de l\u2019\u00c9cole Fran\u00e7aise, Canggu & Seminyak. Bail 10 ou 20 ans. ROI 15-20%."
+        },
+        "keywords": {
+          "en": ["villa umalas bali rent", "villa kerobokan long term", "villa bali family", "bali leasehold villa", "villa bali investment", "villa seminyak area rent", "bali expat villa", "villa bali private pool"],
+          "fr": ["villa umalas bali location", "villa kerobokan longue dur\u00e9e", "villa bali famille", "investissement villa bali", "villa bali bail emphyt\u00e9otique", "villa zone seminyak louer", "villa expatri\u00e9 bali", "villa bali piscine priv\u00e9e"]
+        }
+      },
       "cover": "images/villas/villa-bumbak/cover.png",
       "images": [
         "images/villas/villa-bumbak/cover.png",
