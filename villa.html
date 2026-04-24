@@ -11,6 +11,28 @@
   <script src="js/villas.js"></script>
   <meta name="description" content="Villa Peacock — Luxury 3-bedroom tropical villa for rent in Umalas, Kerobokan, Bali. Private 10m pool, 60m² master suite, garden bungalow. Available as long-term lease or investment opportunity.">
   <style>
+    /* ── Sticky bar — no reserved space in flow ──────────────── */
+    #vdStickyWrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 150;
+      height: 0;
+      overflow: visible;
+    }
+    .vd-sticky-bar {
+      position: fixed !important;
+    }
+    #vdThumbs {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+    .vd-body {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+
     /* ── Mobile layout fixes ─────────────────────────────────── */
     @media (max-width: 768px) {
       .vd-body { padding-left: 0 !important; padding-right: 0 !important; overflow-x: hidden; }
