@@ -1,142 +1,53 @@
 {
-  "villa-sundara-serenity": {
-    "name": { "fr": "Villa Sundara Serenity", "en": "Villa Sundara Serenity" },
-    "type": "short-term",
-    "location": { "fr": "Seminyak, Bali", "en": "Seminyak, Bali" },
-    "price_idr_night": 3500000,
-    "price_idr_month": null,
-    "bedrooms": 4,
-    "bathrooms": 4,
-    "surface_land": "800m²",
-    "surface_build": "650m²",
-    "description": {
-      "fr": "Une villa d'exception nichée au cœur de Seminyak, alliant architecture contemporaine et art de vivre balinais. Quatre suites majestueuses, une piscine à débordement de 18 mètres et des jardins tropicaux soigneusement paysagés composent un cadre d'une rare élégance.",
-      "en": "An exceptional villa nestled in the heart of Seminyak, blending contemporary architecture with the Balinese art de vivre. Four majestic suites, an 18-metre infinity pool and carefully landscaped tropical gardens compose a setting of rare elegance."
-    },
-    "features": {
-      "fr": ["Piscine à débordement 18m", "Chef privé sur demande", "Ménage quotidien", "WiFi fibre optique", "Spa privatif", "Conciergerie 24h", "Voiture avec chauffeur"],
-      "en": ["18m infinity pool", "Private chef on request", "Daily housekeeping", "Fibre optic WiFi", "Private spa", "24h concierge", "Car with driver"]
-    },
-    "images": [
-      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1200&q=85",
-      "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&q=85",
-      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=85",
-      "https://images.unsplash.com/photo-1562790351-d273a961e0e9?w=1200&q=85"
-    ],
-    "map": { "lat": -8.6942, "lng": 115.1672 },
-    "status": "available",
-    "badge": { "fr": "Disponible", "en": "Available Now" }
-  },
-  "villa-puri-emas": {
-    "name": { "fr": "Villa Puri Emas", "en": "Villa Puri Emas" },
-    "type": "short-term",
-    "location": { "fr": "Canggu, Bali", "en": "Canggu, Bali" },
-    "price_idr_night": 4500000,
-    "price_idr_month": null,
-    "bedrooms": 5,
-    "bathrooms": 5,
-    "surface_land": "1100m²",
-    "surface_build": "820m²",
-    "description": {
-      "fr": "Puri Emas — le palais d'or — incarne la quintessence du luxe tropical. Dominant la jungle de Canggu, cette résidence d'architecte offre une vue panoramique sur les rizières et une piscine miroir de 22 mètres.",
-      "en": "Puri Emas — the golden palace — embodies the quintessence of tropical luxury. Overlooking the Canggu jungle, this architect's residence offers panoramic rice field views and a 22-metre mirror pool."
-    },
-    "features": {
-      "fr": ["Piscine miroir 22m", "Restaurant terrasse privé", "Salle de yoga", "Chef étoilé sur demande", "Jacuzzi vue jungle", "Sécurité 24h"],
-      "en": ["22m mirror pool", "Private terrace restaurant", "Yoga studio", "Starred chef on request", "Jungle view jacuzzi", "24h security"]
-    },
-    "images": [
-      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=85",
-      "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=1200&q=85",
-      "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&q=85",
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=85"
-    ],
-    "map": { "lat": -8.6478, "lng": 115.1385 },
-    "status": "demand",
-    "badge": { "fr": "Forte Demande", "en": "High Demand" }
-  },
-  "villa-samudra-cliff": {
-    "name": { "fr": "Villa Samudra Cliff", "en": "Villa Samudra Cliff" },
-    "type": "short-term",
-    "location": { "fr": "Uluwatu, Bali", "en": "Uluwatu, Bali" },
-    "price_idr_night": 5000000,
-    "price_idr_month": null,
-    "bedrooms": 6,
-    "bathrooms": 6,
-    "surface_land": "1800m²",
-    "surface_build": "1100m²",
-    "description": {
-      "fr": "Suspendues à 80 mètres au-dessus de l'océan Indien, les falaises d'Uluwatu accueillent cette résidence spectaculaire. Six suites ocean-front, piscine à débordement fusionnant avec l'horizon et architecture célébrant le dialogue entre roche, eau et ciel.",
-      "en": "Perched 80 metres above the Indian Ocean, the cliffs of Uluwatu host this spectacular residence. Six ocean-front suites, an infinity pool merging with the horizon and architecture celebrating the dialogue between rock, water and sky."
-    },
-    "features": {
-      "fr": ["Vue océan 180°", "Piscine falaise à débordement", "Accès plage privée par ascenseur", "Home cinema 4K", "Chef et majordome inclus", "Hélipad"],
-      "en": ["180° ocean view", "Cliff infinity pool", "Private beach access by elevator", "4K home cinema", "Chef and butler included", "Helipad"]
-    },
-    "images": [
-      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=85",
-      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=85",
-      "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=85",
-      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&q=85"
-    ],
-    "map": { "lat": -8.8291, "lng": 115.0849 },
-    "status": "available",
-    "badge": { "fr": "Disponible", "en": "Available Now" }
-  },
-  "villa-lumiere-ubud": {
-    "name": { "fr": "Villa Lumière", "en": "Villa Lumière" },
-    "type": "long-term",
-    "location": { "fr": "Ubud, Bali", "en": "Ubud, Bali" },
-    "price_idr_night": null,
-    "price_idr_month": 65000000,
-    "bedrooms": 4,
-    "bathrooms": 4,
-    "surface_land": "1200m²",
-    "surface_build": "680m²",
-    "description": {
-      "fr": "Au cœur spirituel de Bali, Villa Lumière offre un refuge de paix et de contemplation. Conçue par un architecte de Singapour, cette maison de location longue durée marie le béton poli, le bois sombre et la végétation luxuriante.",
-      "en": "In the spiritual heart of Bali, Villa Lumière offers a refuge of peace and contemplation. Designed by a Singapore architect, this long-term home marries polished concrete, dark wood and lush vegetation."
-    },
-    "features": {
-      "fr": ["Jardin zen 800m²", "Studio de méditation", "Piscine naturelle", "Bibliothèque privée", "Internet fibre 1Gbps", "Ménage bihebdomadaire"],
-      "en": ["800m² zen garden", "Meditation studio", "Natural pool", "Private library", "1Gbps fibre internet", "Bi-weekly housekeeping"]
-    },
-    "images": [
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=85",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85",
-      "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1200&q=85",
-      "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1200&q=85"
-    ],
-    "map": { "lat": -8.5069, "lng": 115.2625 },
-    "status": "available",
-    "badge": { "fr": "Disponible", "en": "Available" }
-  },
-  "villa-tanah-merah": {
-    "name": { "fr": "Villa Tanah Merah", "en": "Villa Tanah Merah" },
-    "type": "long-term",
-    "location": { "fr": "Pererenan, Bali", "en": "Pererenan, Bali" },
-    "price_idr_night": null,
-    "price_idr_month": 48000000,
-    "bedrooms": 3,
-    "bathrooms": 3,
-    "surface_land": "900m²",
-    "surface_build": "450m²",
-    "description": {
-      "fr": "Tanah Merah tire son nom des latérites de Pererenan. Villa de location longue durée avec murs de pierre volcanique, toitures en alang-alang et jardin de bananier filtrant la lumière dorée. Un cadre authentique pour une vie balinaise véritable.",
-      "en": "Tanah Merah takes its name from the characteristic laterites of Pererenan. Long-term rental villa with volcanic stone walls, alang-alang roofing and banana tree garden filtering the golden light. An authentic setting for true Balinese life."
-    },
-    "features": {
-      "fr": ["Architecture balinaise authentique", "Jardin tropical privé", "Piscine balinaise", "Terrasse rizières", "Cuisine ouverte", "Proche plages surf"],
-      "en": ["Authentic Balinese architecture", "Private tropical garden", "Balinese pool", "Rice field terrace", "Open kitchen", "Near surf beaches"]
-    },
-    "images": [
-      "https://images.unsplash.com/photo-1573052905904-34ad8c27f0cc?w=1200&q=85",
-      "https://images.unsplash.com/photo-1570737544153-f4ba9a5b2b2a?w=1200&q=85",
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=1200&q=85",
-      "https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=1200&q=85"
-    ],
-    "map": { "lat": -8.6389, "lng": 115.1201 },
-    "status": "available",
-    "badge": { "fr": "Disponible", "en": "Available" }
-  }
+  "villas": [
+    {
+      "id": "villa-peacock-bumbak",
+      "rental_show": true,
+      "invest_show": true,
+      "type": "long-term",
+      "location": "Umalas, Kerobokan — Bali",
+      "name": { "en": "Villa Peacock", "fr": "Villa Peacock" },
+      "badge": { "en": "Available", "fr": "Disponible", "cls": "rv-badge-green" },
+      "bedrooms": 3,
+      "bathrooms": 3,
+      "sqm": 300,
+      "pool": true,
+      "price_idr_night": null,
+      "price_idr_month": 45000000,
+      "lease_10yr_idr": 3400000000,
+      "lease_20yr_idr": 4850000000,
+      "suffix": { "en": "\u00a0/ month", "fr": "\u00a0/ mois" },
+      "period": { "en": "per month", "fr": "par mois" },
+      "cta_href": "https://wa.me/6281215597625",
+      "cta_label": { "en": "Book a Visit \u2192", "fr": "Demander une visite \u2192" },
+      "invest_yield": "8\u201310%",
+      "invest_label": { "en": "10yr Lease", "fr": "Bail 10 ans" },
+      "cover": "images/villas/villa-bumbak/cover.png",
+      "images": [
+        "images/villas/villa-bumbak/cover.png",
+        "images/villas/villa-bumbak/garden.png",
+        "images/villas/villa-bumbak/chambre1face.jpg",
+        "images/villas/villa-bumbak/chambre2.jpg",
+        "images/villas/villa-bumbak/chambre3.jpg",
+        "images/villas/villa-bumbak/chambre1cote.jpg",
+        "images/villas/villa-bumbak/salledebain.jpg",
+        "images/villas/villa-bumbak/salon1.jpg",
+        "images/villas/villa-bumbak/salon2cote.jpg",
+        "images/villas/villa-bumbak/salon2feuilles.jpg",
+        "images/villas/villa-bumbak/sejourcote.jpg",
+        "images/villas/villa-bumbak/sejourface.jpg",
+        "images/villas/villa-bumbak/statue1.jpg",
+        "images/villas/villa-bumbak/statue2.jpg",
+        "images/villas/villa-bumbak/statue3.jpg"
+      ],
+      "desc": {
+        "en": "Nestled in the heart of Jalan Bumbak \u2013 Umalas, one of Bali\u2019s most sought-after residential corridors, Villa Peacock is a rare tropical retreat blending privacy, comfort and investment potential. Minutes from Seminyak and Canggu.<br><br>Spread across 300\u00a0m\u00b2 of lush grounds with 200\u00a0m\u00b2 of refined living space. The 60\u00a0m\u00b2 master suite sits on the upper floor with private terrace. Two additional en-suite bedrooms open onto the tropical garden. A detached garden bungalow adds versatile space.<br><br>Available as a 10 or 20-year leasehold, fully furnished and ready to welcome its next tenant or investor.",
+        "fr": "Situ\u00e9e au c\u0153ur de Jalan Bumbak \u2013 Umalas, l\u2019un des quartiers r\u00e9sidentiels les plus pris\u00e9s de Bali, la Villa Peacock est un havre de paix tropical alliant intimit\u00e9, confort et potentiel locatif exceptionnel.<br><br>D\u00e9ploy\u00e9e sur 300\u00a0m\u00b2 de jardin luxuriant avec 200\u00a0m\u00b2 de surface habitable. La suite parentale de 60\u00a0m\u00b2 occupe l\u2019\u00e9tage avec terrasse priv\u00e9e. Deux chambres suppl\u00e9mentaires s\u2019ouvrent sur le jardin tropical.<br><br>Disponible en bail de 10 ou 20 ans, enti\u00e8rement meubl\u00e9e."
+      },
+      "amenities": {
+        "en": ["10m Private Pool", "Children\u2019s Pool Area", "60m\u00b2 Master Suite", "Garden Bungalow / Office", "Fully Equipped Kitchen", "3 Bathrooms En-Suite", "Gazebo", "Car & Scooter Parking", "Air Conditioning", "High-Speed WiFi"],
+        "fr": ["Piscine priv\u00e9e 10m", "Espace enfants piscine", "Suite parentale 60m\u00b2", "Bungalow jardin / Bureau", "Cuisine enti\u00e8rement \u00e9quip\u00e9e", "3 salles de bain en-suite", "Gazebo", "Parking voiture & scooter", "Climatisation", "WiFi haut d\u00e9bit"]
+      }
+    }
+  ]
 }
