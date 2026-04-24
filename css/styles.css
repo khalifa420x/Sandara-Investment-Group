@@ -2388,7 +2388,7 @@ img { display: block; }
 /* --- Layout --- */
 .vd-body {
   background: #F5F0E8;
-  padding: 0 0 100px;
+  padding: 0;
 }
 
 .vd-detail {
@@ -2409,7 +2409,7 @@ img { display: block; }
     padding: 48px 20px 60px;
   }
   .vd-body {
-    padding: 0 0 60px;
+    padding: 0;
   }
 }
 
@@ -2628,7 +2628,8 @@ img { display: block; }
   background: #f7f4ef;
   border-radius: 20px;
   padding: 48px 40px;
-  margin: 40px auto;
+  margin: 0 auto;
+  padding-top: 0;
 }
 
 .vd-related-title {
